@@ -23,6 +23,7 @@ public class JavaSerializer implements ISerializer {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream out = new ObjectOutputStream(byteArrayOutputStream);
             out.writeObject(object);
+            log.info("encoder");
             return byteArrayOutputStream.toByteArray();
         } catch (Exception e) {
             log.error(StringUtils.EMPTY,e);
@@ -37,7 +38,7 @@ public class JavaSerializer implements ISerializer {
         try {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
-
+            log.info("decoder");
             return (T)objectInputStream.readObject();
         } catch (Exception e) {
             log.error(StringUtils.EMPTY,e);
