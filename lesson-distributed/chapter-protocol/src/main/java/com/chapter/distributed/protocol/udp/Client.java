@@ -13,6 +13,7 @@ public class Client {
         InetAddress address= InetAddress.getByName("localhost");
 
         byte[] sendData="Hello".getBytes();
+
         DatagramPacket sendPacket=new
                 DatagramPacket(sendData,sendData.length,address,8080);
         DatagramSocket datagramSocket=new DatagramSocket();

@@ -15,7 +15,7 @@ public class ConsumerMain {
 
 
         ClassPathXmlApplicationContext classPathXmlApplicationContext =
-                new ClassPathXmlApplicationContext("6/consumer.xml");
+                new ClassPathXmlApplicationContext("9/consumer.xml");
         classPathXmlApplicationContext.start();
 
 
