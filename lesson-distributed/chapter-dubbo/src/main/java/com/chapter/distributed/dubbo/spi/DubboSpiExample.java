@@ -1,6 +1,7 @@
 package com.chapter.distributed.dubbo.spi;
 
 import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.extension.ExtensionFactory;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Protocol;
@@ -18,8 +19,8 @@ public class DubboSpiExample {
 //        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();//.getExtension("customProtocol");
 
 
-//        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("dubbo");
-//        System.out.println(protocol.getClass());
+        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("registry");
+        System.out.println(protocol.getClass());
 //        System.out.println(protocol.getDefaultPort());
 //        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();//.getExtension("customProtocol");
 //        System.out.println(driver.getClass());
@@ -28,8 +29,12 @@ public class DubboSpiExample {
 //        System.out.println(driver.getClass());
 
 
-        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();
-        System.out.println(driver.getName("22",URL.valueOf("http").addParameter("i.product.service","i.product.service")));
+//        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();
+//        System.out.println(driver.getName("22",URL.valueOf("http").addParameter("i.product.service","i.product.service")));
+
+
+        ExtensionFactory extensionFactory = ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension();
+        System.out.println(extensionFactory.getClass());
 
     }
 }
