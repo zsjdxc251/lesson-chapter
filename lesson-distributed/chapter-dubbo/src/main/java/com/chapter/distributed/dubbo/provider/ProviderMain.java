@@ -1,5 +1,6 @@
 package com.chapter.distributed.dubbo.provider;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -19,6 +20,9 @@ public class ProviderMain {
                 new ClassPathXmlApplicationContext("9/provider.xml");
                // new ClassPathXmlApplicationContext("6/provider-cluster-2.xml");
         classPathXmlApplicationContext.start();
+
+        String[] names = classPathXmlApplicationContext.getBeanDefinitionNames();
+        System.out.println(StringUtils.join(names,"\n"));;
 
         synchronized (ProviderMain.class) {
             while (true) {

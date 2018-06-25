@@ -19,22 +19,22 @@ public class DubboSpiExample {
 //        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();//.getExtension("customProtocol");
 
 
-        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("registry");
+       Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("dubbo");
         System.out.println(protocol.getClass());
 //        System.out.println(protocol.getDefaultPort());
 //        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();//.getExtension("customProtocol");
 //        System.out.println(driver.getClass());
 
-//        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getExtension("productService");
-//        System.out.println(driver.getClass());
+        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();
+        System.out.println(driver.getClass());
 
 
 //        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();
 //        System.out.println(driver.getName("22",URL.valueOf("http").addParameter("i.product.service","i.product.service")));
 
 
-        ExtensionFactory extensionFactory = ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension();
-        System.out.println(extensionFactory.getClass());
+//        ExtensionFactory extensionFactory = ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension();
+//        System.out.println(extensionFactory.getClass());
 
     }
 }

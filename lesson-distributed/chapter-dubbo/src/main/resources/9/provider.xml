@@ -15,15 +15,15 @@
 
     <dubbo:registry  address="zookeeper://127.0.0.1:2181"/>
 
-    <dubbo:registry  address="zookeeper://127.0.0.1:2181"/>
-    
-    
-    <dubbo:service interface="com.chapter.distributed.dubbo.service.IUserInfoService" ref="userInfoService"/>
+    <dubbo:protocol id="dubboId" port="20880" name="dubbo"/>
+    <dubbo:protocol id="hessianId" port="8080" name="hessian"/>
 
+    <dubbo:service interface="com.chapter.distributed.dubbo.service.IUserInfoService" ref="userInfoService"/>
+    <dubbo:service interface="com.chapter.distributed.dubbo.service.ICacheService" ref="cacheService"/>
 
 
     <bean id="userInfoService" class="com.chapter.distributed.dubbo.provider.impl.UserInfoService"/>
 
-
+    <bean id="cacheService" class="com.chapter.distributed.dubbo.provider.impl.CacheService"/>
 
 </beans>

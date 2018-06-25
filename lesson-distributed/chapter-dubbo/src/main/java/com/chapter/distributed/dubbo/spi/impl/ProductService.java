@@ -8,7 +8,7 @@ import com.chapter.distributed.dubbo.spi.custom.IProductService;
  * @author zhengshijun
  * @version created on 2018/6/21.
  */
-
+@Adaptive
 public class ProductService implements IProductService {
 
     @Override
