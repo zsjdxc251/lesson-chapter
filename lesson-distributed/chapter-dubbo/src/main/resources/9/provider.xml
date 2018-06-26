@@ -16,7 +16,7 @@
     <dubbo:registry  address="zookeeper://127.0.0.1:2181"/>
 
     <dubbo:protocol id="dubboId" port="20880" name="dubbo"/>
-    <dubbo:protocol id="hessianId" port="8080" name="hessian"/>
+    <!--<dubbo:protocol id="hessianId" port="8080" name="hessian"/>-->
 
     <dubbo:service interface="com.chapter.distributed.dubbo.service.IUserInfoService" ref="userInfoService"/>
     <dubbo:service interface="com.chapter.distributed.dubbo.service.ICacheService" ref="cacheService"/>

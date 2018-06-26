@@ -12,4 +12,9 @@ public class ErrorUserInfoService implements IUserInfoService {
     public String getName(String lastName) {
         return "出错了";
     }
+
+    @Override
+    public String getAge(int age) {
+        return null;
+    }
 }

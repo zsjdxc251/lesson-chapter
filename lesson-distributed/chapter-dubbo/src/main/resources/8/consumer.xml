@@ -18,6 +18,7 @@
 
     <dubbo:reference interface="com.chapter.distributed.dubbo.service.IUserInfoService"
                      id="userInfoService"
+                     cluster=""
                      version="0.0.2"/>
 
 </beans>

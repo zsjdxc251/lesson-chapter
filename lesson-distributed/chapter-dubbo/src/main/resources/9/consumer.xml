@@ -17,6 +17,6 @@
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
     <dubbo:reference interface="com.chapter.distributed.dubbo.service.IUserInfoService"
-                     id="userInfoService" mock="com.chapter.distributed.dubbo.consumer.impl.ErrorUserInfoService"  timeout="1"/>
+                     id="userInfoService" mock="com.chapter.distributed.dubbo.consumer.impl.ErrorUserInfoService"  timeout="1000" retries="1"/>
 
 </beans>

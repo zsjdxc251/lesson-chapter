@@ -8,4 +8,7 @@ public interface IUserInfoService {
 
 
     String getName(String lastName);
+
+
+    String getAge(int age);
 }

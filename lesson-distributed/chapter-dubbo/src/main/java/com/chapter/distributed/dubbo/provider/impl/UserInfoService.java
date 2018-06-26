@@ -12,4 +12,9 @@ public class UserInfoService implements IUserInfoService {
     public String getName(String lastName) {
         return "I am "+lastName;
     }
+
+    @Override
+    public String getAge(int age) {
+        return null;
+    }
 }

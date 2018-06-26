@@ -12,4 +12,10 @@ public class CustomUserInfoService implements IUserInfoService {
     public String getName(String lastName) {
         return "Custom i am " + lastName;
     }
+
+
+    @Override
+    public String getAge(int age) {
+        return null;
+    }
 }
