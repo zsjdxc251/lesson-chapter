@@ -22,9 +22,9 @@ public class DubboConsumerProxy {
                                              interfaceCls,
                                      final String host,final int port){
 
-        Directory<T> directory = new RegistryDirectory<>(interfaceCls);
+        Directory<T> directory = new RegistryDirectory<T>(interfaceCls);
 
-        Invoker<T> invoker = new FailoverInvoker<>(directory);
+        Invoker<T> invoker = new FailoverInvoker<T>(directory);
 
         T result = null;
         try {

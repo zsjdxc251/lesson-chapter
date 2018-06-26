@@ -13,12 +13,11 @@ public class RegistryDirectory<T> implements Directory<T> {
         this.serviceType = serviceType;
     }
 
-    @Override
+
     public Class<T> getInterface() {
-        return serviceType;
+        return null;
     }
 
-    @Override
     public List<Invoker<T>> list(Invocation invocation) throws Exception {
         return null;
     }

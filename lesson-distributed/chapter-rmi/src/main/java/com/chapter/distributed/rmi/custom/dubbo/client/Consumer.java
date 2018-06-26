@@ -12,7 +12,7 @@ public class Consumer {
 
 
         ICustomRpcService customRpcService = DubboConsumerProxy.clientProxy(ICustomRpcService.class,"",8080);
-        System.out.println(customRpcService.getName(""));;
+        System.out.println(customRpcService.getName(""));
 
     }
 }
