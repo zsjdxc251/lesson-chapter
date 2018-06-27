@@ -18,17 +18,22 @@ public class App {
 //
 //        System.out.println( NetUtils.getLocalHost());
 
-        Socket socket = new Socket();
-        try {
-            SocketAddress addr = new InetSocketAddress("192.168.1.251", 8080);
-            socket.connect(addr, 1000);
-            String host = socket.getLocalAddress().getHostAddress();
-            System.out.println(host);
-        } finally {
-            try {
-                socket.close();
-            } catch (Throwable e) {
-            }
-        }
+//        Socket socket = new Socket();
+//        try {
+//            SocketAddress addr = new InetSocketAddress("192.168.1.251", 8080);
+//            socket.connect(addr, 1000);
+//            String host = socket.getLocalAddress().getHostAddress();
+//            System.out.println(host);
+//        } finally {
+//            try {
+//                socket.close();
+//            } catch (Throwable e) {
+//            }
+//        }
+
+
+
+        System.out.println(Runtime.getRuntime().availableProcessors());
+
     }
 }
