@@ -3,6 +3,7 @@ package com.chapter.distributed.rmi.custom.dubbo.server;
 import com.chapter.distributed.rmi.custom.dubbo.ExchangeHandler;
 import com.chapter.distributed.rmi.custom.dubbo.Request;
 import com.chapter.distributed.rmi.custom.dubbo.Response;
+import com.chapter.distributed.rmi.custom.dubbo.client.Invocation;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -48,10 +49,10 @@ public class Server implements Runnable{
 
                  ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-                 Request request = (Request)objectInputStream.readObject();
+                 //Request request = (Request)objectInputStream.readObject();
+                 Invocation invocation =(Invocation)objectInputStream.readObject();
 
-
-                 Object object = exchangeHandler.reply(request.getData());
+                 Object object = exchangeHandler.reply(invocation);
 
 
                  Response response = new Response();

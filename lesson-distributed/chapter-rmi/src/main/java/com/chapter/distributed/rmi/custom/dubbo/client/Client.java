@@ -42,7 +42,7 @@ public class Client {
             req.setTwoWay(true);
             req.setData(request);
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-            outputStream.writeObject(req);
+            outputStream.writeObject(request);
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
             Response result = (Response)inputStream.readObject();
