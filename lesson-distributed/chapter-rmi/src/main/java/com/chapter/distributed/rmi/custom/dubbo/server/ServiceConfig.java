@@ -14,6 +14,12 @@ public class ServiceConfig<T> {
 
     Class<?> interfaceClass;
 
+    public ServiceConfig(T ref, Class<?> interfaceClass) {
+        this.ref = ref;
+        this.interfaceClass = interfaceClass;
+    }
+
+
 
     private static JavassistProxyFactory javassistProxyFactory = new JavassistProxyFactory();
 
@@ -22,11 +28,10 @@ public class ServiceConfig<T> {
 
     private final List<Exporter<?>> exporters = new ArrayList<Exporter<?>>();
 
-    private void doExportUrlsFor1Protocol(){
+    public void doExportUrlsFor1Protocol(){
 
 
         Invoker<T> invoker = javassistProxyFactory.getInvoker(ref,(Class<T>) interfaceClass);
-
         try {
             Exporter<?> exporter = dubboProtocol.export(invoker);
             exporters.add(exporter);

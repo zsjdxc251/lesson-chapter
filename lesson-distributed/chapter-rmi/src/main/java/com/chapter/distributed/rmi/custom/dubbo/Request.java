@@ -2,9 +2,10 @@ package com.chapter.distributed.rmi.custom.dubbo;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class Request {
+public class Request implements Serializable{
 
     public static final String HEARTBEAT_EVENT = null;
 

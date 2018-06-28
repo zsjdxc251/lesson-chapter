@@ -9,6 +9,13 @@ import java.util.Map;
  * @version created on 2018/6/26.
  */
 public class RpcResult implements Result {
+    private Object result;
+
+
+    public RpcResult(Object result) {
+        this.result = result;
+    }
+
     @Override
     public Object getValue() {
         return null;

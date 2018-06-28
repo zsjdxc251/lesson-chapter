@@ -1,5 +1,6 @@
 package com.chapter.distributed.rmi.custom.dubbo.client;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.Map;
  * @author zhengshijun
  * @version created on 2018/6/26.
  */
-public class RpcInvocation implements Invocation {
+public class RpcInvocation implements Invocation,Serializable {
 
     private String methodName;
 

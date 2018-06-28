@@ -1,6 +1,8 @@
 package com.chapter.distributed.rmi.custom.dubbo;
 
-public class Response {
+import java.io.Serializable;
+
+public class Response implements Serializable {
 
 
     public static final String HEARTBEAT_EVENT = null;

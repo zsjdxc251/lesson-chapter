@@ -1,6 +1,9 @@
 package com.chapter.distributed.rmi.custom.dubbo;
 
 import com.chapter.distributed.rmi.custom.dubbo.client.Invoker;
+import com.chapter.distributed.rmi.custom.dubbo.client.InvokerInvocationHandler;
+
+import java.lang.reflect.Proxy;
 
 public class JavassistProxyFactory {
 
@@ -15,6 +18,12 @@ public class JavassistProxyFactory {
                 return null;
             }
         };
+    }
+
+    public <T> T getProxy(Invoker<T> invoker, Class<T> interfaces) {
+
+        return (T) Proxy.newProxyInstance(interfaces.getClassLoader(),
+                new Class[]{interfaces},new InvokerInvocationHandler(invoker));
     }
 
 }

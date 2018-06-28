@@ -25,13 +25,13 @@ public class Server implements Runnable{
 
     public Server(ExchangeHandler exchangeHandler){
         this.exchangeHandler = exchangeHandler;
+
+    }
+
+    public void start(){
         try {
-
             serverSocket = new ServerSocket(20880);
-
-
             threadPoolExecutor.execute(this);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,8 +56,6 @@ public class Server implements Runnable{
 
                  Response response = new Response();
                  response.setResult(object);
-
-
                  ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                  objectOutputStream.writeObject(response);
              } catch (Exception e){
