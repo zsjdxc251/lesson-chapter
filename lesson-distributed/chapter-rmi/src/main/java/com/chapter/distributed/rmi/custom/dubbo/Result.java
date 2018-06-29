@@ -1,9 +1,10 @@
 package com.chapter.distributed.rmi.custom.dubbo;
 
+import java.io.Serializable;
 import java.util.Map;
 
 
-public interface Result {
+public interface Result extends Serializable{
 
     /**
      * Get invoke result.

@@ -49,16 +49,17 @@ public class Server implements Runnable{
 
                  ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-                 //Request request = (Request)objectInputStream.readObject();
-                 Invocation invocation =(Invocation)objectInputStream.readObject();
-
-                 Object object = exchangeHandler.reply(invocation);
+                 Request request = (Request)objectInputStream.readObject();
 
 
-                 Response response = new Response();
-                 response.setResult(object);
+                 Object object = exchangeHandler.reply(request.getData());
+
+
+
+//                 Response response = new Response();
+//                 response.setResult(object);
                  ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                 objectOutputStream.writeObject(response);
+                 objectOutputStream.writeObject(object);
              } catch (Exception e){
                  e.printStackTrace();
              }

@@ -42,13 +42,15 @@ public class Client {
             req.setTwoWay(true);
             req.setData(request);
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-            outputStream.writeObject(request);
+            outputStream.writeObject(req);
+            outputStream.flush();
+
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
-            Response result = (Response)inputStream.readObject();
+            Result result = (Result) inputStream.readObject();
             outputStream.close();
             inputStream.close();
-            return new RpcResult(result.getResult());
+            return result;
         } catch (Exception e) {
             log.error(StringUtils.EMPTY,e);
         }

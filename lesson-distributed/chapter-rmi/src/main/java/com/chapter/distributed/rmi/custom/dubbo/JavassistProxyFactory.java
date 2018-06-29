@@ -9,13 +9,10 @@ public class JavassistProxyFactory {
 
     public <T> Invoker<T> getInvoker(T proxy, Class<T> type) {
         // TODO Wrapper类不能正确处理带$的类名
-
-        return new AbstractProxyInvoker<T>(proxy, type) {
+        return new AbstractProxyInvoker<T>(proxy,type){
             @Override
-            public Object doInvoke(T proxy, String methodName,
-                                      Class<?>[] parameterTypes,
-                                      Object[] arguments) throws Throwable {
-                return null;
+            public Object doInvoke(T proxy, String methodName, Class<?>[] parameterTypes, Object[] arguments) throws Throwable {
+                return proxy.getClass().getMethod(methodName,parameterTypes).invoke(proxy,arguments);
             }
         };
     }

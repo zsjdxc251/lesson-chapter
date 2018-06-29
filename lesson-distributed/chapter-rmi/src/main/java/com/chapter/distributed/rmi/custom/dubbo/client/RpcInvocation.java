@@ -20,7 +20,8 @@ public class RpcInvocation implements Invocation,Serializable {
 
     private Map<String, String> attachments;
 
-    private transient Invoker<?> invoker;
+    private Invoker<?> invoker;
+    //private transient Invoker<?> invoker;
 
     public RpcInvocation() {
     }

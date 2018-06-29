@@ -10,10 +10,15 @@ import java.util.Map;
  */
 public class RpcResult implements Result {
     private Object result;
+    private Throwable exception;
 
 
     public RpcResult(Object result) {
         this.result = result;
+    }
+
+    public RpcResult(Throwable exception) {
+        this.exception = exception;
     }
 
     @Override
@@ -33,12 +38,15 @@ public class RpcResult implements Result {
 
     @Override
     public Object recreate() throws Throwable {
-        return null;
+        if (exception != null) {
+            throw exception;
+        }
+        return result;
     }
 
     @Override
     public Object getResult() {
-        return null;
+        return result;
     }
 
     @Override

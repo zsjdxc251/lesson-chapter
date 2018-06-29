@@ -8,6 +8,7 @@ import java.lang.reflect.Proxy;
  * @author zhengshijun
  * @version created on 2018/6/26.
  */
+@Deprecated
 public class DubboConsumerProxy {
 
     /**

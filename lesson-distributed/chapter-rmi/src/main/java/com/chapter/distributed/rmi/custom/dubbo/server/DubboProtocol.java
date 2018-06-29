@@ -25,7 +25,7 @@ public class DubboProtocol {
                 Invocation inv = (Invocation) message;
 
                 Invoker<?> invoker = getInvoker(inv);
-
+                // invoker = AbstractProxyInvoker
 
                 System.out.println(invoker);
                 return invoker.invoke(inv);
@@ -46,8 +46,7 @@ public class DubboProtocol {
     }
 
     public <T> Exporter<T> export(Invoker<T> invoker) throws Exception {
-
-        System.out.println(invoker.getClass());
+        // invoker = AbstractProxyInvoker
         String key = invoker.getInterface().getName();
         DubboExporter<T> exporter = new DubboExporter<T>(invoker, key, exporterMap);
         exporterMap.put(key, exporter);
