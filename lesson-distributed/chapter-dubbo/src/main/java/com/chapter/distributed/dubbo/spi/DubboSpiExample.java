@@ -5,6 +5,7 @@ import com.alibaba.dubbo.common.extension.ExtensionFactory;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Protocol;
+import com.alibaba.dubbo.rpc.cluster.Cluster;
 import com.chapter.distributed.dubbo.spi.custom.IProductService;
 
 import java.sql.Driver;
@@ -19,14 +20,18 @@ public class DubboSpiExample {
 //        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();//.getExtension("customProtocol");
 
 
-       Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("dubbo");
-        System.out.println(protocol.getClass());
+//       Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("dubbo");
+//        System.out.println(protocol.getClass());
 //        System.out.println(protocol.getDefaultPort());
 //        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();//.getExtension("customProtocol");
 //        System.out.println(driver.getClass());
 
-        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();
-        System.out.println(driver.getClass());
+//        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();
+//        System.out.println(driver.getClass());
+
+
+        Cluster cluster = ExtensionLoader.getExtensionLoader(Cluster.class).getAdaptiveExtension();
+        System.out.println(cluster.getClass());
 
 
 //        IProductService driver = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();
