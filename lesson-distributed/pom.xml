@@ -14,6 +14,7 @@
         <module>chapter-dubbo</module>
         <module>chapter-rmi</module>
         <module>chapter-protocol</module>
+        <module>chapter-activemq</module>
     </modules>
 
 
