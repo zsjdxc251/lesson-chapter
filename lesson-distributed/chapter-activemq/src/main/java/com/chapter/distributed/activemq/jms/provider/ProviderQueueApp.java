@@ -24,18 +24,19 @@ public class ProviderQueueApp {
     private static final Logger log = LoggerFactory.getLogger(ProviderQueueApp.class);
 
     public static void main(String[] args){
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("weway","ww123456","tcp://192.168.1.28:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.128:61616");
         Connection connection = null;
         try {
             connection = connectionFactory.createConnection();
             connection.start();
 
             //延迟确认
-            Session session = connection.createSession(Boolean.FALSE, Session.DUPS_OK_ACKNOWLEDGE );
+            Session session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE );
             Destination destination = session.createQueue("myqueue");
 
             MessageProducer messageProducer = session.createProducer(destination);
-            messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
+            // 是否持久化
+//            messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
             messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
 

@@ -24,14 +24,14 @@ public class ConsumerTopicApp {
 
     public static void main(String[] args){
 
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("weway","ww123456","tcp://192.168.1.28:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.128:61616");
         Connection connection = null;
         try {
             connection = connectionFactory.createConnection();
             connection.start();
 
             //延迟确认
-            Session session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
+            Session session = connection.createSession(Boolean.FALSE, Session.CLIENT_ACKNOWLEDGE);
             // 创建目的地
             Destination destination = session.createTopic("mytopic");
             // 创建接收者
@@ -47,6 +47,7 @@ public class ConsumerTopicApp {
                         System.out.println(textMessage.getText());
 
                         //textMessage.acknowledge();
+                        System.out.println(message.getJMSRedelivered());
                     } catch (JMSException e) {
                         log.error(StringUtils.EMPTY,e);
                     }

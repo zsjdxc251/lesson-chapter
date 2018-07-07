@@ -24,14 +24,14 @@ public class ConsumerQueueApp {
     public static void main(String[] args){
 
 
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("weway","ww123456","tcp://192.168.1.28:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.128:61616");
         Connection connection = null;
         try {
             connection = connectionFactory.createConnection();
             connection.start();
 
             //延迟确认
-            Session session = connection.createSession(Boolean.FALSE, Session.DUPS_OK_ACKNOWLEDGE);
+            Session session = connection.createSession(Boolean.FALSE, Session.CLIENT_ACKNOWLEDGE);
             Destination destination = session.createQueue("myqueue");
             MessageConsumer messageConsumer = session.createConsumer(destination);
             //Message message = messageConsumer.receive();
@@ -43,8 +43,8 @@ public class ConsumerQueueApp {
                     TextMessage textMessage = (TextMessage)message;
                     try {
                         System.out.println(textMessage.getText());
-
-                        //textMessage.acknowledge();
+                        // 客户端手动确认
+                        textMessage.acknowledge();
                     } catch (JMSException e) {
                         log.error(StringUtils.EMPTY,e);
                     }

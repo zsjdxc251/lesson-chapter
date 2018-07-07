@@ -23,7 +23,8 @@ public class ProviderTopicApp {
     private static final Logger log = LoggerFactory.getLogger(ProviderTopicApp.class);
 
     public static void main(String[] args){
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("weway","ww123456","tcp://192.168.1.28:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.128:61616");
+
         Connection connection = null;
         try {
             connection = connectionFactory.createConnection();
@@ -34,10 +35,7 @@ public class ProviderTopicApp {
             Destination destination = session.createTopic("mytopic");
 
             MessageProducer messageProducer = session.createProducer(destination);
-            messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
             messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-
-
             for (int i=0;i<10;i++) {
                 TextMessage textMessage = session.createTextMessage("广播数据发送"+i);
                 messageProducer.send(textMessage);
