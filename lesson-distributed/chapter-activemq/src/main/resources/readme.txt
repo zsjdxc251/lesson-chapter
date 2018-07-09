@@ -39,3 +39,8 @@ http://192.168.23.128:8161/admin/
 
 
 重发机制
+
+
+源码剖析
+
+ResponseCorrelator(MutexTransport(WireFormatNegotiator(InactivityMonitor(TcpTransport))))

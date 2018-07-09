@@ -24,20 +24,21 @@ public class ProviderQueueApp {
     private static final Logger log = LoggerFactory.getLogger(ProviderQueueApp.class);
 
     public static void main(String[] args){
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.128:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.129:61616");
         Connection connection = null;
         try {
+            //((ActiveMQConnectionFactory) connectionFactory).setUseAsyncSend(false);
             connection = connectionFactory.createConnection();
             connection.start();
 
             //延迟确认
-            Session session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE );
+            Session session = connection.createSession(Boolean.FALSE, Session.DUPS_OK_ACKNOWLEDGE );
             Destination destination = session.createQueue("myqueue");
 
             MessageProducer messageProducer = session.createProducer(destination);
             // 是否持久化
 //            messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
-            messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+            messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
 
 
             for (int i=0;i<10;i++) {

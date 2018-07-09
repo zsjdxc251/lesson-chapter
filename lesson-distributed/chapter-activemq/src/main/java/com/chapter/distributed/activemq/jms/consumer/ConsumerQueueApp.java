@@ -24,10 +24,13 @@ public class ConsumerQueueApp {
     public static void main(String[] args){
 
 
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.128:61616");
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.129:61616");
         Connection connection = null;
         try {
+
+//            connectionFactory.setUseAsyncSend(true);
             connection = connectionFactory.createConnection();
+
             connection.start();
 
             //延迟确认
@@ -36,6 +39,8 @@ public class ConsumerQueueApp {
             MessageConsumer messageConsumer = session.createConsumer(destination);
             //Message message = messageConsumer.receive();
             //System.out.println(((TextMessage)message).getText());
+            messageConsumer.receive();
+
             messageConsumer.setMessageListener(message -> {
 
                 if (message instanceof TextMessage){
