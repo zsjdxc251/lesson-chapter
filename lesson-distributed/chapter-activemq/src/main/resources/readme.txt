@@ -41,6 +41,52 @@ http://192.168.23.128:8161/admin/
 重发机制
 
 
+
+同步发送和异步发送针对broker而言
+    默认情况：
+      1.非持久化是异步发送
+      2.持久化非事务是同步发送
+      3.开始事务都是异步发送
+    配置异步发送
+    1.ActiveMQConnectionFactory.setUseAsyncSend(true)
+    2.ActiveMQConnection.setUseAsyncSend(true)
+    3.?jms.userAsyncSend=true
+
+
 源码剖析
 
 ResponseCorrelator(MutexTransport(WireFormatNegotiator(InactivityMonitor(TcpTransport))))
+
+
+
+生产者
+    producerWindowSize
+       只针对异步发送
+        单位为字节
+       ProducerWindowSize是一个生产者在等到确认消息之前，可以发送给代理broker的最大字节数据量，这个确认消息用来告诉生产者，代理broker已经收到先前发送的消息了。
+       ProducerWindowSize是指在收到broker确认应答之前，生产者能够传送消息给broker的最大信息量
+       配置大小
+       1.ActiveMQConnectionFactory.setProducerWindowSize()
+       2.brokerUrl?jms.producerWindowSize=105588
+       3.ActiveMQConnection.setProducerWindowSize()
+       4.destinationUrl?producer.windowSize=
+
+
+    这个值越大消耗的内存越大
+
+
+消费者
+    prefetchSize
+       默认 1000
+       非持久化 topic 默认100
+       用户一次性broker获取Message条数
+       设置
+          consumer.prefetchSize=
+
+
+    optimizeAcknowledge
+       开启批量确认
+       prefetchSize*0.65 发起确认
+       设置
+       1.ActiveMQConnectionFactory.setOptimizeAcknowledge(true)
+

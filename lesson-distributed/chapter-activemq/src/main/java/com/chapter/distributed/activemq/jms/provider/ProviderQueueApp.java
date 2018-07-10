@@ -1,10 +1,12 @@
 package com.chapter.distributed.activemq.jms.provider;
 
+import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.jms.BytesMessage;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.DeliveryMode;
@@ -13,6 +15,9 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.stream.IntStream;
 
 /**
@@ -27,8 +32,10 @@ public class ProviderQueueApp {
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.129:61616");
         Connection connection = null;
         try {
-            //((ActiveMQConnectionFactory) connectionFactory).setUseAsyncSend(false);
+
+
             connection = connectionFactory.createConnection();
+//            ((ActiveMQConnection)connection).setProducerWindowSize(10);
             connection.start();
 
             //延迟确认
@@ -37,11 +44,11 @@ public class ProviderQueueApp {
 
             MessageProducer messageProducer = session.createProducer(destination);
             // 是否持久化
-//            messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
             messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
+//            messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
 
-            for (int i=0;i<10;i++) {
+            for (int i=0;i<10000;i++) {
                 TextMessage textMessage = session.createTextMessage("数据发送"+i);
                 messageProducer.send(textMessage);
             }
