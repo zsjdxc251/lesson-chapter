@@ -23,7 +23,7 @@ public class ProviderTopicApp {
     private static final Logger log = LoggerFactory.getLogger(ProviderTopicApp.class);
 
     public static void main(String[] args){
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.128:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://121.196.232.248:61616");
 
         Connection connection = null;
         try {

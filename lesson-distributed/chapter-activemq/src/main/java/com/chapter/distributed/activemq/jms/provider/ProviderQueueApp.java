@@ -29,7 +29,7 @@ public class ProviderQueueApp {
     private static final Logger log = LoggerFactory.getLogger(ProviderQueueApp.class);
 
     public static void main(String[] args){
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.129:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://121.196.232.248:61616");
         Connection connection = null;
         try {
 
@@ -48,8 +48,8 @@ public class ProviderQueueApp {
 //            messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
 
-            for (int i=0;i<10000;i++) {
-                TextMessage textMessage = session.createTextMessage("数据发送"+i);
+            for (int i=0;i<10;i++) {
+                TextMessage textMessage = session.createTextMessage("数据"+i);
                 messageProducer.send(textMessage);
             }
             session.close();

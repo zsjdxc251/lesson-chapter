@@ -50,7 +50,7 @@ http://192.168.23.128:8161/admin/
     配置异步发送
     1.ActiveMQConnectionFactory.setUseAsyncSend(true)
     2.ActiveMQConnection.setUseAsyncSend(true)
-    3.?jms.userAsyncSend=true
+    3.brokerUrl?jms.userAsyncSend=true
 
 
 源码剖析
@@ -89,4 +89,9 @@ ResponseCorrelator(MutexTransport(WireFormatNegotiator(InactivityMonitor(TcpTran
        prefetchSize*0.65 发起确认
        设置
        1.ActiveMQConnectionFactory.setOptimizeAcknowledge(true)
+       2.?jms.optimizeAcknowledge=true
 
+    optimizeAcknowledgeTimeOut
+       超时时间
+        设置
+        1.?jms.optimizeAcknowledgeTimeOut=1000

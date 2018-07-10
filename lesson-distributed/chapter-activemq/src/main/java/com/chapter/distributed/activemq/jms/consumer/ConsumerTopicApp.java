@@ -12,6 +12,7 @@ import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhengshijun
@@ -24,7 +25,7 @@ public class ConsumerTopicApp {
 
     public static void main(String[] args){
 
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.23.128:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://121.196.232.248:61616");
         Connection connection = null;
         try {
             connection = connectionFactory.createConnection();
@@ -46,10 +47,13 @@ public class ConsumerTopicApp {
                     try {
                         System.out.println(textMessage.getText());
 
-                        //textMessage.acknowledge();
-                        System.out.println(message.getJMSRedelivered());
+                        textMessage.acknowledge();
+                        //System.out.println(message.getJMSRedelivered());
+                        TimeUnit.SECONDS.sleep(1);
                     } catch (JMSException e) {
                         log.error(StringUtils.EMPTY,e);
+                    } catch (InterruptedException e) {
+
                     }
 
                 }
