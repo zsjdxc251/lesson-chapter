@@ -32,14 +32,14 @@ public class ConsumerQueueApp {
 
             //connectionFactory.setTransactedIndividualAck(true);
 
-            //connectionFactory.setOptimizeAcknowledge(false);
+            connectionFactory.setOptimizeAcknowledge(true);
 //            connectionFactory.setUseAsyncSend(true);
             connection = connectionFactory.createConnection();
 
             connection.start();
 
             //延迟确认
-            Session session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
+            Session session = connection.createSession(Boolean.FALSE, Session.CLIENT_ACKNOWLEDGE);
             Destination destination = session.createQueue("myqueue?consumer.prefetchSize=10");
             MessageConsumer messageConsumer = session.createConsumer(destination);
 
@@ -55,7 +55,7 @@ public class ConsumerQueueApp {
                         TextMessage textMessage = (TextMessage)message;
                         System.out.println(textMessage.getText());
 
-                        throw new RuntimeException();
+//                        //throw new RuntimeException();
                     } catch (JMSException e ) {
                         log.error(StringUtils.EMPTY,e);
                     }
