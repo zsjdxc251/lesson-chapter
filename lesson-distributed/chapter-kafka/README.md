@@ -7,3 +7,6 @@
 >>>在zookeeper 查看
 >>>ls /brokers/ids 如果几个集群配置的id都存在代表集群配置成功
 
+##spring-kafka
+>>>[文档](https://docs.spring.io/spring-kafka/reference/htmlsingle/)
+
