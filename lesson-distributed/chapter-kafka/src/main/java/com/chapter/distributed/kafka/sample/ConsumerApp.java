@@ -41,7 +41,7 @@ public class ConsumerApp extends Thread{
         ConsumerRecords<Integer,String> consumerRecord=consumer.poll(2000);
         log.info("consumerRecord size:{}",consumerRecord.count());
         for(ConsumerRecord record:consumerRecord){
-            //log.info("id:{},value:{}",record.key(),record.value());
+            log.info("id:{},value:{}",record.key(),record.value());
             consumer.commitAsync();
         }
 
