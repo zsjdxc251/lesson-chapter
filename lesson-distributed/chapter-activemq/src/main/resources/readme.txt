@@ -100,4 +100,4 @@ Number Of Consumers  消费者 这个是消费者端的消费者数量
 
 Number Of Pending Messages 等待消费的消息 这个是当前未出队列的数量。可以理解为总接收数-总出队列数
 Messages Enqueued 进入队列的消息  进入队列的总数量,包括出队列的。 这个数量只增不减
-Messages Dequeued 出了队列的消息  可以理解为是消费这消费掉的数量 
+Messages Dequeued 出了队列的消息  可以理解为是消费这消费掉的数量
