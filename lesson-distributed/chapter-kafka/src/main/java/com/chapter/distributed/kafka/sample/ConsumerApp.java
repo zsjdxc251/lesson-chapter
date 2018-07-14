@@ -29,8 +29,9 @@ public class ConsumerApp extends Thread{
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringDeserializer");
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
 
-        properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,"false");
+        properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,"true");
         properties.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG,"1000");
+        properties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG,"5");
         consumer = new KafkaConsumer<>(properties);
         consumer.subscribe(Collections.singleton(topic));
     }
