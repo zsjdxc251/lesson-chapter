@@ -43,25 +43,25 @@ public class ConsumerQueueApp {
             Destination destination = session.createQueue("myqueue?consumer.prefetchSize=10");
             MessageConsumer messageConsumer = session.createConsumer(destination);
 
-//            TextMessage textMessage = (TextMessage) messageConsumer.receive();
-//            System.out.println(textMessage.getText());
-//            textMessage.acknowledge();
+            TextMessage textMessage = (TextMessage) messageConsumer.receive();
+            System.out.println(textMessage.getText());
+            textMessage.acknowledge();
 
-            messageConsumer.setMessageListener(message -> {
-
-                if (message instanceof TextMessage){
-
-                    try {
-                        TextMessage textMessage = (TextMessage)message;
-                        System.out.println(textMessage.getText());
-
-//                        //throw new RuntimeException();
-                    } catch (JMSException e ) {
-                        log.error(StringUtils.EMPTY,e);
-                    }
-
-                }
-            });
+//            messageConsumer.setMessageListener(message -> {
+//
+//                if (message instanceof TextMessage){
+//
+//                    try {
+//                        TextMessage textMessage = (TextMessage)message;
+//                        System.out.println(textMessage.getText());
+//
+////                        //throw new RuntimeException();
+//                    } catch (JMSException e ) {
+//                        log.error(StringUtils.EMPTY,e);
+//                    }
+//
+//                }
+//            });
 
         } catch (JMSException e) {
             log.error(StringUtils.EMPTY,e);
