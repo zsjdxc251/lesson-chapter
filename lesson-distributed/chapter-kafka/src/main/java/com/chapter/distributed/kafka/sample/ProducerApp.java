@@ -31,6 +31,8 @@ public class ProducerApp extends Thread{
         properties.put(ProducerConfig.ACKS_CONFIG,"-1");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.IntegerSerializer");
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringSerializer");
+        // 消息发送到哪个分区
+        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,"com.chapter.distributed.kafka.sample.CustomPartitioner");
         this.producer = new KafkaProducer<>(properties);
         this.topic = topic;
         this.isAysnc = isAysnc;
@@ -39,7 +41,7 @@ public class ProducerApp extends Thread{
     @Override
     public void run() {
         CountDownLatch countDownLatch = new CountDownLatch(10000);
-        for (int i=0;i<10000;i++) {
+        for (int i=0;i<10;i++) {
             String message = "数据"+i;
             log.info("message:{}",message);
             if (isAysnc){
@@ -68,7 +70,7 @@ public class ProducerApp extends Thread{
 
     }
     public static void main(String[] args){
-        new ProducerApp("test",true).start();
+        new ProducerApp("testPts",true).start();
 
     }
 }
