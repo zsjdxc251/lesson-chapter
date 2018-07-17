@@ -39,7 +39,7 @@ public class ConsumerApp extends Thread{
         //consumer.subscribe(Collections.singleton(topic));
 
         // 只消费指定分区消息
-        TopicPartition topicPartition=new TopicPartition(topic,0);
+        TopicPartition topicPartition=new TopicPartition(topic,1);
         consumer.assign(Arrays.asList(topicPartition));
     }
 
