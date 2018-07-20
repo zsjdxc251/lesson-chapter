@@ -11,6 +11,7 @@
     <modules>
         <module>lesson-distributed</module>
         <module>lesson-distributed/chapter-serializer</module>
+        <module>lesson-microservice</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
