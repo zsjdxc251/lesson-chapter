@@ -1,6 +1,5 @@
 package com.chapter.distributed.rmi.custom.dubbo.api;
-
-import org.assertj.core.util.Lists;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

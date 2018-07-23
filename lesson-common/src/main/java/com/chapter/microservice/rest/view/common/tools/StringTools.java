@@ -1,4 +1,4 @@
-package com.lesson.common.tools;
+package com.chapter.microservice.rest.view.common.tools;
 
 import org.apache.commons.lang3.StringUtils;
 

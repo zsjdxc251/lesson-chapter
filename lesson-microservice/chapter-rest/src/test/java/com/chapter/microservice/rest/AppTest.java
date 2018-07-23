@@ -1,4 +1,4 @@
-package com.lesson.common;
+package com.chapter.microservice.rest;
 
 import static org.junit.Assert.assertTrue;
 

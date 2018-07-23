@@ -1,4 +1,4 @@
-package com.lesson.common;
+package com.chapter.microservice.rest.view.common;
 
 /**
  * Hello world!

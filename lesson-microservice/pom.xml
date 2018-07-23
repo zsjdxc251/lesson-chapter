@@ -19,6 +19,8 @@
     <artifactId>lesson-microservice</artifactId>
     <modules>
         <module>chapter-application</module>
+        <module>chapter-view</module>
+        <module>chapter-rest</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
