@@ -20,6 +20,16 @@ public class IndexController {
 
         return "home";
     }
+    @GetMapping("/list")
+    public String list(ModelMap modelMap){
+
+
+        //modelMap.put("message","message2");
+
+
+        return "home_index";
+    }
+
 
 
     @ModelAttribute(value = "message")

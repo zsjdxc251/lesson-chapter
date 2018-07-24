@@ -83,29 +83,10 @@
             <property name="order" value="0" />
         </bean>
     ```
+    
 
-   * velocity
+    
 
-     ```xml
-     <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-     
-         <property name="resourceLoaderPath">
-     
-           <value>WEB-INF/velocity/</value>
-     
-         </property>
-     
-         </bean>
-     <bean id="viewResolver" class="org.springframework.
-     
-               web.servlet.view.velocity.VelocityViewResolver">
-     
-         <property name="suffix"><value>.vm</value></property>
-     
-     </bean>
-     ```
-
-     
 
 
 
