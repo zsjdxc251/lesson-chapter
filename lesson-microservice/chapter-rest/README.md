@@ -29,10 +29,20 @@
 
   * @RequestMappng 中的 produces   对应 请求头 “Accept”
 
+  * `RequestResponseBodyMethodProcessor` 处理MessageConverter核心处理类
+
+    ```java
+    public class RequestResponseBodyMethodProcessor extends AbstractMessageConverterMethodProcessor {
+        protected <T> void writeWithMessageConverters(@Nullable T value, MethodParameter returnType,
+    			ServletServerHttpRequest inputMessage, ServletServerHttpResponse outputMessage)
+    			throws IOException, HttpMediaTypeNotAcceptableException, HttpMessageNotWritableException {
+    
+    }
+    ```
+
     
 
-## RequestResponseBodyMethodProcessor
-
+    
 
 
 
@@ -44,6 +54,14 @@
 ## 请求流程
 
 `DispatcherServlet` -> `HandlerMapping` ->  `HandlerAdapter`  -> `HandlerInterceptor` - > `HttpMessageConverter` ->`Handler` -> `View` -> `ViewRe`
+
+```java
+public class DispatcherServlet extends FrameworkServlet {
+    protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws       Exception {
+       ...
+    }
+}
+```
 
 
 

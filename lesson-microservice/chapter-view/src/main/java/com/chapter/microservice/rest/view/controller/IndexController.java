@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class IndexController {
@@ -18,7 +20,7 @@ public class IndexController {
         //modelMap.put("message","message2");
 
 
-        return "home";
+        return "thymeleaf/home";
     }
     @GetMapping("/list")
     public String list(ModelMap modelMap){
@@ -27,7 +29,23 @@ public class IndexController {
         //modelMap.put("message","message2");
 
 
-        return "home_index";
+        return "freemarker/home_index";
+    }
+    @GetMapping("/getSource")
+    public String getSource(ModelMap modelMap){
+
+
+        //modelMap.put("message","message2");
+
+
+        return "freemarker/source";
+    }
+
+    @GetMapping("/jsonString")
+    @ResponseBody
+    public String jsonString(){
+        return  "jsonString222";
+
     }
 
 
@@ -35,7 +53,7 @@ public class IndexController {
     @ModelAttribute(value = "message")
     public String message(){
 
-        return "xxxlll";
+        return "大佬三连鄙视";
     }
 
 

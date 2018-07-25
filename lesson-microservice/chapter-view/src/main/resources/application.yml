@@ -4,13 +4,13 @@
 spring:
   thymeleaf:
     suffix: .html
-    prefix: classpath:/templates/thymeleaf/
+    prefix: classpath:/templates/
     cache: false
-    #  freemarker:
-    #    suffix: .ftl
-    #    prefix: classpath:/templates/freemarker/
-    #    cache: false
-    #    content-type: text/html
+  freemarker:
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+    cache: false
+    content-type: text/html
 
 
 
