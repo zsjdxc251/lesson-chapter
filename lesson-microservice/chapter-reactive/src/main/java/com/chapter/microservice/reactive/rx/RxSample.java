@@ -24,7 +24,7 @@ public class RxSample {
 
         Maybe.just("");
 
-        Completable.amb()
+       
 
     }
 }
