@@ -36,6 +36,12 @@
             <version>${spring.boot.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.reactivex.rxjava2</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>2.1.17</version>
+        </dependency>
+
         <!--<dependency>-->
             <!--<groupId>io.projectreactor</groupId>-->
             <!--<artifactId>reactor-core</artifactId>-->
