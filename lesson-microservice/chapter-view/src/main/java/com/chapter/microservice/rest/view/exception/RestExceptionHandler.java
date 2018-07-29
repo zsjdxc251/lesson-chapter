@@ -13,7 +13,7 @@ import org.springframework.web.server.ServerWebExchange;
 import java.util.List;
 import java.util.Locale;
 
-@RestControllerAdvice(annotations = {RestController})
+@RestControllerAdvice(annotations = {RestController.class})
 public class RestExceptionHandler {
 
 
