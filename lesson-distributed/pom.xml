@@ -16,10 +16,17 @@
         <module>chapter-protocol</module>
         <module>chapter-activemq</module>
         <module>chapter-kafka</module>
+        <module>chapter-serializer</module>
     </modules>
+    <name>lesson-distributed</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
 
-
-
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
     <build>
 
         <plugins>

@@ -10,7 +10,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>lesson-distributed</module>
-        <module>lesson-distributed/chapter-serializer</module>
         <module>lesson-microservice</module>
         <module>lesson-common</module>
     </modules>
