@@ -17,6 +17,7 @@
     <url>http://www.example.com</url>
     <modules>
         <module>chapter-cloud-native</module>
+        <module>chapter-cloud-config</module>
     </modules>
 
     <properties>
@@ -52,8 +53,8 @@
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
                 <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
                 <plugin>

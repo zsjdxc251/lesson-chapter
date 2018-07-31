@@ -51,6 +51,19 @@ public void multicastEvent(final ApplicationEvent event, @Nullable ResolvableTyp
 
 
 
+### 事件
+    事件类：`ApplicationEvent`
+
+    事件监听器： `ApplicationListener`
+
+    事件广播器：`ApplicationEventMulticaster` / `SimpleApplicationEventMulticaster` （唯一）
+
+    事件发送器：`ApplicationEventPublisher`
+
+    * 通过 `ApplicationEventPublisher` 发送消息(` ApplicationEvent`) 到广播器 `ApplicationEventMulticaster` 遍历 发送到监听器 `ApplicationListener`
+
+
+
 
 
 

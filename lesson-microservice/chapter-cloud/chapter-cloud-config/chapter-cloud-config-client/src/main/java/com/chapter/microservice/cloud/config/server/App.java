@@ -1,4 +1,4 @@
-package com.lesson;
+package com.chapter.microservice.cloud.config.server;
 
 /**
  * Hello world!

@@ -5,6 +5,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.event.EventListener;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -26,6 +27,9 @@ public class AppStartCreate {
 
 
     }
+
+
+
 
     public static void simple(String[] args){
         SpringApplication.run(AppStartCreate.class,args);
