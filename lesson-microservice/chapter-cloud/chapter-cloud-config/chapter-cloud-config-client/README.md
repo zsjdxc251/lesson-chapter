@@ -3,7 +3,7 @@
 
 ## Endpoint
   * 初始化
-    * `AbstractWebMvcEndpointHandlerMapping#initHandlerMethods` -> `registerMappingForOperation`
+    * `JmxEndpointDiscoverer#createEndpointBeans` ->  `AbstractWebMvcEndpointHandlerMapping#initHandlerMethods` -> `registerMappingForOperation`
   * `AbstractWebMvcEndpointHandlerMapping` -> `ServletWebOperationAdapter#handle` -> `DiscoveredWebOperation#invoker`
 
 
