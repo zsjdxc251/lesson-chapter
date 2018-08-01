@@ -1,4 +1,4 @@
-package com.chapter.microservice.cloud.config.server;
+package com.chapter.microservice.cloud.config.client;
 
 import static org.junit.Assert.assertTrue;
 

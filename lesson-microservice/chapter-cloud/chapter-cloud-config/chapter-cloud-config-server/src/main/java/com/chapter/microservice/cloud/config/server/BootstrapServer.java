@@ -8,10 +8,10 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 
 @SpringBootApplication
 @EnableConfigServer
-public class App 
+public class BootstrapServer
 {
     public static void main( String[] args ){
 
-        SpringApplication.run(App.class,args);
+        SpringApplication.run(BootstrapServer.class,args);
     }
 }
