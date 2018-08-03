@@ -8,6 +8,7 @@ import org.springframework.cloud.config.environment.PropertySource;
 import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.cloud.config.server.environment.EnvironmentRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @SpringBootApplication
 @EnableConfigServer
+@EnableScheduling
 public class BootstrapServer
 {
     public static void main( String[] args ){
