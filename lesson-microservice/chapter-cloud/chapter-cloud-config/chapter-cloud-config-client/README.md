@@ -6,4 +6,7 @@
     * `JmxEndpointDiscoverer#createEndpointBeans` ->  `AbstractWebMvcEndpointHandlerMapping#initHandlerMethods` -> `registerMappingForOperation`
   * `AbstractWebMvcEndpointHandlerMapping` -> `ServletWebOperationAdapter#handle` -> `DiscoveredWebOperation#invoker`
 
+  * health
+   * `HealthEndpointProperties`
+
 
