@@ -3,6 +3,8 @@ package com.chapter.microservice.cloud.config.server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
 import org.springframework.cloud.config.server.EnableConfigServer;
@@ -25,6 +27,11 @@ public class BootstrapServer
         SpringApplication.run(BootstrapServer.class,args);
     }
 
+
+    /**
+     * 自定义数据源 config server
+     * @return
+     */
     @Bean
     public EnvironmentRepository environmentRepository(){
 

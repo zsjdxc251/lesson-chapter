@@ -77,6 +77,8 @@ public class DispatcherServlet extends FrameworkServlet {
   }
   ```
 
+* `application/properties`
+
 
 
 * `PATCH` Method servlet Api 没有对其做处理 spring MVC做了特殊处理

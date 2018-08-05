@@ -23,6 +23,7 @@
         <module>chapter-rest</module>
         <module>chapter-reactive</module>
         <module>chapter-cloud</module>
+        <module>chapter-boot</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

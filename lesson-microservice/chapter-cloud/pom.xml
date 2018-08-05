@@ -19,6 +19,7 @@
         <module>chapter-cloud-native</module>
         <module>chapter-cloud-config</module>
         <module>chapter-cloud-eureka</module>
+        <module>chapter-cloud-zookeeper</module>
     </modules>
 
     <properties>
