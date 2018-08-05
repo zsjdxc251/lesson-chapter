@@ -17,6 +17,7 @@
     <url>http://www.example.com</url>
     <modules>
         <module>chapter-cloud-zookeeper-consumer</module>
+        <module>chapter-cloud-zookeeper-provider</module>
     </modules>
 
     <properties>
