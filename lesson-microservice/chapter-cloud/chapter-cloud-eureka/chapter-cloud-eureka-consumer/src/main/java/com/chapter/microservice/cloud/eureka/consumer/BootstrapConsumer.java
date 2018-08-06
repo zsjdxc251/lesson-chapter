@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
@@ -19,6 +20,6 @@ public class BootstrapConsumer
     @LoadBalanced
     @Bean
     public RestTemplate restTemplate(){
-        return new RestTemplate();
+        return new RestTemplate(new HttpComponentsClientHttpRequestFactory());
     }
 }
