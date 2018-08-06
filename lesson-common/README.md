@@ -14,7 +14,18 @@
 
 ### JSR-330
   * 依赖注入
+
   * `@Inject`、`@Qualifier`、`@Named`、`@Scope`
+
+### JSR-349
+
+* Bean validation 1.1
+
+### JSR-380
+
+* Bean Validation  2.0
+  * `@Email`, `@NotEmpty`, `@NotBlank`, `@Positive`, `@PositiveOrZero`, `@Negative`, `@NegativeOrZero`, `@PastOrPresent` and `@FutureOrPresent` 
+
 
 
 ## JavaSE
