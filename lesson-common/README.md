@@ -40,3 +40,13 @@
     * `com.google.common.util.concurrent`：多线程工具包。
 
   * Guava 扩展
+
+### IO/网络
+
+#### 文件系统
+#### URL 资源
+#### Socket (BIO)
+#### NIO
+#### NIO2
+#### AIO
+  * Future + NIO
