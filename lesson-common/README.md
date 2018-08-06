@@ -12,6 +12,11 @@
 ### JSR-305
  * 注解做编译约束
 
+### JSR-310
+
+* support for the new date/time data types (JSR 310) for `@Past` and `@Future` 
+
+
 ### JSR-330
   * 依赖注入
 
