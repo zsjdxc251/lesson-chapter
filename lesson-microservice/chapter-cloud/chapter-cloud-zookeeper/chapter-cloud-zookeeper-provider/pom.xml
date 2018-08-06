@@ -53,5 +53,10 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>com.lesson</groupId>
+            <artifactId>chapter-cloud-zookeeper-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

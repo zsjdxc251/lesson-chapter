@@ -18,6 +18,7 @@
     <modules>
         <module>chapter-cloud-zookeeper-consumer</module>
         <module>chapter-cloud-zookeeper-provider</module>
+        <module>chapter-cloud-zookeeper-api</module>
     </modules>
 
     <properties>

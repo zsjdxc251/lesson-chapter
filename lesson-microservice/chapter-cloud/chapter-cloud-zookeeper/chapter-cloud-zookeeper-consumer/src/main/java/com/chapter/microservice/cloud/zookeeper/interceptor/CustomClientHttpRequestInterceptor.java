@@ -6,6 +6,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -19,6 +22,7 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.util.ObjectUtils;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -47,6 +51,7 @@ public class CustomClientHttpRequestInterceptor implements ClientHttpRequestInte
         String scheme = request.getURI().getScheme();
         String query = request.getURI().getQuery();
         HttpMethod method = request.getMethod();
+        HttpHeaders headers = request.getHeaders();
 
         List<ServiceInstance> serviceInstances =  discoveryClient.getInstances(serviceId);
         if (ObjectUtils.isEmpty(serviceInstances)){
@@ -56,10 +61,28 @@ public class CustomClientHttpRequestInterceptor implements ClientHttpRequestInte
         String host = hosts.get(new Random().nextInt(hosts.size()));
         String actualUrl = scheme+"://"+host+path+(StringUtils.isBlank(query)?StringUtils.EMPTY:"?"+query);
 
+
+
+
         HttpClient httpClient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(actualUrl);
-        httpGet.setConfig(requestConfig);
-        HttpResponse response  = httpClient.execute(httpGet);
+
+        HttpRequestBase httpRequestBase = null;
+        if (method == HttpMethod.GET){
+            httpRequestBase = new HttpGet(actualUrl);
+        } else if (method == HttpMethod.POST){
+            httpRequestBase = new HttpPost(actualUrl);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body);
+            InputStreamEntity inputStreamEntity = new InputStreamEntity(byteArrayInputStream);
+            HttpPost.class.cast(httpRequestBase).setEntity(inputStreamEntity);
+
+        }
+        final HttpRequestBase newHttpRequestBase = httpRequestBase;
+        headers.remove(HttpHeaders.CONTENT_LENGTH);
+        headers.forEach((key,value)->{
+            newHttpRequestBase.setHeader(key,StringUtils.join(value,", "));
+        });
+        httpRequestBase.setConfig(requestConfig);
+        HttpResponse response  = httpClient.execute(httpRequestBase);
 
         ClientHttpResponse clientHttpResponse = new ClientHttpResponse(){
             private int statusCode = response.getStatusLine().getStatusCode();
