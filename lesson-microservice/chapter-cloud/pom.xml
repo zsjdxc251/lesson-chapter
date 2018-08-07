@@ -20,6 +20,7 @@
         <module>chapter-cloud-config</module>
         <module>chapter-cloud-eureka</module>
         <module>chapter-cloud-zookeeper</module>
+        <module>chapter-cloud-hystrix</module>
     </modules>
 
     <properties>
