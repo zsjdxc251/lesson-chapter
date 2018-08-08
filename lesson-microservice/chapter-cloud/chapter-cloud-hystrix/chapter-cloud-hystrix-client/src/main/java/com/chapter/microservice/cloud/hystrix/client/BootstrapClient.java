@@ -7,7 +7,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 @SpringBootApplication
-@EnableCircuitBreaker
+@EnableHystrix
 public class BootstrapClient
 {
     public static void main( String[] args )

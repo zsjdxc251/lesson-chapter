@@ -1,4 +1,4 @@
-package com.lesson;
+package com.chapter.microservice.cloud.hystrix.turbine;
 
 import static org.junit.Assert.assertTrue;
 

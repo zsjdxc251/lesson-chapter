@@ -18,6 +18,7 @@
     <modules>
         <module>chapter-cloud-hystrix-client</module>
         <module>chapter-cloud-hystrix-dashboard</module>
+        <module>chapter-cloud-hystrix-turbine</module>
     </modules>
 
 
