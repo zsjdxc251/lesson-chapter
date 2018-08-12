@@ -21,6 +21,7 @@
         <module>chapter-cloud-eureka</module>
         <module>chapter-cloud-zookeeper</module>
         <module>chapter-cloud-hystrix</module>
+        <module>chapter-cloud-feign</module>
     </modules>
 
     <properties>

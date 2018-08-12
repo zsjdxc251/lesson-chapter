@@ -49,6 +49,17 @@ public class UserInfo implements Serializable{
         sex=(String)objectInputStream.readObject();
     }
 
+    /**
+     * 单例模式 反序列化防止重复创建对象
+     * @return
+     */
+//    public Object readResolve(){
+//
+//        return null;
+//
+//    }
+
+
     public String getName() {
         return name;
     }
