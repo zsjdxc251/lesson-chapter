@@ -1,0 +1,6 @@
+#spring:
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        serviceId: spring-cloud-config-sample-server

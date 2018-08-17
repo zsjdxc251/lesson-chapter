@@ -12,6 +12,7 @@
         <module>lesson-distributed</module>
         <module>lesson-microservice</module>
         <module>lesson-common</module>
+        <module>lesson-concurrent</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -73,12 +74,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.37</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>23.0</version>
         </dependency>
 
         <dependency>

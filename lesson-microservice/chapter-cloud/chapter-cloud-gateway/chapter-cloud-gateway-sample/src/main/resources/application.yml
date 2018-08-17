@@ -1,0 +1,22 @@
+
+
+
+
+spring:
+  application:
+    name: spring-cloud-gateway-sample
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: 123456
+        uri: lb://spring-cloud-zookeeper-provider
+        predicates:
+        - Path=/invoker/**
+
+server:
+  port: 7071
+
+

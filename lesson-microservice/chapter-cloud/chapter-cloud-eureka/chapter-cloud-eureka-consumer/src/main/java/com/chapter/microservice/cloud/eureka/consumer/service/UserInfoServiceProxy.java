@@ -29,6 +29,7 @@ public class UserInfoServiceProxy implements UserInfoService {
         HttpEntity<UserInfo> entity = new HttpEntity<>(userInfo,headers);
 
         ResponseEntity<UserInfo> responseEntity = restTemplate.postForEntity(PROVIDER_SERVER_URL_PREFIX+"/user/create",entity,UserInfo.class);
+
         return responseEntity.getBody();
     }
 }
