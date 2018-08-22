@@ -1,4 +1,4 @@
-package com.lesson.microservice.boot.sample.microservice.cloud.zuul.sample;
+package com.lesson.microservice.cloud.zuul.sample;
 
 
 import org.springframework.boot.SpringApplication;

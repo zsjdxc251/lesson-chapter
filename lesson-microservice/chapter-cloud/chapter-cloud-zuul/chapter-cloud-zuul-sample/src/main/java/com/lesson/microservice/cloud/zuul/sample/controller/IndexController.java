@@ -1,4 +1,4 @@
-package com.lesson.microservice.boot.sample.microservice.cloud.zuul.sample.controller;
+package com.lesson.microservice.cloud.zuul.sample.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
