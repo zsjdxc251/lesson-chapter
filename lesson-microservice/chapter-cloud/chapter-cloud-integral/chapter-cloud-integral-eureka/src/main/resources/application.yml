@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spring-cloud-integral-eureka
+server:
+  port: 9090
+
+
+
+eureka:
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/
+  instance:
+    prefer-ip-address: true

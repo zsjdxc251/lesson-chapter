@@ -1,0 +1,15 @@
+# eureka 注册中心配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka/
+
+spring:
+  cloud:
+    config:
+      discovery:
+        serviceId: spring-cloud-integral-config
+        enabled: true
+      name: application
+      profile: config
+      label: master

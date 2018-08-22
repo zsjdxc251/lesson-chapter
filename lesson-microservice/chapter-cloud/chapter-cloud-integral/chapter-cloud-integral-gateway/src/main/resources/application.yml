@@ -1,0 +1,32 @@
+
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-cloud-inegral-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: 123456
+        uri: lb://spring-cloud-integral-hystrix
+        predicates:
+        - Path=/order/**
+      - id: 67890
+        uri: lb://spring-cloud-integral-feign
+        predicates:
+        - Path=/shop/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+
+
+

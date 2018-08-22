@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: spring-cloud-integral-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///D:/Temp/test/
+      discovery:
+        enabled: true
+    zookeeper:
+      enabled: true
+
+
+server:
+  port: 0
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# eureka 注册中心配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka/

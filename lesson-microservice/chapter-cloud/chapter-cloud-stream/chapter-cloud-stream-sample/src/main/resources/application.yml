@@ -1,0 +1,16 @@
+
+spring:
+  application:
+    name: spring-cloud-stream-sample
+  cloud:
+    stream:
+      bindings:
+        channel_name_arg0:
+          destination: destination_name_arg0
+        channel_name_arg1:
+          destination: destination_name_arg0
+  kafka:
+    bootstrapServers: 121.196.232.248:9092,121.196.232.248:9093,121.196.232.248:9094
+server:
+  port: 7070
+

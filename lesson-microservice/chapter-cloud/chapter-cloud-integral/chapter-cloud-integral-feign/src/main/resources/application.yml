@@ -1,0 +1,7 @@
+
+spring:
+  application:
+    name: spring-cloud-integral-feign
+
+server:
+  port: 0

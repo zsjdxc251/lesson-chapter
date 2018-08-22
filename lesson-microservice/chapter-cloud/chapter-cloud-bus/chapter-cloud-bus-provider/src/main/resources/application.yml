@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: spring-cloud-bus-provider
+  kafka:
+    bootstrapServers: 121.196.232.248:9092,121.196.232.248:9093,121.196.232.248:9094
+
+server:
+  port: ${random.int[10000,19999]}
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
