@@ -1,11 +1,18 @@
 package com.chapter.microservice.application.event;
 
 import org.springframework.context.ApplicationEvent;
+import org.springframework.context.Lifecycle;
 import org.springframework.context.PayloadApplicationEvent;
 import org.springframework.context.event.ApplicationEventMulticaster;
+import org.springframework.context.event.EventListener;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
+import org.springframework.context.event.SmartApplicationListener;
 
 /**
+ *
+ * @see  {@link Lifecycle}
+ * @see  {@link EventListener}
+ * @see  {@link SmartApplicationListener}
  * @author zhengshijun
  * @version created on 2018/7/20.
  */

@@ -15,6 +15,11 @@
     <name>chapter-cloud-integral</name>
     <modules>
         <module>chapter-cloud-integral-gateway</module>
+        <module>chapter-cloud-integral-config</module>
+        <module>chapter-cloud-integral-eureka</module>
+        <module>chapter-cloud-integral-feign</module>
+        <module>chapter-cloud-integral-api</module>
+        <module>chapter-cloud-integral-hystrix</module>
     </modules>
 
 </project>

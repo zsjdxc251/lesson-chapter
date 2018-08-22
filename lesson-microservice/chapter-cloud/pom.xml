@@ -25,6 +25,9 @@
         <module>chapter-cloud-zuul</module>
         <module>chapter-cloud-gateway</module>
         <module>chapter-cloud-integral</module>
+        <module>chapter-cloud-stream</module>
+        <module>chapter-cloud-bus</module>
+        <module>chapter-cloud-sleuth</module>
     </modules>
 
     <properties>
