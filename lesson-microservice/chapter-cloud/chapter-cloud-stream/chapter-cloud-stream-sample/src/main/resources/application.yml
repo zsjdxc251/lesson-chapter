@@ -7,8 +7,10 @@ spring:
       bindings:
         channel_name_arg0:
           destination: destination_name_arg0
+          binder: active
         channel_name_arg1:
           destination: destination_name_arg0
+          binder: active
   kafka:
     bootstrapServers: 121.196.232.248:9092,121.196.232.248:9093,121.196.232.248:9094
 server:
