@@ -18,6 +18,8 @@
     <modules>
         <module>chapter-cloud-stream-sample</module>
         <module>chapter-cloud-stream-eureka</module>
+        <module>chapter-cloud-stream-rocket</module>
+        <module>chapter-cloud-stream-active</module>
     </modules>
 
 
