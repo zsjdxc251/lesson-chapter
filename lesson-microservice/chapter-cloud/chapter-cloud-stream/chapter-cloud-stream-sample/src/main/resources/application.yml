@@ -11,6 +11,9 @@ spring:
         channel_name_arg1:
           destination: destination_name_arg0
           binder: active
+        channel_name_arg2:
+          destination: destination_name_arg2
+          binder: kafka
   kafka:
     bootstrapServers: 121.196.232.248:9092,121.196.232.248:9093,121.196.232.248:9094
 server:

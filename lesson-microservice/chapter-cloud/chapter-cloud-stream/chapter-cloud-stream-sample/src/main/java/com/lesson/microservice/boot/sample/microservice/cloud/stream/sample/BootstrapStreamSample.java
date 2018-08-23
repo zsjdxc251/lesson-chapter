@@ -25,7 +25,14 @@ public class BootstrapStreamSample
     @StreamListener("channel_name_arg1")
     public void onMesssage(String message){
 
-        System.out.println("onMesssage"+message);
+        System.out.println("activeOnMesssage"+message);
+
+    }
+
+    @StreamListener("channel_name_arg2")
+    public void onKafkaMesssage(String message){
+
+        System.out.println("kafkaOnMesssage"+message);
 
     }
 

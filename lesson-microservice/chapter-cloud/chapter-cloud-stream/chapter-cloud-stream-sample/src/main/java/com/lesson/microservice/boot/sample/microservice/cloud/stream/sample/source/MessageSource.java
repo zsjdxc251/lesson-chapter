@@ -12,4 +12,7 @@ public interface MessageSource{
 
     @Input("channel_name_arg1")
     SubscribableChannel inputChannel();
+
+    @Output("channel_name_arg2")
+    MessageChannel kafkaOutputChannel();
 }

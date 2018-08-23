@@ -25,4 +25,13 @@ public class MessageController {
         return result? ResponseEntity.ok("发送成功"):ResponseEntity.noContent().build();
 
     }
+    @GetMapping("/kafka/send")
+    public ResponseEntity<String> sendKafkaMessage(String message){
+
+        boolean result = messageSource.kafkaOutputChannel().send(new GenericMessage<>(message));
+
+
+        return result? ResponseEntity.ok("发送成功"):ResponseEntity.noContent().build();
+
+    }
 }
