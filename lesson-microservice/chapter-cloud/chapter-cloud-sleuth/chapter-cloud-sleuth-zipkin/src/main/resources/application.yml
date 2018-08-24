@@ -1,0 +1,21 @@
+
+
+
+spring:
+  application:
+    name: spring-cloud-sleuth-zipkin
+
+  kafka:
+    bootstrapServers: 121.196.232.248:9092,121.196.232.248:9093,121.196.232.248:9094
+  zipkin:
+    sender:
+      type: kafka
+server:
+  port: 7070
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka
+

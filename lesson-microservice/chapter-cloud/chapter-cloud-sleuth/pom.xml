@@ -10,7 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chapter-cloud-sleuth</artifactId>
+    <packaging>pom</packaging>
 
     <name>chapter-cloud-sleuth</name>
+    <modules>
+        <module>chapter-cloud-sleuth-zipkin</module>
+        <module>chapter-cloud-sleuth-sample</module>
+        <module>chapter-cloud-sleuth-eureka</module>
+    </modules>
 
 </project>

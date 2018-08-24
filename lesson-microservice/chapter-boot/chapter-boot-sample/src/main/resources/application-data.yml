@@ -1,0 +1,21 @@
+
+## 表示数组/集合
+custom:
+  property:
+    userInfoList:
+      -
+       id: id_1
+       username: zsjdxc251
+      -
+       id: id2
+       username: zsjdxc250
+    userInfoMap:
+      id_1:
+        id: id_3
+        username: zsjdxc252
+      id_2:
+        id: id_4
+        username: zsjdxc253
+    ids:
+      - id_5
+      - id_6

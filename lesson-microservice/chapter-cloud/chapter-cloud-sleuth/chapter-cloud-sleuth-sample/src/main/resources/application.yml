@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spring-cloud-sleuth-sample
+  kafka:
+    bootstrapServers: 121.196.232.248:9092,121.196.232.248:9093,121.196.232.248:9094
+
+
+server:
+  port: 8080
+
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka
