@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
  */
 public class UserInfo {
 
-    @NotNull(message = "{user.info.id}")
+    @NotNull(message = "{com.lesson.microservice.boot.sample.entity.id}")
     private String id;
 
     private String username;
