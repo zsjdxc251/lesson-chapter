@@ -1,4 +1,4 @@
-package com.lesson.microservice.boot.sample.microservice.cloud.integral.feign.controller;
+package com.lesson.microservice.cloud.integral.feign.controller;
 
 
 import com.lesson.microservice.boot.sample.microservice.cloud.integral.api.service.IOrderService;

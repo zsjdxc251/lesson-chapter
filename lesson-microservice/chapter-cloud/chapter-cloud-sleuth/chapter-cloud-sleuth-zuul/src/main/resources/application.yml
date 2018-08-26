@@ -1,0 +1,13 @@
+
+
+spring:
+  application:
+    name: spring-cloud-sleuth-zuul
+
+
+server:
+  port: 7070
+
+zuul:
+  routes:
+    spring-cloud-sleuth-hystrix: /user/**

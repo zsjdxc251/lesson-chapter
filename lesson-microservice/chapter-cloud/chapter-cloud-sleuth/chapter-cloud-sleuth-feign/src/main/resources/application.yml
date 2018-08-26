@@ -1,0 +1,11 @@
+
+
+
+spring:
+  application:
+    name: spring-cloud-sleuth-feign
+
+
+
+server:
+  port: 0

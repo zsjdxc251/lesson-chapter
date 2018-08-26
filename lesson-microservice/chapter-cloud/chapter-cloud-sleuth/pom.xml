@@ -20,6 +20,7 @@
         <module>chapter-cloud-sleuth-feign</module>
         <module>chapter-cloud-sleuth-api</module>
         <module>chapter-cloud-sleuth-hystrix</module>
+        <module>chapter-cloud-sleuth-zuul</module>
     </modules>
 
 </project>
