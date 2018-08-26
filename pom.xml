@@ -13,6 +13,7 @@
         <module>lesson-microservice</module>
         <module>lesson-common</module>
         <module>lesson-concurrent</module>
+        <module>lesson-open</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

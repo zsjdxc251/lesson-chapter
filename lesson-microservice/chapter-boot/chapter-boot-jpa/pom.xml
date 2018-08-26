@@ -57,7 +57,7 @@
                 </execution>
             </executions>
             <configuration>
-                <mainClass>com.lesson.microservice.boot.sample.BootstrapBootSample</mainClass>
+                <mainClass>com.lesson.microservice.boot.jpa.BootstrapBootJpa</mainClass>
             </configuration>
         </plugin>
 

@@ -14,10 +14,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  * @author  zhengshijun
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.lesson.microservice.boot.jpa.configure","com.lesson.microservice.boot.jpa.controller"})
 @EnableTransactionManagement(proxyTargetClass = true)
-@ComponentScan({"com.lesson.microservice.boot.jpa.configure",
-        "com.lesson.microservice.boot.jpa.controller"})
+//@ComponentScan({"com.lesson.microservice.boot.jpa.configure","com.lesson.microservice.boot.jpa.controller"})
 public class BootstrapBootJpa {
 
     public static void main(String[] args){
@@ -26,6 +25,7 @@ public class BootstrapBootJpa {
         ConfigurableApplicationContext applicationContext
         = SpringApplication.run(BootstrapBootJpa.class,args);
 
+        System.out.println(applicationContext.getClass().getName());
         System.out.println(StringUtils.join(applicationContext.getBeanDefinitionNames(),"\n"));
     }
 

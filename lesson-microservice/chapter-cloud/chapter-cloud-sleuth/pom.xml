@@ -17,6 +17,9 @@
         <module>chapter-cloud-sleuth-zipkin</module>
         <module>chapter-cloud-sleuth-sample</module>
         <module>chapter-cloud-sleuth-eureka</module>
+        <module>chapter-cloud-sleuth-feign</module>
+        <module>chapter-cloud-sleuth-api</module>
+        <module>chapter-cloud-sleuth-hystrix</module>
     </modules>
 
 </project>

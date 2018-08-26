@@ -1,0 +1,7 @@
+
+spring:
+  application:
+    name: spring-cloud-sleuth-hystrix
+
+server:
+  port: 0

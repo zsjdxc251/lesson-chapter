@@ -1,6 +1,10 @@
 package com.lesson.microservice.boot.auto.config;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 /**
  * @author zhengshijun
@@ -21,6 +25,12 @@ public class AutoConfigDispatcherServletInitializer extends AbstractAnnotationCo
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/*"};
+        return new String[]{"/"};
+    }
+
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return super.getServletFilters();
     }
 }
