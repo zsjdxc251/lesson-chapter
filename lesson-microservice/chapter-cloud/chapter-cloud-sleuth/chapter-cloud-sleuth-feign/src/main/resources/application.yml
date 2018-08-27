@@ -5,7 +5,8 @@ spring:
   application:
     name: spring-cloud-sleuth-feign
 
-
+  zipkin:
+    baseUrl: http://localhost:7071/
 
 server:
   port: 0

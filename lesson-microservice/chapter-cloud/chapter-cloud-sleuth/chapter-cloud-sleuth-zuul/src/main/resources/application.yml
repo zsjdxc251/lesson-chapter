@@ -4,10 +4,13 @@ spring:
   application:
     name: spring-cloud-sleuth-zuul
 
-
+  zipkin:
+    baseUrl: http://localhost:7071/
 server:
   port: 7070
 
 zuul:
   routes:
     spring-cloud-sleuth-hystrix: /user/**
+
+

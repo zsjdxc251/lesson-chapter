@@ -41,5 +41,11 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!-- 配置跟踪 器-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

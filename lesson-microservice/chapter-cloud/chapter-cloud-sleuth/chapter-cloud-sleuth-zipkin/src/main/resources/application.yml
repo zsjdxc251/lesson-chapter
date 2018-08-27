@@ -11,7 +11,7 @@ spring:
     sender:
       type: kafka
 server:
-  port: 7070
+  port: 7071
 
 
 eureka:
