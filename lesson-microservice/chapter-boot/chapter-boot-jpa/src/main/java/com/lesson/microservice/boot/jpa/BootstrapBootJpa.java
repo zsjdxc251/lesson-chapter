@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  * @author  zhengshijun
  */
-@SpringBootApplication(scanBasePackages = {"com.lesson.microservice.boot.jpa.configure","com.lesson.microservice.boot.jpa.controller"})
+@SpringBootApplication
 @EnableTransactionManagement(proxyTargetClass = true)
 //@ComponentScan({"com.lesson.microservice.boot.jpa.configure","com.lesson.microservice.boot.jpa.controller"})
 public class BootstrapBootJpa {
