@@ -14,8 +14,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class CustomBootstrap
 {
 
@@ -25,23 +27,16 @@ public class CustomBootstrap
         ConfigurableApplicationContext applicationContext =
                 new SpringApplicationBuilder(CustomBootstrap.class).run(args);
 
-
-        String[] names = applicationContext.getBeanDefinitionNames();
-
-        System.out.println(StringUtils.join(names,"\n"));
-
-
-
-
+        System.out.println(StringUtils.join(applicationContext.getBeanDefinitionNames(),"\n"));
 
     }
 
-    @ConditionalOnMissingBean(ActionManager.class)
-    @Bean
-    public ActionManager actionManager(){
-        System.out.println("----------------------------------------");
-        return new ActionManager();
-    }
+//    @ConditionalOnMissingBean(ActionManager.class)
+//    @Bean
+//    public ActionManager actionManager(){
+//        System.out.println("----------------------------------------");
+//        return new ActionManager();
+//    }
 
 
 }

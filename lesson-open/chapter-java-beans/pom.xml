@@ -13,4 +13,12 @@
 
     <name>chapter-java-beans</name>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>5.0.8.RELEASE</version>
+        </dependency>
+    </dependencies>
 </project>
