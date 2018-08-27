@@ -10,4 +10,12 @@
     <packaging>jar</packaging>
     <name>chapter-java-resource</name>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>5.0.8.RELEASE</version>
+        </dependency>
+    </dependencies>
 </project>

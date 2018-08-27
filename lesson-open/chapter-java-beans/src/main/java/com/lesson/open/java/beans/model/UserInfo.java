@@ -1,5 +1,7 @@
 package com.lesson.open.java.beans.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 /**
@@ -16,6 +18,7 @@ public class UserInfo extends AbstractModel{
 
     private Integer age;
 
+    @JSONField(format="yyyy-MM-dd")
     private Date createTime;
 
     public String getId() {

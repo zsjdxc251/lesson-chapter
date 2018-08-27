@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userInfo" class="com.lesson.open.java.beans.model.UserInfo">
+        <property name="username" value="zsjdxc251"/>
+        <property name="createTime" value="2018-05-28"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars">
+            <list>
+                <bean class="com.lesson.open.java.beans.CustomPropertyEditorRegistrar" />
+            </list>
+        </property>
+    </bean>
+</beans>

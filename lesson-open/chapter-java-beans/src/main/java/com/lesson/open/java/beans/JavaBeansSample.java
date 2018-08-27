@@ -50,7 +50,6 @@ public class JavaBeansSample {
 
         SimpleTypeConverter propertyEditorRegistrySupport = new SimpleTypeConverter();
 
-
         Object beanObject = beanClass.newInstance();
         Stream.of(propertyDescriptors).forEach(propertyDescriptor -> {
 
