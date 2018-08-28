@@ -4,8 +4,12 @@ spring:
   application:
     name: spring-cloud-sleuth-zuul
 
-  zipkin:
-    baseUrl: http://localhost:7071/
+  ## HTTP 上报
+#  zipkin:
+#    baseUrl: http://localhost:7071/
+  ## MQ 上报
+  kafka:
+    bootstrapServers: 121.196.232.248:9092,121.196.232.248:9093,121.196.232.248:9094
 server:
   port: 7070
 
