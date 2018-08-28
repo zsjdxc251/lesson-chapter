@@ -70,5 +70,11 @@ public class ThreadLocal<T> {
 ## volatile
 
 1. 可以保证可见性，防止内存重排序
+
 2. #lock -> 缓存锁 （`MESI`）
+
 3. 内存屏障 `storestore` `loadload` `loadstore`
+## 并发包
+
+### Locks
+

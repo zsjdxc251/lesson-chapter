@@ -1,4 +1,4 @@
-package com.chapter.concurrent;
+package com.lesson;
 
 import static org.junit.Assert.assertTrue;
 
