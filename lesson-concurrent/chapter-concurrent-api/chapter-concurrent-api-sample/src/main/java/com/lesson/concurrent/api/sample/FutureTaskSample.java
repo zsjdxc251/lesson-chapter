@@ -2,7 +2,9 @@ package com.lesson.concurrent.api.sample;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.RunnableFuture;
 
 /**
  *
@@ -10,8 +12,11 @@ import java.util.concurrent.FutureTask;
  *  {@link FutureTask}
  *  {@link ExecutionException}
  *
+ *  {@code java.util.concurrent.FutureTask} -> {@link RunnableFuture} -> {@link Runnable}, {@link Future}
  *
  * @see Thread
+ * @see Runnable
+ *
  * @author zhengshijun
  * @version created on 2018/8/28.
  */
