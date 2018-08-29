@@ -1,12 +1,14 @@
 package com.lesson.concurrent.api.sample;
 
 import java.util.concurrent.AbstractExecutorService;
+import java.util.concurrent.CountedCompleter;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.ForkJoinWorkerThread;
+import java.util.concurrent.Future;
 import java.util.concurrent.RecursiveAction;
 import java.util.concurrent.RecursiveTask;
 
@@ -27,11 +29,17 @@ import java.util.concurrent.RecursiveTask;
  *        在{@code ForkJoinPool}执行work 使用的就是 ForkJoinWorkerThread线程
  *   </li>
  *
+ *
+ *   {@code RecursiveTask},{@code RecursiveAction},{@code CountedCompleter} extends {@code ForkJoinTask} implements {@link Future}
+ *
+ *
  *   {@link Executor} -> {@link ExecutorService} -> {@link AbstractExecutorService} -> {@code java.util.concurrent.ForkJoinPool}
  *
  *
  *  {@link RecursiveTask}
  *  {@link RecursiveAction}
+ *  {@link CountedCompleter}
+ *
  *  {@link ForkJoinPool}
  *  {@link ForkJoinTask}
  *  {@link ForkJoinWorkerThread}
@@ -82,6 +90,25 @@ public class ForkJoinSample {
         } catch (InterruptedException| ExecutionException e) {
             e.printStackTrace();
         }
+
+
+        CountedCompleter<String> countedCompleter = new CountedCompleter<String>(){
+
+            @Override
+            public void compute() {
+
+                System.out.println("11");
+
+            }
+
+            @Override
+            public void complete(String rawResult) {
+                super.complete(rawResult);
+                System.out.println("22");
+            }
+        };
+
+        forkJoinPool.execute(countedCompleter);
 
     }
 }
