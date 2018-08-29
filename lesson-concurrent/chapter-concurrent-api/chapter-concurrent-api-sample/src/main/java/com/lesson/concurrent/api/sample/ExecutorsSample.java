@@ -1,5 +1,6 @@
 package com.lesson.concurrent.api.sample;
 
+import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,6 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
  *    {@link Executors}
  *    {@link ExecutorService} extends {@link Executor}
  *    {@link ScheduledExecutorService}
+ *    {@link AbstractExecutorService} implements {@link ExecutorService}
  *
  *
  * @author zhengshijun

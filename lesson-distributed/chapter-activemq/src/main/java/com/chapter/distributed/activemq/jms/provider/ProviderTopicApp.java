@@ -23,11 +23,13 @@ public class ProviderTopicApp {
     private static final Logger log = LoggerFactory.getLogger(ProviderTopicApp.class);
 
     public static void main(String[] args){
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://121.196.232.248:61616");
-
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.1.28:61616");
+        ((ActiveMQConnectionFactory) connectionFactory).setPassword("ww123456");
+        ((ActiveMQConnectionFactory) connectionFactory).setUserName("weway");
         Connection connection = null;
         try {
             connection = connectionFactory.createConnection();
+            connection.setClientID("client_id");
             connection.start();
 
             //延迟确认
@@ -40,8 +42,12 @@ public class ProviderTopicApp {
                 TextMessage textMessage = session.createTextMessage("广播数据发送"+i);
                 messageProducer.send(textMessage);
             }
+            Thread.currentThread().join();
             session.close();
-        } catch (JMSException e) {
+
+        } catch (InterruptedException e){
+            log.error(StringUtils.EMPTY,e);
+        }catch (JMSException e) {
             log.error(StringUtils.EMPTY,e);
         } finally {
             if (connection != null){
