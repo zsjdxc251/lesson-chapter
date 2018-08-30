@@ -67,5 +67,12 @@ server:
   </dependency>
   ```
 
-  
+## 配置消息总线 zipkin 上报
 
+* 启动`zipkin.jar` 命令
+
+  ```shell
+  java -DKAFKA_BOOTSTRAP_SERVERS=ip:port,ip:port -jar zipkin.jar
+  ```
+
+  
