@@ -13,6 +13,8 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import java.util.UUID;
+import java.util.stream.IntStream;
 
 /**
  * @author zhengshijun
@@ -23,41 +25,54 @@ public class ProviderTopicApp {
     private static final Logger log = LoggerFactory.getLogger(ProviderTopicApp.class);
 
     public static void main(String[] args){
+
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.1.28:61616");
         ((ActiveMQConnectionFactory) connectionFactory).setPassword("ww123456");
         ((ActiveMQConnectionFactory) connectionFactory).setUserName("weway");
-        Connection connection = null;
-        try {
-            connection = connectionFactory.createConnection();
-            connection.setClientID("client_id");
-            connection.start();
+        IntStream.range(1,1000).forEach((x)->{
 
-            //延迟确认
-            Session session = connection.createSession(Boolean.FALSE, Session.DUPS_OK_ACKNOWLEDGE );
-            Destination destination = session.createTopic("mytopic");
+            new Thread(()->{
 
-            MessageProducer messageProducer = session.createProducer(destination);
-            messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-            for (int i=0;i<10;i++) {
-                TextMessage textMessage = session.createTextMessage("广播数据发送"+i);
-                messageProducer.send(textMessage);
-            }
-            Thread.currentThread().join();
-            session.close();
-
-        } catch (InterruptedException e){
-            log.error(StringUtils.EMPTY,e);
-        }catch (JMSException e) {
-            log.error(StringUtils.EMPTY,e);
-        } finally {
-            if (connection != null){
+                Connection connection = null;
                 try {
-                    connection.close();
-                } catch (JMSException e) {
+                    connection = connectionFactory.createConnection();
+                    connection.setClientID("client_id"+ UUID.randomUUID().toString());
+                    connection.start();
+
+                    //延迟确认
+                    Session session = connection.createSession(Boolean.FALSE, Session.DUPS_OK_ACKNOWLEDGE );
+                    Destination destination = session.createTopic("mytopic");
+
+                    MessageProducer messageProducer = session.createProducer(destination);
+                    messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+                    for (int i=0;i<10;i++) {
+                        TextMessage textMessage = session.createTextMessage("广播数据发送"+i);
+                        messageProducer.send(textMessage);
+                    }
+                    Thread.currentThread().join();
+                    session.close();
+
+                } catch (InterruptedException e){
                     log.error(StringUtils.EMPTY,e);
+                }catch (JMSException e) {
+                    log.error(StringUtils.EMPTY,e);
+                } finally {
+                    if (connection != null){
+                        try {
+                            connection.close();
+                        } catch (JMSException e) {
+                            log.error(StringUtils.EMPTY,e);
+                        }
+                    }
                 }
-            }
-        }
+            }).start();
+
+
+
+        });
+
+
+
 
     }
 
