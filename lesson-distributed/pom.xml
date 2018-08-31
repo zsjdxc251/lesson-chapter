@@ -17,6 +17,7 @@
         <module>chapter-activemq</module>
         <module>chapter-kafka</module>
         <module>chapter-serializer</module>
+        <module>chapter-zookeeper</module>
     </modules>
     <name>lesson-distributed</name>
     <!-- FIXME change it to the project's website -->
