@@ -2,6 +2,14 @@
 
 ## Quickstart
 
+* 依赖
+
+  ```sh
+  wget www.rabbitmq.com/releases/erlang/erlang-18.3-1.el7.centos.x86_64.rpm
+  wget http://repo.iotti.biz/CentOS/7/x86_64/socat-1.7.3.2-5.el7.lux.x86_64.rpm
+  wget www.rabbitmq.com/releases/rabbitmq-server/v3.6.5/rabbitmq-server-3.6.5-1.noarch.rpm
+  ```
+
 * 后台启动 `rabbitmq-server start &`
 
 * 停止 `rabbitmqctl app_stop`

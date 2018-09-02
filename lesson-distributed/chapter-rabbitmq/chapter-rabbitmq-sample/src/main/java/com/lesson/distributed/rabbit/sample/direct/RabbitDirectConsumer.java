@@ -32,12 +32,12 @@ public class RabbitDirectConsumer implements SampleHandler {
     @Override
     public void execute(Channel channel) throws Exception {
 
-        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT);
+        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT,true);
 
         String queueName = channel.queueDeclare().getQueue();
         log.info("queueName:{}",queueName);
     
-        String routingKey = "demo.warn";
+        String routingKey = "*.warn";
         if (StringUtils.isNotBlank(routingKey)){
             channel.queueBind(queueName,exchangeName,routingKey);
 
@@ -65,7 +65,7 @@ public class RabbitDirectConsumer implements SampleHandler {
 
     public static void main(String[] args){
 
-        RabbitApplication.execute(new RabbitDirectConsumer("logs.warn"));
+        RabbitApplication.execute(new RabbitDirectConsumer("logs.error"));
 
     }
 }

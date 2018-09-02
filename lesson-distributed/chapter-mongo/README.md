@@ -1,6 +1,6 @@
 # MonogoDB
 
-## 基本命令
+## Quickstart
 
 * 简单启动  
 

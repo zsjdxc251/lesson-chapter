@@ -25,7 +25,7 @@ public class RabbitDirectProvider implements SampleHandler {
 
         channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT,Boolean.TRUE);
 
-        String routingKey = "test.info";
+        String routingKey = "*.warn";
         String message = exchangeName+"/发送消息";
 
         channel.basicPublish(exchangeName, routingKey, null, message.getBytes());

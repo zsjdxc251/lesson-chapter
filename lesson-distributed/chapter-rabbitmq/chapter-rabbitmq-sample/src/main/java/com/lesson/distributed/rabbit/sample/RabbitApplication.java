@@ -30,7 +30,7 @@ public class RabbitApplication {
             factory.setHost("121.196.232.248");
             factory.setPort(5672);
             factory.setVirtualHost("/");
-            factory.setConnectionTimeout(500000);
+            factory.setConnectionTimeout(5000);
             factory.setUsername("guest");
             factory.setPassword("guest");
             // 获取连接
