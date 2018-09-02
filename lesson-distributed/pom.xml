@@ -18,6 +18,8 @@
         <module>chapter-kafka</module>
         <module>chapter-serializer</module>
         <module>chapter-zookeeper</module>
+        <module>chapter-rabbitmq</module>
+        <module>chapter-mongo</module>
     </modules>
     <name>lesson-distributed</name>
     <!-- FIXME change it to the project's website -->
