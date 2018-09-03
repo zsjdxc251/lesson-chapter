@@ -6,6 +6,9 @@ import org.springframework.core.convert.support.DefaultConversionService;
 
 import java.util.List;
 
+/**
+ * @author zhengshijun
+ */
 public class DefaultConvertSample {
 
     public static void main(String[] args){

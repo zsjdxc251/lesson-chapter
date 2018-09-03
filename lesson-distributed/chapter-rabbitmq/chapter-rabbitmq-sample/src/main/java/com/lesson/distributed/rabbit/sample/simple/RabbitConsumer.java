@@ -16,7 +16,7 @@ public class RabbitConsumer implements SampleHandler {
 
 
         try {
-            String QUEUE_NAME = "hello-1";
+            String QUEUE_NAME = "queue_name_error";
 
             // queue : 队列名称    durable : 是否持久化   exclusive:      autoDelete: 是否删除   arquments
             // 没有的时候创建 queue
