@@ -25,49 +25,55 @@ import java.util.concurrent.locks.LockSupport;
 public class LockSupportSample {
 
     public static void main(String[] args){
-        final Thread parkThread = new Thread(()->{
+//        final Thread parkThread = new Thread(()->{
+//
+//
+//            Object object = new Object();
+//            System.out.println("释放21");
+//            try {
+//
+//                TimeUnit.MILLISECONDS.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            System.out.println("过了1秒");
+//            try {
+//
+//                TimeUnit.MILLISECONDS.sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            System.out.println("过了5秒");
+//            System.out.println(Thread.currentThread().getState());
+//            LockSupport.park();
+//            System.out.println(Thread.currentThread().getState());
+//            System.out.println("阻塞完成");
+//
+//
+//            System.out.println("释放2"+Thread.currentThread().getState());
+//
+//        });
+//
+//
+//        Thread unparkThread = new Thread(()->{
+//            System.out.println("释放11");
+//
+//            System.out.println(parkThread.getState());
+//            LockSupport.unpark(parkThread);
+//            System.out.println(parkThread.getState());
+//            System.out.println("释放1");
+//
+//        });
+//        parkThread.start();
+//        unparkThread.start();
 
 
-            Object object = new Object();
-            System.out.println("释放21");
-            try {
-
-                TimeUnit.MILLISECONDS.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("过了1秒");
-            try {
-
-                TimeUnit.MILLISECONDS.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("过了5秒");
-            System.out.println(Thread.currentThread().getState());
-            LockSupport.park();
-            System.out.println(Thread.currentThread().getState());
-            System.out.println("阻塞完成");
 
 
-            System.out.println("释放2"+Thread.currentThread().getState());
 
-        });
-
-
-        Thread unparkThread = new Thread(()->{
-            System.out.println("释放11");
-
-            System.out.println(parkThread.getState());
-            LockSupport.unpark(parkThread);
-            System.out.println(parkThread.getState());
-            System.out.println("释放1");
-
-        });
-        parkThread.start();
-        unparkThread.start();
-
-
+        Thread thread = Thread.currentThread();
+        LockSupport.unpark(thread);
+        LockSupport.park();
 
 
 
