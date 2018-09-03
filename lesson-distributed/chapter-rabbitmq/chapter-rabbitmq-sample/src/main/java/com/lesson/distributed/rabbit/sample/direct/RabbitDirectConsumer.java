@@ -43,6 +43,14 @@ public class RabbitDirectConsumer implements SampleHandler {
 
         }
 
+        // String destination, String source, String routingKey
+        // 交换机绑定交换机   在消息发送重交换机 source , routingKey 发送消息 绑定到  名词为 destination 的交换机上面
+        // channel.exchangeBind()
+
+        // String queue, String exchange, String routingKey
+        // 队列名称绑定到 交换机上面
+        //channel.queueBind()
+
 
 
         Consumer consumer = new DefaultConsumer(channel) {

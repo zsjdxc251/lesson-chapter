@@ -16,13 +16,13 @@ public class RabbitConsumer implements SampleHandler {
 
 
         try {
-            String QUEUE_NAME = "queue_name_error";
+            String QUEUE_NAME = "queue_name_yellow";
 
             // queue : 队列名称    durable : 是否持久化   exclusive:      autoDelete: 是否删除   arquments
             // 没有的时候创建 queue
-            channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+            // channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
-             //channel.queueBind(QUEUE_NAME," logs.error","dem.error");
+             channel.queueBind(QUEUE_NAME," color.blue","dem.error");
 
 
 
