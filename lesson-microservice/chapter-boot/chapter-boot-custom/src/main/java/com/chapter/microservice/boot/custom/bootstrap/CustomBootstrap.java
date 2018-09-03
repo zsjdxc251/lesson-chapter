@@ -2,8 +2,10 @@ package com.chapter.microservice.boot.custom.bootstrap;
 
 
 import com.chapter.microservice.boot.api.manager.ActionManager;
+import com.chapter.microservice.boot.api.service.PrimaryService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -17,9 +19,12 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableScheduling
 public class CustomBootstrap
 {
+
+    @Autowired
+    @Qualifier("primaryService1")
+    private PrimaryService primaryService;
 
     public static void main( String[] args ) {
 
@@ -38,5 +43,15 @@ public class CustomBootstrap
 //        return new ActionManager();
 //    }
 
+
+    @Primary
+    @Bean("primaryService1")
+    public PrimaryService primaryService1(){
+        return new PrimaryService();
+    }
+    @Bean("primaryService2")
+    public PrimaryService primaryService2(){
+        return new PrimaryService();
+    }
 
 }
