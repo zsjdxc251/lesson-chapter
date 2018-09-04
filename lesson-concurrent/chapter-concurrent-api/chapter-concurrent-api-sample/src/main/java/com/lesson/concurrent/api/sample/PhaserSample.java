@@ -100,15 +100,17 @@ public class PhaserSample {
      *  {@code Phaser#bulkRegister} +
      *
      *  {@code Phaser#arriveAndDeregister} -
-     *
+     *  {@code Phaser#register} 注册线程个数
      * @see ThreadLocalRandom
      * @see Random
      *
      */
     public void forPhaser(){
         String name = "明刚红丽黑白";
-        phaser = new Phaser(name.length());
+        phaser = new Phaser();
+
         // ThreadLocalRandom.current();
+
         Random random = new Random();
         BlockingDeque<String>  backupName = new LinkedBlockingDeque<>();
         backupName.addLast("小蓝");
@@ -116,6 +118,10 @@ public class PhaserSample {
         backupName.addLast("小梅");
         backupName.addLast("小黄");
         IntStream.range(0,name.length()).forEach(i->{
+
+            // 表示在 phaser注册一个表示phaser维护的线程个数 与构造参数传入一样性质
+            phaser.register();
+
             new Thread(new ForPhaser(phaser,5,random,backupName),"小"+name.toCharArray()[i]).start();
         });
     }
