@@ -29,7 +29,7 @@ public class ProviderQueueApp {
     private static final Logger log = LoggerFactory.getLogger(ProviderQueueApp.class);
 
     public static void main(String[] args){
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("nio://121.196.232.248:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("nio://127.0.0.1:61616");
         Connection connection = null;
         try {
 

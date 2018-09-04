@@ -26,18 +26,28 @@ public class ProviderTopicApp {
 
     public static void main(String[] args){
 
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.1.28:61616");
-        ((ActiveMQConnectionFactory) connectionFactory).setPassword("ww123456");
-        ((ActiveMQConnectionFactory) connectionFactory).setUserName("weway");
-        IntStream.range(1,1000).forEach((x)->{
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://127.0.0.1:61616");
+//        ((ActiveMQConnectionFactory) connectionFactory).setPassword("ww123456");
+//        ((ActiveMQConnectionFactory) connectionFactory).setUserName("weway");
 
-            new Thread(()->{
 
-                Connection connection = null;
+        try {
+            final Connection connection = connectionFactory.createConnection();
+            connection.setClientID("client_id"+ UUID.randomUUID().toString());
+            connection.start();
+
+
+
+            IntStream.range(1,1000).forEach((x)->{
+
+                System.out.println(x);
                 try {
-                    connection = connectionFactory.createConnection();
-                    connection.setClientID("client_id"+ UUID.randomUUID().toString());
-                    connection.start();
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                try {
 
                     //延迟确认
                     Session session = connection.createSession(Boolean.FALSE, Session.DUPS_OK_ACKNOWLEDGE );
@@ -49,27 +59,31 @@ public class ProviderTopicApp {
                         TextMessage textMessage = session.createTextMessage("广播数据发送"+i);
                         messageProducer.send(textMessage);
                     }
-                    Thread.currentThread().join();
+
                     session.close();
-
-                } catch (InterruptedException e){
-                    log.error(StringUtils.EMPTY,e);
-                }catch (JMSException e) {
-                    log.error(StringUtils.EMPTY,e);
-                } finally {
-                    if (connection != null){
-                        try {
-                            connection.close();
-                        } catch (JMSException e) {
-                            log.error(StringUtils.EMPTY,e);
-                        }
-                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }).start();
 
 
 
-        });
+            });
+
+
+
+
+        } catch (JMSException e) {
+            log.error(StringUtils.EMPTY,e);
+        } finally {
+//            if (connection != null){
+//                try {
+//                    connection.close();
+//                } catch (JMSException e) {
+//                    log.error(StringUtils.EMPTY,e);
+//                }
+//            }
+        }
+
 
 
 
