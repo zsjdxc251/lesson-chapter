@@ -1,5 +1,6 @@
 package com.lesson.concurrent.api.sample;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.core.async.ThreadNameCachingStrategy;
 
 import java.util.Random;
@@ -94,6 +95,12 @@ public class PhaserSample {
      *
      *  {@code Phaser} arriveAndAwaitAdvance 特性 可以重复调用多次 来递增计数器 phaser.getPhaser()
      *
+     *  {@code Phaser#arriveAndAwaitAdvance} =
+     *
+     *  {@code Phaser#bulkRegister} +
+     *
+     *  {@code Phaser#arriveAndDeregister} -
+     *
      * @see ThreadLocalRandom
      * @see Random
      *
@@ -101,14 +108,15 @@ public class PhaserSample {
     public void forPhaser(){
         String name = "明刚红丽黑白";
         phaser = new Phaser(name.length());
-        Random random = ThreadLocalRandom.current();
+        // ThreadLocalRandom.current();
+        Random random = new Random();
         BlockingDeque<String>  backupName = new LinkedBlockingDeque<>();
         backupName.addLast("小蓝");
         backupName.addLast("小紫");
         backupName.addLast("小梅");
         backupName.addLast("小黄");
         IntStream.range(0,name.length()).forEach(i->{
-            new Thread(new ForPhaser(phaser,10,random,backupName),"小"+name.toCharArray()[i]).start();
+            new Thread(new ForPhaser(phaser,5,random,backupName),"小"+name.toCharArray()[i]).start();
         });
     }
 
@@ -139,33 +147,42 @@ public class PhaserSample {
                 // 一开始集合
                 phaser.arriveAndAwaitAdvance();
             }
+
+            if (phaser.getPhase() > loop){
+                System.out.println(Thread.currentThread().getName()+" ==> 游玩结束");
+                return;
+            }
+
             /***************************************/
 
             // 实现中途加入和退出
             int index = random.nextInt(100);
+
             if (index < 10) {
+
                 // 中途加入
                 if (!backupName.isEmpty()){
                     String threadName = backupName.removeFirst();
-                    phaser.bulkRegister(1);
-                    System.out.println(threadName+" 在第 "+phaser.getPhase()+" 轮加入");
-                    new Thread(new ForPhaser(phaser,loop,random,backupName),threadName).start();
+                    if (StringUtils.isNotBlank(threadName)){
+                        phaser.bulkRegister(1);
+                        System.out.println(threadName+" 在第 "+phaser.getPhase()+" 轮加入");
+                        new Thread(new ForPhaser(phaser,loop,random,backupName),threadName).start();
+                    }
+
                 }
             } else if (index > 90){
+
                 // 中途退出
                 String threadName = Thread.currentThread().getName();
                 System.out.println(threadName+" 在第 "+phaser.getPhase()+" 轮退出");
                 backupName.addLast(threadName);
-                phaser.arriveAndAwaitAdvance();
+                phaser.arriveAndDeregister();
                 return;
             }
 
 
             /**************************************/
-            if (phaser.getPhase() > loop){
-                System.out.println(Thread.currentThread().getName()+" ==> 游玩结束");
-                return;
-            }
+
             System.out.println(Thread.currentThread().getName()+" ==> 第 "+phaser.getPhase()+" 轮游玩");
             phaser.arriveAndAwaitAdvance();
             startPlay();
