@@ -19,6 +19,7 @@
         <module>chapter-boot-sample</module>
         <module>chapter-boot-auto-config</module>
         <module>chapter-boot-jpa</module>
+        <module>chapter-boot-version</module>
     </modules>
 
 
