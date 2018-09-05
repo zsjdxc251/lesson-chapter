@@ -41,6 +41,13 @@ public class ZookeeperSample {
             countDownLatch.await();
             Stat stat = zooKeeper.exists("/locks/",false);
             if (stat == null){
+
+                /**
+                 *
+                 *    zookeeper ACL 机制
+                 *
+                 *
+                 */
                 zooKeeper.create("/locks/","".getBytes(),ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             }
 
