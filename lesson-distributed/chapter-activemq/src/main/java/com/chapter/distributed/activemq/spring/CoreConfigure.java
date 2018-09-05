@@ -15,9 +15,9 @@ public class CoreConfigure {
     @Bean
     public ActiveMQConnectionFactory activeMQConnectionFactory(){
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
-        activeMQConnectionFactory.setBrokerURL("tcp://127.0.0.1:61616");
-//        activeMQConnectionFactory.setUserName("weway");
-//        activeMQConnectionFactory.setPassword("ww123456");
+        activeMQConnectionFactory.setBrokerURL("tcp://192.168.1.28:61616");
+        activeMQConnectionFactory.setUserName("weway");
+        activeMQConnectionFactory.setPassword("ww123456");
         return activeMQConnectionFactory;
     }
 

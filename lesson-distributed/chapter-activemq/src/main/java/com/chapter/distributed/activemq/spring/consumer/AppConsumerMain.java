@@ -3,6 +3,7 @@ package com.chapter.distributed.activemq.spring.consumer;
 
 import com.chapter.distributed.activemq.spring.CoreConfigure;
 
+import com.chapter.distributed.activemq.spring.InitialBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.jms.annotation.EnableJms;
@@ -17,7 +18,7 @@ import javax.jms.Session;
 
 @Configuration
 @ComponentScan("com.chapter.distributed.activemq.spring.consumer")
-@Import({CoreConfigure.class})
+@Import({CoreConfigure.class, InitialBean.class})
 @EnableJms
 public class AppConsumerMain {
 
