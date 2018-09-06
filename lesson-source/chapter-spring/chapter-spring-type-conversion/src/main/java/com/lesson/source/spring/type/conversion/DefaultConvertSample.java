@@ -1,6 +1,7 @@
 package com.lesson.source.spring.type.conversion;
 
 import com.google.common.collect.Lists;
+import com.lesson.source.spring.type.conversion.converter.StringArrayToStringConverter;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.support.DefaultConversionService;
 
@@ -15,6 +16,9 @@ public class DefaultConvertSample {
 
 
         DefaultConversionService cs = new DefaultConversionService();
+
+        cs.addConverter(new StringArrayToStringConverter());
+
 
         List<Integer> input = Lists.newArrayList();
         input.add(1);
