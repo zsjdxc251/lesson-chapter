@@ -14,6 +14,7 @@
     <modules>
         <module>chapter-design-singleton</module>
         <module>chapter-design-factory</module>
+        <module>chapter-design-proxy</module>
     </modules>
 
 
