@@ -16,7 +16,6 @@
         <module>lesson-open</module>
         <module>lesson-source</module>
         <module>lesson-builder</module>
-        <module>lesson-builder</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

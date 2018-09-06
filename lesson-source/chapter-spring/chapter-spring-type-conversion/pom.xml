@@ -12,8 +12,6 @@
     <artifactId>chapter-spring-type-conversion</artifactId>
 
     <name>chapter-spring-type-conversion</name>
-    DefaultConversionService
-
     <dependencies>
 
         <dependency>
