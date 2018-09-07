@@ -1,7 +1,20 @@
 package com.lesson.source.design.proxy.custom;
 
+import com.alibaba.dubbo.common.compiler.support.JdkCompiler;
+import org.apache.commons.lang3.ClassUtils;
+
+import javax.tools.JavaCompiler;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.StandardLocation;
+import javax.tools.ToolProvider;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Parameter;
+import java.util.Locale;
 import java.util.stream.Stream;
 
 public class CustomProxy {
@@ -14,14 +27,18 @@ public class CustomProxy {
 
         String generateSource = generateSource(interfaces);
 
-        System.out.println(generateSource);
 
+        JdkCompiler compiler = new JdkCompiler();
 
+        try {
+            Class<?> entry = compiler.doCompile("com.lesson.source.design.proxy.custom.$Proxy0",generateSource);
 
+            Constructor<?> constructor = entry.getConstructor(InvocationHandler.class);
 
-
-
-
+            return constructor.newInstance(h);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -29,8 +46,9 @@ public class CustomProxy {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("package com.lesson.source.design.proxy.custom;");
         stringBuilder.append("import java.lang.reflect.InvocationHandler;");
-        stringBuilder.append("import java.lang.reflect.Method");
+        stringBuilder.append("import java.lang.reflect.Method;");
         stringBuilder.append("public class $Proxy0 implements ");
         for (int i=0;i<interfaces.length;i++) {
             stringBuilder.append(interfaces[0].getName());
@@ -53,7 +71,9 @@ public class CustomProxy {
 
             Stream.of(entry.getMethods()).forEach(method -> {
 
-                stringBuilder.append("public "+method.getReturnType().getName()+" "+method.getName());
+                Class<?> returnType = method.getReturnType();
+
+                stringBuilder.append("@Override public "+method.getReturnType().getName()+" "+method.getName());
                 stringBuilder.append("(");
 
                 Parameter[] parameters = method.getParameters();
@@ -69,10 +89,31 @@ public class CustomProxy {
                 }
                 stringBuilder.append("){");
 
+                boolean isReturn = true;
+                if (returnType == void.class){
+                    isReturn = false;
+                }
 
 
-                stringBuilder.append("return handler.invoke(this, "+entry.getName()+".class.getMethod(\""+method.getName()+"\"," +
-                        "new Class[]{");
+                if (isReturn){
+                    stringBuilder.append(method.getReturnType().getName()).append(" result = ");
+                    if (returnType.isPrimitive()){
+                        stringBuilder.append("0");
+                    } else {
+                        stringBuilder.append("null");
+                    }
+                    stringBuilder.append(";");
+                }
+
+                stringBuilder.append(" try {");
+                if (isReturn){
+                    stringBuilder.append("result =  ("+method.getReturnType().getName()+")");
+                }
+                stringBuilder.append("handler.invoke(this, "+entry.getName()+".class.getMethod(\""+method.getName()+"\"" +
+                        "");
+                if (parameterClasses.length > 0){
+                    stringBuilder.append(",");
+                }
                 for (int index = 0;index<parameterClasses.length; index++) {
 
                     stringBuilder.append(parameterClasses[index].getName()+".class");
@@ -80,16 +121,22 @@ public class CustomProxy {
                         stringBuilder.append(",");
                     }
                 }
-                stringBuilder.append("}), Object[] args)");
+                stringBuilder.append("),");
 
-
-
+                stringBuilder.append("new Object[]{");
+                for (int index = 0;index<parameters.length; index++) {
+                    stringBuilder.append(parameters[index].getName());
+                    if (index!= parameters.length-1){
+                        stringBuilder.append(",");
+                    }
+                }
+                stringBuilder.append("});");
+                stringBuilder.append("} catch(Throwable e){ e.printStackTrace();}");
+                if (isReturn){
+                    stringBuilder.append("return result;");
+                }
                 stringBuilder.append("}");
             });
-
-
-
-
 
         }
         stringBuilder.append("}");
