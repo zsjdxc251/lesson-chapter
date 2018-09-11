@@ -12,7 +12,7 @@ import org.springframework.context.annotation.PropertySources;
  * @version created on 2018/9/6.
  */
 @EnableDubboConfig(multiple = true)
-@DubboComponentScan
+//@DubboComponentScan
 @PropertySources(
         value = {@PropertySource("classpath:application.properties")}
 )
