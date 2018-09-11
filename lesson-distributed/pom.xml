@@ -20,6 +20,7 @@
         <module>chapter-zookeeper</module>
         <module>chapter-rabbitmq</module>
         <module>chapter-mongo</module>
+        <module>chapter-redis</module>
     </modules>
     <name>lesson-distributed</name>
     <!-- FIXME change it to the project's website -->
