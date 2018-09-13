@@ -13,6 +13,8 @@
   *编译依赖于`c++`  所以先执行 `yum install gcc ` & `yum install gcc-c++ ` | `yum install tcl `*
 
 * 运行 `./bin/redis-server redis.conf `
+* 参数运行 `./bin/redis-server --port 7777 --daemonize no`
+  * `daemonize` 是否后台启动 `yea` | `no` 
 
 ## 课程目录
 
