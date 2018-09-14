@@ -14,7 +14,7 @@
 
 * 运行 `./bin/redis-server redis.conf `
 * 参数运行 `./bin/redis-server --port 7777 --daemonize no`
-  * `daemonize` 是否后台启动 `yea` | `no` 
+  * `daemonize` 是否后台启动 `yes` | `no` 
 
 ## 课程目录
 
