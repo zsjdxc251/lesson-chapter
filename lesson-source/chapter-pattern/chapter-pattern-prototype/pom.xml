@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>chapter-pattern-strategy-template</artifactId>
+    <artifactId>chapter-pattern-prototype</artifactId>
 
-    <name>chapter-pattern-strategy-template</name>
-    <description>策略模式与模板模式</description>
+    <name>chapter-pattern-prototype</name>
+    <description>原型模式</description>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
