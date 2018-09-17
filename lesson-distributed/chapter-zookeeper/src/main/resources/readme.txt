@@ -15,6 +15,7 @@ Watch
   配置中心
   负载均衡
   分布式锁
+  Leader选举
 
 
 
@@ -25,3 +26,9 @@ Watch
  server.2=192.168.23.129:2888:3888
  server.3=192.168.23.130:2888:3888
  每台添加~/dataDir/myid 文件
+
+ zxid,epoch,myid
+
+
+ZAB 协议
+ZooKeeper Atomic Broadcast
