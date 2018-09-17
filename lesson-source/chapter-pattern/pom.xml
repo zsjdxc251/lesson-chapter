@@ -15,6 +15,7 @@
         <module>chapter-pattern-singleton</module>
         <module>chapter-pattern-factory</module>
         <module>chapter-pattern-proxy</module>
+        <module>chapter-pattern-strategy-template</module>
     </modules>
 
 
