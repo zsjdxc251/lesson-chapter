@@ -1,8 +1,10 @@
 # zookeeper
 
+[TOC]
 
 
-## 课程目录
+
+## 课程目录[^*]
 
 1. **从架构的发展过程说起**
 2. **什么是zookeeper**
@@ -21,7 +23,7 @@
 
 ## watcher 机制
 
-## 什么是Zookeeper
+## 什么是Zookeeper[^1]
 
 ### Zookeeper节点 `mode` 特性
 
@@ -39,7 +41,7 @@
 
 
 
-## Zookeeper安装部署
+## Zookeeper安装部署[^2]
 
 ### 集群配置
 
@@ -53,7 +55,7 @@
 
 
 
-## Zookeeper的设计猜想
+## Zookeeper的设计猜想[^3]
 
 ###  zookeeper 的由来
 
