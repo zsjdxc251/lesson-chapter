@@ -45,7 +45,6 @@ server:
   zipkin2.server.internal.EnableZipkinServer
   ```
 
-  
 
 ### 调用链应用配置
 
@@ -74,5 +73,3 @@ server:
   ```shell
   java -DKAFKA_BOOTSTRAP_SERVERS=ip:port,ip:port -jar zipkin.jar
   ```
-
-  
