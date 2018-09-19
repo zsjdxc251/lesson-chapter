@@ -17,6 +17,8 @@
         <module>chapter-pattern-proxy</module>
         <module>chapter-pattern-strategy-template</module>
         <module>chapter-pattern-prototype</module>
+        <module>chapter-pattern-delegate-adapter</module>
+        <module>chapter-pattern-decorator-observer</module>
     </modules>
 
 
