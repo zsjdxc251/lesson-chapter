@@ -17,8 +17,17 @@
   *编译依赖于`c++`  所以先执行 `yum install gcc ` & `yum install gcc-c++ ` | `yum install tcl `*
 
 * 运行 `./bin/redis-server redis.conf `
+
 * 参数运行 `./bin/redis-server --port 7777 --daemonize no`
   * `daemonize` 是否后台启动 `yes` | `no` 
+
+* `./redis-cli -p 端口号 -h 域名`
+
+  ```properties
+  logfile 设置日志路径
+  ```
+
+  
 
 ## 课程目录
 
@@ -216,8 +225,29 @@
 
 
 
+## Redis 主备与哨兵配置
+
+### Redis主备（Master-Slaver）
+
+* 关闭所有节点防火墙 并设置 `bind 0.0.0.0`
+
+* 主`Master`
+
+  ```propertie
+   min-slaves-to-write 3
+   min-slaves-max-lag 1
+  ```
+
+* 备`Slaver`设置连接主地址
+
+  ```properties
+  slaveof 192.168.204.135 7777
+  ```
+
+* 进入主备查看状态 `info replication`
 
 
 
+### 哨兵配置
 
-
+* 配置监控主 `sentinel monitor mymaster 192.168.204.135 7777 1`
