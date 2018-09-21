@@ -22,6 +22,7 @@ public interface ISerializer {
      * @param <T>
      * @return
      */
+    @SuppressWarnings("unchecked")
     <T> T decoder(byte[] bytes,Class<T> entry);
 
 

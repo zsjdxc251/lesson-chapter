@@ -33,12 +33,9 @@ public class JavaSerializer implements ISerializer {
 
     @Override
     public <T> T decoder(byte[] bytes, Class<T> entry) {
-
-
         try {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
-            log.info("decoder");
             return (T)objectInputStream.readObject();
         } catch (Exception e) {
             log.error(StringUtils.EMPTY,e);
