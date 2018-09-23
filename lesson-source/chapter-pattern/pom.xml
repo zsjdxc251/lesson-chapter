@@ -19,6 +19,8 @@
         <module>chapter-pattern-prototype</module>
         <module>chapter-pattern-delegate-adapter</module>
         <module>chapter-pattern-decorator-observer</module>
+        <module>chapter-pattern-composite-flyweight</module>
+        <module>chapter-pattern-facade-builder</module>
     </modules>
 
 

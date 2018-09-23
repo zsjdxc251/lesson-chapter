@@ -3,10 +3,7 @@ package com.chapter.distributed.dubbo.spi;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.extension.ExtensionFactory;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
-import com.alibaba.dubbo.rpc.Exporter;
-import com.alibaba.dubbo.rpc.Invoker;
-import com.alibaba.dubbo.rpc.Protocol;
-import com.alibaba.dubbo.rpc.RpcInvocation;
+import com.alibaba.dubbo.rpc.*;
 import com.alibaba.dubbo.rpc.cluster.Cluster;
 import com.chapter.distributed.dubbo.service.IUserInfoService;
 import com.chapter.distributed.dubbo.spi.custom.IProductService;
@@ -23,10 +20,10 @@ public class DubboSpiExample {
         //Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();//.getExtension("customProtocol");
 
 
-       Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("dubbo");
-        URL url = new URL("dubbo","",20880);
-        Invoker<?> invoker = protocol.refer(IUserInfoService.class,url);
-        System.out.println(invoker.getClass());
+//       Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("dubbo");
+//        URL url = new URL("dubbo","",20880);
+//        Invoker<?> invoker = protocol.refer(IUserInfoService.class,url);
+//        System.out.println(invoker.getClass());
 
 
         //System.out.println(invoker.invoke(new RpcInvocation()));
@@ -48,6 +45,15 @@ public class DubboSpiExample {
 
 //        ExtensionFactory extensionFactory = ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension();
 //        System.out.println(extensionFactory.getClass());
+
+        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+
+        System.out.println(protocol.getClass());
+
+        ProxyFactory proxyFactory = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
+
+        System.out.println(proxyFactory);
+
 
     }
 }

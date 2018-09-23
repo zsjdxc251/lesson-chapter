@@ -8,7 +8,7 @@ import java.io.File;
 
 /**
  * jdk 代理只能代理接口
- *
+ *   ASM
  *
  */
 public class JdkSample {
