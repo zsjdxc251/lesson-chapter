@@ -44,13 +44,35 @@
 
 
 
+## 工厂模式
+
+**工厂模式分为`简单工厂`,`工厂方法`,`抽象工厂`**
+
+* 简单工厂
+
+  ![img](https://pic1.zhimg.com/80/09067f878916c0e4377bfadc82afc248_hd.png) 
+
+* 工厂方法
+
+  ![img](https://pic4.zhimg.com/80/69ab924585b751cb9e7bc7b7f9f2179b_hd.png) 
+
+* 抽象工厂
+
+  ![img](https://pic3.zhimg.com/80/ab2a90cfcc7a971b1e3127d1f531a486_hd.png) 
+
+  * 在抽象工厂模式中，需要添加一个工厂
+
+    ![preview](https://pic1.zhimg.com/e8184a3c6b3463338d85c329004d7c64_r.jpg) 
+
+  * 在抽象工厂中，需要添加一个产品
+
+    ![img](https://pic3.zhimg.com/80/0f20f50524336fa9634e19237ce0ec7e_hd.png) 
 
 
 
+## 单例模式
 
-
-
-
+**单例模式写法分为：`懒汉式`,`饿汉式`，`注册式`,`序列化`**
 
 
 
