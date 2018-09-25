@@ -17,9 +17,9 @@ public class RedisSpringSample {
 
         RedisTemplate redisTemplate = annotationConfigApplicationContext.getBean(RedisTemplate.class);
 
-        System.out.println(redisTemplate.hasKey("bizcard:backend:checkChangeTemplateCount:companyId:5b91f71fe3b3c14d22fa461f"));
+        System.out.println(redisTemplate.hasKey("bizcard:backend:checkChangeTemplateCount:companyId:5ba37280a7d9ca76a3a05754"));
 
-        redisTemplate.delete("bizcard:backend:checkChangeTemplateCount:companyId:5b91f71fe3b3c14d22fa461f");
+        //redisTemplate.delete("bizcard:backend:checkChangeTemplateCount:companyId:5ba37280a7d9ca76a3a05754");
 
     }
 }
