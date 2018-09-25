@@ -22,6 +22,7 @@
         <module>chapter-pattern-composite-flyweight</module>
         <module>chapter-pattern-facade-builder</module>
         <module>chapter-pattern-iterator</module>
+        <module>chapter-pattern-chain</module>
     </modules>
 
 
