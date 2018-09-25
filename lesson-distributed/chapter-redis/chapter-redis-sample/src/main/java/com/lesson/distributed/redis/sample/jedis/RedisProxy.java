@@ -10,10 +10,8 @@ import org.springframework.beans.BeanUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.Transaction;
 
 import java.lang.reflect.Method;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,7 +26,7 @@ public class RedisProxy implements MethodInterceptor {
 
 	private static int timeout = 6000;
 
-	private static int database = 0;
+	private static int database = 1;
 
 	private static String host = "192.168.1.20";
 
@@ -122,7 +120,7 @@ public class RedisProxy implements MethodInterceptor {
 	public Object intercept(Object arg0, Method arg1, Object[] arg2, MethodProxy arg3) throws Throwable {
 
 		Jedis jedis = pool.getResource();
-		jedis.select(0);
+		jedis.select(database);
 
 		if (arg1.getReturnType() == Jedis.class){
 
@@ -158,16 +156,23 @@ public class RedisProxy implements MethodInterceptor {
 //		System.out.println(keys.size());
 //		keys.forEach(System.out::println);
 
-		Jedis jedis = command.getJedis();
+//		Jedis jedis = command.getJedis();
+//
+//		jedis.watch("bizcard-chat:watch");
+//		Transaction transaction = jedis.multi();
+//		transaction.set("bizcard-chat:watch","2");
+//		List<Object> list = transaction.exec();
+//
+//		log.info("list:{}",list);
+//		System.out.println(jedis.get("bizcard-chat:watch"));;
+//		jedis.close();
 
-		jedis.watch("bizcard-chat:watch");
-		Transaction transaction = jedis.multi();
-		transaction.set("bizcard-chat:watch","2");
-		List<Object> list = transaction.exec();
+		//command.del("bizcard:backend:checkChangeTemplateCount:companyId:5b91f71fe3b3c14d22fa461f");
+		//command.keys("*5b91f71fe3b3c14d22fa461f").forEach(System.out::println);
 
-		log.info("list:{}",list);
-		System.out.println(jedis.get("bizcard-chat:watch"));;
-		jedis.close();
+
+
+
 	}
 
 

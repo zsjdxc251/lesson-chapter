@@ -21,6 +21,7 @@
         <module>chapter-pattern-decorator-observer</module>
         <module>chapter-pattern-composite-flyweight</module>
         <module>chapter-pattern-facade-builder</module>
+        <module>chapter-pattern-iterator</module>
     </modules>
 
 
