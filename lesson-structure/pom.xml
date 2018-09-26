@@ -17,6 +17,7 @@
     <url>http://www.example.com</url>
     <modules>
         <module>chapter-structure-linked</module>
+        <module>chapter-structure-tree</module>
     </modules>
 
     <properties>
