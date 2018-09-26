@@ -3,7 +3,6 @@ package com.chapter.microservice.application.event;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.Lifecycle;
 import org.springframework.context.PayloadApplicationEvent;
-import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.EventListener;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.context.event.SmartApplicationListener;
@@ -41,6 +40,8 @@ public class ApplicationEventSample {
         eventMulticaster.multicastEvent(new CustomEvent<Integer>(12));
 
         eventMulticaster.multicastEvent(new PayloadApplicationEvent<String>("2","welcome"));
+
+
 
     }
 

@@ -8,5 +8,7 @@ public class MouseWheelListener implements MouseListener<MouseWheelEvent> {
     @Override
     public void onMouseEvent(MouseWheelEvent event) {
 
+        System.out.println("MouseWheelListener:"+event);
+
     }
 }

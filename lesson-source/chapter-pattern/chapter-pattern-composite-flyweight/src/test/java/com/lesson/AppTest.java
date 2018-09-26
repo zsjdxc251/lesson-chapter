@@ -1,7 +1,6 @@
 package com.lesson;
 
-import static org.junit.Assert.assertTrue;
-
+import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
 
 /**
@@ -15,6 +14,8 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue()
     {
-        assertTrue( true );
+
+
+
     }
 }

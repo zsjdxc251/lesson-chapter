@@ -14,7 +14,12 @@ public class ObserverSample {
         mouseEventMulticaster.addMouseListener(event -> {
             System.out.println(event);
         });
+
+        mouseEventMulticaster.addMouseListener(new MouseWheelListener());
+
         mouseEventMulticaster.multicastEvent(new MouseClickEvent<>("zsj"));
+
+        mouseEventMulticaster.multicastEvent(new MouseWheelEvent<>("鼠标滑动"));
 
     }
 }
