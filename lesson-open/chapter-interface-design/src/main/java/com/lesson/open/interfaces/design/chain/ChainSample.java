@@ -58,8 +58,7 @@ public class ChainSample {
                 return;
             }
 
-            Executor executor = executors.get(position);
-            position ++;
+            Executor executor = executors.get(position ++);
             executor.execute(this);
 
 

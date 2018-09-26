@@ -31,6 +31,8 @@ public class FilterChainSample {
 
         Invoker last = Result::new;
 
+
+        // 第一种实现
         for (int i = 0 ;i<filters.size() ;i++){
             Filter filter = filters.get(i);
             Invoker next = last;
@@ -47,6 +49,40 @@ public class FilterChainSample {
             System.out.println(result.get());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+
+
+
+        // 第二种实现
+        try {
+            last = new DefaultInvoker(filters);
+
+            System.out.println(last.invoke().get());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    static class DefaultInvoker implements Invoker{
+        private List<Filter> filters;
+        private int position;
+
+        public DefaultInvoker(List<Filter> filters) {
+            this.filters = filters;
+        }
+
+        @Override
+        public Result invoke() throws Exception {
+            if (position >= filters.size()){
+                return new Result();
+            }
+            Filter filter = filters.get(position++);
+            Result result = filter.invoke(this);
+            result.increment();
+            return result;
         }
     }
 
