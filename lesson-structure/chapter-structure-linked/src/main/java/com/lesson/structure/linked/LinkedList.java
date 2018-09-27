@@ -57,6 +57,33 @@ public class LinkedList<T> {
     }
 
     public void reverse(){
+        Node pre = null; //   1   2
+        Node next; //   2 null
+        // start           2 null
+        // start.next null  start.next 1
+
+        //  1 2 3 4
+
+//        while (start != null) {
+//            next = start.next;
+//
+//            start.next = pre;
+//            pre = start;
+//
+//            start = next;
+//        }
+//        this.start = pre;
+
+
+
+        while (start != null) {
+            next = start.next;
+            start.next = pre;
+            pre = start;
+            start = next;
+
+        }
+        this.start = pre;
 
 
     }
@@ -104,18 +131,19 @@ public class LinkedList<T> {
         linkedList.add("1");
         linkedList.add("2");
         linkedList.add("3");
-        linkedList.add("4");
-        linkedList.add("5");
-
-        LinkedList<String> linkedList2 = new LinkedList<>();
-        linkedList2.add("34");
-        linkedList2.add("5");
-
-        linkedList2 = linkedList.merge(linkedList2);
-
-
-        //System.out.println(linkedList.middle());
+//        linkedList.add("4");
+//        linkedList.add("5");
+        linkedList.reverse();
         linkedList.forEach(System.out::println);
+//        LinkedList<String> linkedList2 = new LinkedList<>();
+//        linkedList2.add("34");
+//        linkedList2.add("5");
+//
+//        linkedList2 = linkedList.merge(linkedList2);
+//
+//
+//        //System.out.println(linkedList.middle());
+
 
     }
 }
