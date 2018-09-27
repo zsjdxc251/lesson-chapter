@@ -74,16 +74,7 @@ public class LinkedList<T> {
 //        }
 //        this.start = pre;
 
-
-
-        while (start != null) {
-            next = start.next;
-            start.next = pre;
-            pre = start;
-            start = next;
-
-        }
-        this.start = pre;
+ 
 
 
     }
