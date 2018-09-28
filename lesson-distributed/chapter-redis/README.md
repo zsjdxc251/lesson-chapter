@@ -238,6 +238,12 @@
 
 ### Redis主备（Master-Slaver）
 
+* [参考链接]: https://redis.io/topics/sentinel	"英文链接"
+
+	 [参考链接]: http://www.redis.cn/topics/sentinel	"中文链接"
+
+  
+
 * 关闭所有节点防火墙 并设置 `bind 0.0.0.0`
 
 * 主`Master`
@@ -259,4 +265,49 @@
 
 ### 哨兵配置
 
-* 配置监控主 `sentinel monitor mymaster 192.168.204.135 7777 1`
+* 配置监控主在文件`sentinel.conf `设置 `sentinel monitor mymaster 192.168.204.135 7777 1`
+
+  ```sh
+  ./redis-sentinel sentinel.conf
+  ```
+
+## Redis-cluster
+
+* [参考链接]: https://redis.io/topics/cluster-tutorial	"英文链接"
+
+   [参考链接]: http://www.redis.cn/topics/cluster-tutorial	"中文链接"
+
+* 检查集群情况命令 进入客户端   `./redis-cli -c -p 7001`    `cluster slots`
+
+* 创建集群
+
+   ```shell
+   ./redis-trib.rb create --replicas 1 192.168.112.131:7001 192.168.112.131:7002 192.168.112.131:7003 192.168.112.129:7001 192.168.112.129:7002 192.168.112.129:7003 192.168.112.130:7001 192.168.112.130:7002 192.168.112.130:7003
+   
+   ```
+
+* 新增从节点
+
+   ```shell
+   ./redis-trib.rb add-node --slave --master-id $[nodeid] 127.0.0.1:7008 127.0.0.1:7000  
+   ```
+
+* 移除主节点
+
+   ```shell
+   ./redis-trib.rb del-node 127.0.0.1:7001
+   ```
+
+* 移除从节点
+
+   ```shell
+   ./redis-trib.rb del-node 127.0.0.1:7009 2ab1b061c36f30ae35604e9a171ae3afdc3c87e5  
+   ```
+
+* 检查节点信息
+
+   ```shell
+   ./redis-trib.rb check 127.0.0.1:7009  
+   ```
+
+   
