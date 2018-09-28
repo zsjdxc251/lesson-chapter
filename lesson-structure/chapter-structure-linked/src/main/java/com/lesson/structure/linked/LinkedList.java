@@ -64,17 +64,17 @@ public class LinkedList<T> {
 
         //  1 2 3 4
 
-//        while (start != null) {
-//            next = start.next;
-//
-//            start.next = pre;
-//            pre = start;
-//
-//            start = next;
-//        }
-//        this.start = pre;
+        while (start != null) {
+            next = start.next;
 
- 
+            start.next = pre;
+            pre = start;
+
+            start = next;
+        }
+        this.start = pre;
+
+
 
 
     }

@@ -1,4 +1,4 @@
-package com.lesson.distributed.redis.sample.jedis;
+package com.lesson.distributed.redis.sample.jedis.proxy;
 
 import org.apache.commons.lang3.ArrayUtils;
 import redis.clients.jedis.BinaryClient;

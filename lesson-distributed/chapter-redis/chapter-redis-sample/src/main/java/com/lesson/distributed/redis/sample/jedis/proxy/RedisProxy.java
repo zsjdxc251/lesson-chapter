@@ -1,4 +1,4 @@
-package com.lesson.distributed.redis.sample.jedis;
+package com.lesson.distributed.redis.sample.jedis.proxy;
 
 import com.google.common.collect.Maps;
 import net.sf.cglib.proxy.Enhancer;

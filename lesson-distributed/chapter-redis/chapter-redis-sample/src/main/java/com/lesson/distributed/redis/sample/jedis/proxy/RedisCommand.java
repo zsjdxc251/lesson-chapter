@@ -1,4 +1,4 @@
-package com.lesson.distributed.redis.sample.jedis;
+package com.lesson.distributed.redis.sample.jedis.proxy;
 
 import redis.clients.jedis.Jedis;
 

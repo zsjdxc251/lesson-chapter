@@ -1,4 +1,4 @@
-package com.lesson.distributed.redis.sample.jedis;
+package com.lesson.distributed.redis.sample.jedis.proxy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
