@@ -22,6 +22,7 @@
         <module>chapter-mongo</module>
         <module>chapter-redis</module>
         <module>chapter-rocket</module>
+        <module>chapter-nginx</module>
     </modules>
     <name>lesson-distributed</name>
     <!-- FIXME change it to the project's website -->
