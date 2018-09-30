@@ -56,28 +56,49 @@ public class LinkedList<T> {
         }
     }
 
-    public void reverse(){
-        Node pre = null; //   1   2
-        Node next; //   2 null
-        // start           2 null
-        // start.next null  start.next 1
 
-        //  1 2 3 4
+    /**
+     *
+     *   pre null
+     *   start 1   start.next null
+     *   next 2
+     *
+     *
+     *   pre 1
+     *   start 2   start.next 1
+     *   next 3
+     *
+     */
+    public void reverse(){
+
+        Node pre = null;
+
+        Node next = null;
 
         while (start != null) {
+            // 找本次循环的下一个  如果当前循环到的是1   那么下一个就是 2
             next = start.next;
 
+            // 关键操作 ： 调换引用 相当于把 当前的下一个之下当前的上一个调换一下
             start.next = pre;
-            pre = start;
 
+            // 把本次的实例为下一次的pre
+            pre = start;
+            // 这次循环完 就循环下一个
             start = next;
+
         }
+
         this.start = pre;
 
 
 
-
     }
+
+
+
+
+
     public T middle(){
         if (start == null) {
             return null;
