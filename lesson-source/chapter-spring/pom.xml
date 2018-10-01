@@ -18,6 +18,7 @@
     <modules>
         <module>chapter-spring-type-conversion</module>
         <module>chapter-spring-data-binding</module>
+        <module>chapter-spring-ioc</module>
     </modules>
 
 

@@ -16,6 +16,9 @@ public class JedisSample {
         JedisPool jedisPool = new JedisPool(jedisPoolConfig,"121.196.232.248",7777,2000,"12345QWERTYUIO");
 
         Jedis jedis = jedisPool.getResource();
+
+        jedis.set("","");
+
         String script = "if redis.call('get',KEYS[1]) == ARGV[1] then redis.call('del',KEYS[1]) return 1 else while(true) do return 0  end ";
 
         String value = String.valueOf(Thread.currentThread().getId());
