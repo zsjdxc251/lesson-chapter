@@ -24,6 +24,7 @@
         <module>chapter-pattern-iterator</module>
         <module>chapter-pattern-chain</module>
         <module>chapter-pattern-command</module>
+        <module>chapter-pattern-state-visitor</module>
     </modules>
 
 

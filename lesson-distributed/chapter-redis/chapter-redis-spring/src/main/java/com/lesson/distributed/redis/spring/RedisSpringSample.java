@@ -17,10 +17,11 @@ public class RedisSpringSample {
 
         RedisTemplate redisTemplate = annotationConfigApplicationContext.getBean(RedisTemplate.class);
 
+        String type = "checkSyncToCardCount";
 
-        System.out.println(redisTemplate.hasKey("bizcard:backend:checkChangeTemplateCount:companyId:56988a85a33674126c947914"));
+        System.out.println(redisTemplate.hasKey("bizcard:backend:"+type+":companyId:5b91f71fe3b3c14d22fa461f"));
 
-      redisTemplate.delete("bizcard:backend:checkChangeTemplateCount:companyId:56988a85a33674126c947914");
+      redisTemplate.delete("bizcard:backend:"+type+":companyId:5b91f71fe3b3c14d22fa461f");
 
     }
 }
