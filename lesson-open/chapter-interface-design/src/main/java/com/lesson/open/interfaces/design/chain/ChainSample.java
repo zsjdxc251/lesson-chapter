@@ -18,19 +18,23 @@ public class ChainSample {
         executorChain.addExecutor((chain)->{
             System.out.println("1");
             chain.execute();
+            System.out.println("11");
 
         });
         executorChain.addExecutor((chain)->{
             System.out.println("2");
             chain.execute();
+            System.out.println("22");
         });
         executorChain.addExecutor((chain)->{
             System.out.println("3");
             chain.execute();
+            System.out.println("33");
         });
         executorChain.addExecutor((chain)->{
             System.out.println("4");
             chain.execute();
+            System.out.println("44");
         });
 
         executorChain.execute();

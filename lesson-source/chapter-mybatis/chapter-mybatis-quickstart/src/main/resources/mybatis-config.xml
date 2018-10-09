@@ -24,6 +24,12 @@
         <plugin interceptor="com.lesson.source.mybatis.quickstart.plugins.ExampleInterceptor">
             <property name="username" value="zsjdxc251"/>
         </plugin>
+        <plugin interceptor="com.lesson.source.mybatis.quickstart.plugins.QueryInterceptor">
+            <property name="username" value="zsjdxc250"/>
+        </plugin>
+        <plugin interceptor="com.lesson.source.mybatis.quickstart.plugins.SelectInterceptor">
+            <property name="username" value="zsjdxc520"/>
+        </plugin>
     </plugins>
     <environments default="dev">
         <environment id="dev">
@@ -50,6 +56,8 @@
 
     <mappers>
         <mapper resource="mapper/CityMapper.xml"/>
+        <!--<mapper class="com.lesson.source.mybatis.quickstart.mapper.CityMapper"/>-->
+
     </mappers>
 
 

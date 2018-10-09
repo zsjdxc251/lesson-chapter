@@ -30,21 +30,22 @@ import java.util.Properties;
                 method = "query",
                 args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class})
 })
-public class ExampleInterceptor implements Interceptor {
+public class SelectInterceptor implements Interceptor {
 
 
-    private static final Logger log = LoggerFactory.getLogger(ExampleInterceptor.class);
+    private static final Logger log = LoggerFactory.getLogger(SelectInterceptor.class);
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
 
-        log.info("intercept target class:{}",invocation.getTarget().getClass());
+        log.info("intercept target class:{}",invocation.getTarget().getClass().getInterfaces());
         log.info("intercept target method:{}",invocation.getMethod().getName());
         log.info("intercept args:{}",invocation.getArgs().length);
 
         MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
         BoundSql boundSql = mappedStatement.getBoundSql(invocation.getArgs()[1]);
         log.info(String.format("plugin output sql = %s , param=%s", boundSql.getSql(),boundSql.getParameterObject()));
+
         Object result = invocation.proceed();
         log.info("execute over");
         return result;

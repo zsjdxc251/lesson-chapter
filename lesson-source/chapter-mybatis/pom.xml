@@ -18,6 +18,7 @@
     <modules>
         <module>chapter-mybatis-quickstart</module>
         <module>chapter-mybatis-generator</module>
+        <module>chapter-mybatis-spring</module>
     </modules>
 
 
