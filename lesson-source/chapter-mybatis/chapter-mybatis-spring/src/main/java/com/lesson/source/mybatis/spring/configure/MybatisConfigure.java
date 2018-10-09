@@ -34,6 +34,9 @@ public class MybatisConfigure {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUsername("root");
         dataSource.setPassword("zsj12345");
+        dataSource.setDefaultAutoCommit(false);
+
+
         return dataSource;
     }
 
@@ -49,6 +52,7 @@ public class MybatisConfigure {
                             PathMatchingResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX+"mapper/*.xml"));
 
             sqlSessionFactoryBean.setConfigLocation( new ClassPathResource("mybatis-config.xml"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,7 +68,6 @@ public class MybatisConfigure {
 
 
     @Bean
-    //@DependsOn("sqlSessionFactory")
     public MapperScannerConfigurer mapperScannerConfigurer(){
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
