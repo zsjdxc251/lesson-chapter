@@ -3,6 +3,7 @@ package com.lesson.source.mybatis.spring.configure;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import java.io.IOException;
  */
 @Configuration
 @PropertySource("jdbc.properties")
+@MapperScan("com.lesson.source.mybatis.spring.mapper")
 public class MybatisConfigure {
     private String url;
 
@@ -67,13 +69,13 @@ public class MybatisConfigure {
     }
 
 
-    @Bean
-    public MapperScannerConfigurer mapperScannerConfigurer(){
-        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-        mapperScannerConfigurer.setBasePackage("com.lesson.source.mybatis.spring.mapper");
-        return mapperScannerConfigurer;
-    }
+//    @Bean
+//    public MapperScannerConfigurer mapperScannerConfigurer(){
+//        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
+//        mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
+//        mapperScannerConfigurer.setBasePackage("com.lesson.source.mybatis.spring.mapper");
+//        return mapperScannerConfigurer;
+//    }
 
 
 }

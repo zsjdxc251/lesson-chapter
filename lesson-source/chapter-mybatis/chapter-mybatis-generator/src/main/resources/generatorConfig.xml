@@ -34,7 +34,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://127.0.0.1:3306/test?useSSL=true"
                         userId="root"
-                        password="zsj12345">
+                        password="12345">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -61,7 +61,12 @@
             <!--&lt;!&ndash;oracle 配置&ndash;&gt;-->
             <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>&ndash;&gt;-->
         <!--</table>-->
-        <table tableName="city" delimitAllColumns="true">
+        <!--<table tableName="city" delimitAllColumns="true">-->
+            <!--<property name="beginningDelimiter" value="`"/>-->
+            <!--<property name="endingDelimiter" value="`"/>-->
+            <!--<property name="delimitIdentifiers" value="true"/>-->
+        <!--</table>-->
+        <table tableName="user_info" delimitAllColumns="true">
             <property name="beginningDelimiter" value="`"/>
             <property name="endingDelimiter" value="`"/>
             <property name="delimitIdentifiers" value="true"/>
