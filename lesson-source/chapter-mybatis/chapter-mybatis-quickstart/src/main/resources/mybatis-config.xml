@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+
+
+
+<configuration>
+
+
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <setting name="logImpl" value="Log4J2"/>
+    </settings>
+
+    <!-- 全局使用 自定义 只要是 JdbcType.VARCHAR 都会进入 ExampleTypeHandler-->
+    <typeHandlers>
+        <typeHandler handler="com.lesson.source.mybatis.quickstart.handler.ExampleTypeHandler"/>
+    </typeHandlers>
+    <plugins>
+        <plugin interceptor="com.lesson.source.mybatis.quickstart.plugins.ExampleInterceptor">
+            <property name="username" value="zsjdxc251"/>
+        </plugin>
+    </plugins>
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+
+    <mappers>
+        <mapper resource="mapper/CityMapper.xml"/>
+    </mappers>
+
+
+
+
+
+
+
+
+</configuration>

@@ -19,9 +19,9 @@ public class RedisSpringSample {
 
         String type = "checkSyncToCardCount";
 
-        System.out.println(redisTemplate.hasKey("bizcard:backend:"+type+":companyId:5b91f71fe3b3c14d22fa461f"));
+        System.out.println(redisTemplate.hasKey("bizcard:backend:"+type+":companyId:5bbb1004a7d9ca542fffe8df"));
 
-      redisTemplate.delete("bizcard:backend:"+type+":companyId:5b91f71fe3b3c14d22fa461f");
+      redisTemplate.delete("bizcard:backend:"+type+":companyId:5bbb1004a7d9ca542fffe8df");
 
     }
 }
