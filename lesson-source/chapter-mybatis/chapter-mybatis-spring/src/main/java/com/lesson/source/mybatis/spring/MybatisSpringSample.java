@@ -1,6 +1,6 @@
 package com.lesson.source.mybatis.spring;
 
-import com.lesson.source.mybatis.spring.configure.MybatisConfigure;
+import com.lesson.source.mybatis.spring.configure.CoreConfigure;
 import com.lesson.source.mybatis.spring.mapper.CityMapper;
 import com.lesson.source.mybatis.spring.model.City;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class MybatisSpringSample {
 
     public static void main(String[] args){
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(MybatisConfigure.class);
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(CoreConfigure.class);
 
 
         CityMapper cityMapper = applicationContext.getBean(CityMapper.class);
