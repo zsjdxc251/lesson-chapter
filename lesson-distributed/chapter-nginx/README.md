@@ -47,6 +47,10 @@
 6. location匹配规则
 7. 实际使用建议
 8. Rewrite规则
+9. Nginx反向代理
+10. Nginx的负载均衡实践
+11. Nginx动静分离实践
+12. Nginx进程模型
 
 
 
