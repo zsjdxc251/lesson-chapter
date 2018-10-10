@@ -94,4 +94,7 @@ public interface CityMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(City record);
+
+
+
 }

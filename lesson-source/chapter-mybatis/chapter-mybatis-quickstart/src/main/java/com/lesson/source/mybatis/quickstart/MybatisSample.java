@@ -1,7 +1,6 @@
 package com.lesson.source.mybatis.quickstart;
 
 import com.lesson.source.mybatis.quickstart.mapper.CityMapper;
-import com.lesson.source.mybatis.quickstart.model.City;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -31,17 +30,12 @@ public class MybatisSample {
 
         CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
 
+        System.out.println(cityMapper.selectByPrimaryKey(726L));
 
-        City city = new City();
-//        city.setId(22222L);
-//        city.setName("123456");
-//        city.setState("343");
-//        System.out.println(cityMapper.insert(city));
 
-        city = cityMapper.selectByPrimaryKey(1L);
+        cityMapper = sqlSession.getMapper(CityMapper.class);
 
-        sqlSession.commit();
-        sqlSession.close();
+        System.out.println(cityMapper.selectByPrimaryKey(726L));
 
 
 

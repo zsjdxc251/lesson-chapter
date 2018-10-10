@@ -14,7 +14,9 @@
 
     <settings>
         <setting name="logImpl" value="Log4J2"/>
+        <setting name="cacheEnabled" value="true"/>
     </settings>
+
 
     <!-- 全局使用 自定义 只要是 JdbcType.VARCHAR 都会进入 ExampleTypeHandler-->
     <typeHandlers>
