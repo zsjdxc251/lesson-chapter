@@ -2,8 +2,10 @@ package com.lesson.source.mybatis.spring.mapper;
 
 import com.lesson.source.mybatis.spring.model.City;
 import com.lesson.source.mybatis.spring.model.CityExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface CityMapper {
     /**
@@ -60,6 +62,7 @@ public interface CityMapper {
      *
      * @mbg.generated
      */
+    @Select("select * from city  where id=#{id}")
     City selectByPrimaryKey(Long id);
 
     /**
