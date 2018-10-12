@@ -37,7 +37,7 @@ public class CustomInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         log.info("intercept target:{}",invocation.getTarget().getClass());
-        System.out.println(invocation.getMethod());
+
 
         Object result = invocation.proceed();
 

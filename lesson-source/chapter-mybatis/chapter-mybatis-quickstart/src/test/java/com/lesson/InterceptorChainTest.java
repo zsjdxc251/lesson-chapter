@@ -17,10 +17,10 @@ public class InterceptorChainTest {
         InterceptorChain interceptorChain = new InterceptorChain();
 
         interceptorChain.addInterceptor(new CustomInterceptor());
+        interceptorChain.addInterceptor(new CustomInterceptor());
 
 
         ICityService cityService = (ICityService)interceptorChain.pluginAll(new CityService());
-        System.out.println(cityService);
         System.out.println(cityService.getName());
 
     }
