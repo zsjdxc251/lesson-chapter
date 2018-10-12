@@ -2,7 +2,6 @@ package com.lesson.source.mybatis.quickstart;
 
 import com.lesson.source.mybatis.quickstart.mapper.CityMapper;
 import com.lesson.source.mybatis.quickstart.model.City;
-import com.lesson.source.mybatis.quickstart.model.Country;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.binding.MapperProxy;
 import org.apache.ibatis.executor.BaseExecutor;
@@ -35,6 +34,9 @@ import java.io.InputStream;
  *
  *   =>>
  *   {@link DefaultSqlSession#selectOne(java.lang.String, java.lang.Object)}
+ *
+ *    {@link DefaultSqlSession#selectList(java.lang.String, java.lang.Object, org.apache.ibatis.session.RowBounds)}
+ *        方法中
  *   =>>
  *   {@link CachingExecutor#query(org.apache.ibatis.mapping.MappedStatement, java.lang.Object, org.apache.ibatis.session.RowBounds, org.apache.ibatis.session.ResultHandler)}
  *   =>>
@@ -42,6 +44,7 @@ import java.io.InputStream;
  *
  *   =>>
  *   {@link SimpleExecutor#doQuery(org.apache.ibatis.mapping.MappedStatement, java.lang.Object, org.apache.ibatis.session.RowBounds, org.apache.ibatis.session.ResultHandler, org.apache.ibatis.mapping.BoundSql)}
+ *
  *
  *   =>>
  *   {@link RoutingStatementHandler#query(java.sql.Statement, org.apache.ibatis.session.ResultHandler)}
@@ -77,7 +80,7 @@ public class MybatisSample {
 
         City city =  cityMapper.selectByPrimaryKey(726L);
 
-        Country   country = cityMapper.selectCountry(13);
+       // Country   country = cityMapper.selectCountry(13);
 
 
 
