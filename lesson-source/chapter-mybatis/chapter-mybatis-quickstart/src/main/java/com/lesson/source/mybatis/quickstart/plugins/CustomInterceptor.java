@@ -8,7 +8,6 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
@@ -30,19 +29,15 @@ import java.util.Properties;
                 method = "query",
                 args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class})
 })
-public class QueryInterceptor implements Interceptor {
+public class CustomInterceptor implements Interceptor {
 
 
-    private static final Logger log = LoggerFactory.getLogger(QueryInterceptor.class);
+    private static final Logger log = LoggerFactory.getLogger(CustomInterceptor.class);
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-
-
-
-        MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
-        BoundSql boundSql = mappedStatement.getBoundSql(invocation.getArgs()[1]);
-
+        log.info("intercept target:{}",invocation.getTarget().getClass());
+        System.out.println(invocation.getMethod());
 
         Object result = invocation.proceed();
 
@@ -52,7 +47,7 @@ public class QueryInterceptor implements Interceptor {
     @Override
     public Object plugin(Object target) {
         log.info("begin plugin:{}",target.getClass());
-        Object result = Plugin.wrap(target, this);
+        Object result = CustomPlugin.wrap(target, this);
         log.info("end plugin:{}",result.getClass());
         return result;
     }

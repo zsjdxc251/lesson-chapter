@@ -2,6 +2,7 @@ package com.lesson.source.mybatis.quickstart.mapper;
 
 import com.lesson.source.mybatis.quickstart.model.City;
 import com.lesson.source.mybatis.quickstart.model.CityExample;
+import com.lesson.source.mybatis.quickstart.model.Country;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -94,6 +95,10 @@ public interface CityMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(City record);
+
+
+
+    Country  selectCountry(Integer id);
 
 
 

@@ -39,21 +39,22 @@ public class ExampleInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
 
         log.info("intercept target class:{}",invocation.getTarget().getClass());
-        log.info("intercept target method:{}",invocation.getMethod().getName());
-        log.info("intercept args:{}",invocation.getArgs().length);
+
 
         MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
         BoundSql boundSql = mappedStatement.getBoundSql(invocation.getArgs()[1]);
-        log.info(String.format("plugin output sql = %s , param=%s", boundSql.getSql(),boundSql.getParameterObject()));
+        //log.info(String.format("plugin output sql = %s , param=%s", boundSql.getSql(),boundSql.getParameterObject()));
         Object result = invocation.proceed();
-        log.info("execute over");
+        //log.info("execute over");
         return result;
     }
 
     @Override
     public Object plugin(Object target) {
-        log.info("plugin:{}",target.getClass());
-        return Plugin.wrap(target, this);
+        log.info("begin plugin:{}",target.getClass());
+        Object result = Plugin.wrap(target, this);
+        log.info("end plugin:{}",result.getClass());
+        return result;
     }
 
     @Override

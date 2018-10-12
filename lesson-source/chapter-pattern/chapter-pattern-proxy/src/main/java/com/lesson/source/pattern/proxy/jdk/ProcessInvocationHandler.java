@@ -17,8 +17,11 @@ public class ProcessInvocationHandler implements InvocationHandler {
         System.out.println(method.getName());
 
 
-        method.invoke(userInfoService,args);
+        Object result = null;
+        if (userInfoService != null){
+            result =  method.invoke(userInfoService,args);
+        }
 
-        return "你好";
+        return result;
     }
 }
