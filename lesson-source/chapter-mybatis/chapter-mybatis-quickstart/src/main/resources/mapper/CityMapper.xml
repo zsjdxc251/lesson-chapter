@@ -8,7 +8,7 @@
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="state" jdbcType="VARCHAR" property="state"  />
   </resultMap>
 
   <resultMap id="BaseResultMapNOne" type="com.lesson.source.mybatis.quickstart.model.Country">

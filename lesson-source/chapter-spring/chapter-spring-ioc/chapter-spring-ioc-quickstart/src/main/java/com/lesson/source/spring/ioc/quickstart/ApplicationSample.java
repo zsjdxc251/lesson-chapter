@@ -1,5 +1,6 @@
 package com.lesson.source.spring.ioc.quickstart;
 
+import com.lesson.source.spring.ioc.quickstart.service.ExampleService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -13,7 +14,11 @@ public class ApplicationSample {
 
 
         ClassPathXmlApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("");
+                new ClassPathXmlApplicationContext("classpath:spring-beans.xml");
+
+
+        ExampleService exampleService = (ExampleService)applicationContext.getBean("exampleService");
+        System.out.println(exampleService);
 
     }
 }
