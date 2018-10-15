@@ -6,10 +6,11 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:annotation-config/>
+    <!--<context:annotation-config/>-->
 
     <bean id="exampleService" class="com.lesson.source.spring.ioc.quickstart.service.ExampleService" scope="prototype">
 
+        <property name="userInfoService" ref="userInfoService"/>
     </bean>
 
     <bean id="userInfoService" class="com.lesson.source.spring.ioc.quickstart.service.UserInfoService">
