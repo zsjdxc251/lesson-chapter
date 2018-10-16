@@ -33,6 +33,19 @@ public class LinkedList<T> {
         }
     }
 
+    public void addCycle(){
+
+        Node next = start;
+        while (next.next != null){
+            next = next.next;
+        }
+
+        next.next = start;
+
+
+
+    }
+
     private void add(Node node){
         if (this.start == null){
             this.start = node;
@@ -138,15 +151,44 @@ public class LinkedList<T> {
         return this;
     }
 
+    /**
+     *  判断列表是否有环 主要是看首尾是否相连
+     *
+     *   使用
+     *
+     * @return
+     */
+    public boolean hasCycle(){
+        Node fast = start ,slow = start;
+
+        while (slow != null && fast != null) {
+            slow = slow.next;
+            if (fast.next != null){
+                fast = fast.next.next;
+            } else {
+                fast = null;
+            }
+
+            if (slow != null && slow == fast){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args){
         LinkedList<String> linkedList = new LinkedList<>();
         linkedList.add("1");
         linkedList.add("2");
         linkedList.add("3");
+        linkedList.add("4");
 //        linkedList.add("4");
 //        linkedList.add("5");
-        linkedList.reverse();
-        linkedList.forEach(System.out::println);
+//        linkedList.reverse();
+//        linkedList.forEach(System.out::println);
+
+       //linkedList.addCycle();
+        System.out.println(linkedList.hasCycle());
 //        LinkedList<String> linkedList2 = new LinkedList<>();
 //        linkedList2.add("34");
 //        linkedList2.add("5");

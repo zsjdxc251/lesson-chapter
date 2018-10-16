@@ -1,8 +1,9 @@
 package com.lesson;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Unit test for simple App.
@@ -39,5 +40,20 @@ public class AppTest
         if (en[0].length > a){
             forEach(classes,en);
         }
+    }
+
+
+
+    @Test
+    public void test1(){
+
+        System.out.println(1<<5);
+
+
+        System.out.println(Integer.toBinaryString(14));
+
+        TreeMap treeMap;
+        treeMap.put()
+        TreeSet treeSet;
     }
 }
