@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -36,5 +37,11 @@ public class UserInfoController {
         userInfo = userInfoRepository.save(userInfo);
 
         return ResponseEntity.ok(userInfo);
+    }
+
+    @GetMapping("/getUserInfo")
+    public ResponseEntity<UserInfo> getUserInfo(){
+        Optional<UserInfo> optional = userInfoRepository.findById(16L);
+        return ResponseEntity.ok(optional.isPresent()?optional.get():new UserInfo());
     }
 }
