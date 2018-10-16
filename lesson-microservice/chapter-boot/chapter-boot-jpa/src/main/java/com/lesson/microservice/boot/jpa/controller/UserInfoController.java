@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  *
@@ -25,6 +26,8 @@ public class UserInfoController {
 
     @Autowired
     private UserInfoRepository userInfoRepository;
+
+    private AtomicLong atomicLong = new AtomicLong();
 
     @GetMapping("/create")
     public ResponseEntity<UserInfo> create(){
@@ -42,6 +45,7 @@ public class UserInfoController {
     @GetMapping("/getUserInfo")
     public ResponseEntity<UserInfo> getUserInfo(){
         Optional<UserInfo> optional = userInfoRepository.findById(16L);
+        System.out.println(atomicLong.incrementAndGet());
         return ResponseEntity.ok(optional.isPresent()?optional.get():new UserInfo());
     }
 }
