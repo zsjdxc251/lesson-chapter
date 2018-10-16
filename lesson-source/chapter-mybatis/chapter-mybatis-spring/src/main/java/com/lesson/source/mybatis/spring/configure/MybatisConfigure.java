@@ -63,7 +63,7 @@ public class MybatisConfigure {
             sqlSessionFactoryBean.setMapperLocations(
                     new PathMatchingResourcePatternResolver().getResources(PathMatchingResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + MAPPER_FOLDER));
 
-            sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(MYBATIS_CONFIG_FILE));
+           sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(MYBATIS_CONFIG_FILE));
         } catch (IOException e) {
             e.printStackTrace();
         }

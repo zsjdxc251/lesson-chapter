@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lesson.distributed.transaction.atomikos.mapper.master.CityMapper">
+
+    
+    <select id="selectOne" resultType="com.lesson.distributed.transaction.atomikos.entity.City">
+        select * from city limit 1;
+    </select>
+
+    <insert id="insert" parameterType="com.lesson.distributed.transaction.atomikos.entity.City" useGeneratedKeys="true" keyProperty="id">
+        insert into city(`name`,`state`)values(#{name},#{state})
+
+    </insert>
+</mapper>

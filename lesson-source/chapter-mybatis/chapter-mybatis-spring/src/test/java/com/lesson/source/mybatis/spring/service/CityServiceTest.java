@@ -19,7 +19,7 @@ public class CityServiceTest extends BaseAppTest {
     @Test
     public void find(){
 
-        cityService.findOne(726L);
+        cityService.findOne(14L);
 
     }
 }

@@ -2,9 +2,6 @@ package com.lesson;
 
 import org.junit.Test;
 
-import java.util.TreeMap;
-import java.util.TreeSet;
-
 /**
  * Unit test for simple App.
  */
@@ -52,8 +49,6 @@ public class AppTest
 
         System.out.println(Integer.toBinaryString(14));
 
-        TreeMap treeMap;
-        treeMap.put()
-        TreeSet treeSet;
+
     }
 }
