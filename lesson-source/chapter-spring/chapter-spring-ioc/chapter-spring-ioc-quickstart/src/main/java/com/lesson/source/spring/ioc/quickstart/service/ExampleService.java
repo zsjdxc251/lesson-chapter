@@ -8,8 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ExampleService {
 
-    @Autowired
+    //@Autowired
     private UserInfoService userInfoService;
+
+
+
+    public void setUserInfoService(UserInfoService userInfoService) {
+        this.userInfoService = userInfoService;
+    }
 
     @Override
     public String toString() {
