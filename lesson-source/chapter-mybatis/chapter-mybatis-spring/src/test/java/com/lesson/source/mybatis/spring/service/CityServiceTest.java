@@ -13,13 +13,13 @@ public class CityServiceTest extends BaseAppTest {
     public void save() {
 
         System.out.println(cityService.getClass());
-        cityService.save("22","66");
+        cityService.save("22","11");
     }
 
     @Test
     public void find(){
 
-        cityService.findOne(14L);
+        cityService.findAll();
 
     }
 }
