@@ -1,13 +1,16 @@
 package com.lesson.source.mybatis.spring.service;
 
+import com.alibaba.fastjson.JSON;
 import com.lesson.source.mybatis.spring.mapper.CityMapper;
 import com.lesson.source.mybatis.spring.model.City;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author zhengshijun
@@ -22,7 +25,7 @@ public class CityService {
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = RuntimeException.class)
+    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = RuntimeException.class,isolation = Isolation.READ_UNCOMMITTED)
     public int save(String name , String state){
 
         City city = new City();
@@ -30,7 +33,7 @@ public class CityService {
         city.setState(state);
         int result = cityMapper.insert(city);
 
-        ((CityService)AopContext.currentProxy()).save2(name,state);
+        //((CityService)AopContext.currentProxy()).save2(name,state);
 
         return result;
 
@@ -47,6 +50,7 @@ public class CityService {
     }
 
 
+    @Transactional(rollbackFor = RuntimeException.class)
     public City findOne(Long i) {
 
         City city =  cityMapper.selectByPrimaryKey(i);
@@ -56,8 +60,17 @@ public class CityService {
         System.out.println(city);
 
         return city;
+    }
 
 
+    public void findAll(){
+        List<City> cityList = cityMapper.selectAll();
+        System.out.println(JSON.toJSONString(cityList));
+
+
+
+        cityList = cityMapper.selectAll();
+        System.out.println(JSON.toJSONString(cityList));
     }
 
 

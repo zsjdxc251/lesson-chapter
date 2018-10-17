@@ -96,4 +96,7 @@ public interface CityMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(City record);
+
+    @Select("select * from city")
+    List<City> selectAll();
 }
