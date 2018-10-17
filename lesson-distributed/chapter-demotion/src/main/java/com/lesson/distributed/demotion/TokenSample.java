@@ -75,9 +75,9 @@ public class TokenSample {
 
     public static void main(String[] args) throws Exception{
 
-        new TokenSample(50,10,"令牌桶").processWithLeakyBucket().doProcessor();
+        new TokenSample(50,1000,"令牌桶").processWithLeakyBucket().doProcessor();
 
-        new TokenSample(50,10,"漏桶").processWithTokenBucket().doProcessor();
+        new TokenSample(50,1000,"漏桶").processWithTokenBucket().doProcessor();
     }
 
 
