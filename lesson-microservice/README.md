@@ -34,6 +34,7 @@
 * `Jdbc`
 * `Apllo` 
 * `Disconf` 百度开源 基于Zookeeper的分布式配置管理软件
+* `diamond`
 
 ## 服务熔断
 * `Dubbo`
