@@ -20,6 +20,7 @@
         <module>chapter-boot-auto-config</module>
         <module>chapter-boot-jpa</module>
         <module>chapter-boot-version</module>
+        <module>chapter-boot-actuator</module>
     </modules>
 
 
