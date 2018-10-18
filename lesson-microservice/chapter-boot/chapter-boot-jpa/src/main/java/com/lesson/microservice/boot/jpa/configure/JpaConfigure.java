@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EntityScan("com.lesson.microservice.boot.jpa.entity")
+//@EntityScan("com.lesson.microservice.boot.jpa.entity")
 // TODO
 // FIXME   @EnableJpaRepositories("com.lesson.microservice.boot.jpa.repository") 在系统不使用该注解时spring 是如何加载repository 参考类JpaRepositoriesAutoConfiguration
 // import condition
