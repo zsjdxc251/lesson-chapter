@@ -5,13 +5,14 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author zhengshijun
- * @version created on 2018/10/14.
+ * @version created on 2018/10/20.
  */
-@Service
-public class UserInfoService implements IUserInfoService{
 
-    @Autowired
-    private ExampleService simpleService;
+public class SimpleService implements IUserInfoService {
+
+
+
+
 
 
 }

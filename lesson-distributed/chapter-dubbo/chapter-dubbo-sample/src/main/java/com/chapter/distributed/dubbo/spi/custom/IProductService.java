@@ -8,9 +8,10 @@ import com.alibaba.dubbo.common.extension.SPI;
  * @author zhengshijun
  * @version created on 2018/6/21.
  */
-@SPI("productService")
+@SPI
 public interface IProductService {
 
 
+    @Adaptive
     String getName(String name,URL url);
 }

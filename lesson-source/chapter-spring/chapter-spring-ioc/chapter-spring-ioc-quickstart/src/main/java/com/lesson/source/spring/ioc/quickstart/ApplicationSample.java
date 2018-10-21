@@ -1,6 +1,9 @@
 package com.lesson.source.spring.ioc.quickstart;
 
+import com.lesson.source.spring.ioc.quickstart.configure.CoreConfigure;
 import com.lesson.source.spring.ioc.quickstart.service.ExampleService;
+import com.lesson.source.spring.ioc.quickstart.service.IUserInfoService;
+import com.lesson.source.spring.ioc.quickstart.service.UserInfoService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -16,9 +19,15 @@ public class ApplicationSample {
         ClassPathXmlApplicationContext applicationContext =
                 new ClassPathXmlApplicationContext("classpath:spring-beans.xml");
 
+        ExampleService exampleService = applicationContext.getBean(ExampleService.class);
 
-        ExampleService exampleService = (ExampleService)applicationContext.getBean("exampleService");
+        UserInfoService userInfoService = applicationContext.getBean(UserInfoService.class);
+
         System.out.println(exampleService);
+        System.out.println(userInfoService);
+
+
+
 
     }
 }

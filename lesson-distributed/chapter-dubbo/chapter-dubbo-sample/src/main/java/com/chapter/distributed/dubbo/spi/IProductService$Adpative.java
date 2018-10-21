@@ -10,7 +10,10 @@ public class IProductService$Adpative implements com.chapter.distributed.dubbo.s
         String extName = url.getParameter("i.product.service");
         if (extName == null)
             throw new IllegalStateException("Fail to get extension(com.chapter.distributed.dubbo.spi.custom.IProductService) name from url(" + url.toString() + ") use keys([i.product.service])");
-        com.chapter.distributed.dubbo.spi.custom.IProductService extension = (com.chapter.distributed.dubbo.spi.custom.IProductService) ExtensionLoader.getExtensionLoader(com.chapter.distributed.dubbo.spi.custom.IProductService.class).getExtension(extName);
+        com.chapter.distributed.dubbo.spi.custom.IProductService extension =
+                (com.chapter.distributed.dubbo.spi.custom.IProductService)
+                        ExtensionLoader.getExtensionLoader(com.chapter.distributed.dubbo.spi.custom.IProductService.class)
+                                .getExtension(extName);
         return extension.getName(arg0, arg1);
     }
 }

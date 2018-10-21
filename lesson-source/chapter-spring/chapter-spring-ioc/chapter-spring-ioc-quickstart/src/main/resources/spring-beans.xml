@@ -6,15 +6,16 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--<context:annotation-config/>-->
+    <context:annotation-config/>
 
-    <bean id="exampleService" class="com.lesson.source.spring.ioc.quickstart.service.ExampleService" scope="prototype">
+    <context:component-scan base-package="com.lesson.source.spring.ioc.quickstart"/>
 
-        <property name="userInfoService" ref="userInfoService"/>
-    </bean>
+    <!--<bean id="exampleService" class="com.lesson.source.spring.ioc.quickstart.service.ExampleService" scope="prototype">-->
 
-    <bean id="userInfoService" class="com.lesson.source.spring.ioc.quickstart.service.UserInfoService">
+    <!--</bean>-->
 
-    </bean>
+    <!--<bean id="userInfoService" class="com.lesson.source.spring.ioc.quickstart.service.UserInfoService" scope="prototype">-->
+
+    <!--</bean>-->
 
 </beans>

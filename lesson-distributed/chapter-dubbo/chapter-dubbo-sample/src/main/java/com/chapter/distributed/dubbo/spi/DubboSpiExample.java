@@ -46,14 +46,24 @@ public class DubboSpiExample {
 //        ExtensionFactory extensionFactory = ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension();
 //        System.out.println(extensionFactory.getClass());
 
-        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+//        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+//
+//        System.out.println(protocol.getClass());
+//
+//        ProxyFactory proxyFactory = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
+//
+//        System.out.println(proxyFactory);
 
-        System.out.println(protocol.getClass());
-
-        ProxyFactory proxyFactory = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
-
-        System.out.println(proxyFactory);
 
 
+
+        IProductService productService = ExtensionLoader.getExtensionLoader(IProductService.class).getAdaptiveExtension();
+
+        System.out.println(productService.getClass());
+
+
+
+//        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+//        System.out.println(protocol.getClass());
     }
 }

@@ -25,6 +25,7 @@
         <module>chapter-nginx</module>
         <module>chapter-transaction</module>
         <module>chapter-demotion</module>
+        <module>chapter-mycat</module>
     </modules>
     <name>lesson-distributed</name>
     <!-- FIXME change it to the project's website -->

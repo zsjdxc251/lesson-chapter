@@ -1,1 +1,6 @@
+
+buyProductService=com.chapter.distributed.dubbo.spi.impl.BuyProductService
 productService=com.chapter.distributed.dubbo.spi.impl.ProductService
+buyProductServiceWrapper=com.chapter.distributed.dubbo.spi.impl.BuyProductServiceWrapper
+productServiceWrapper=com.chapter.distributed.dubbo.spi.impl.ProductServiceWrapper
+
