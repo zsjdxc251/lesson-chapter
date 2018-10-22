@@ -2,8 +2,7 @@ package com.lesson.source.spring.ioc.quickstart;
 
 import com.lesson.source.spring.ioc.quickstart.configure.CoreConfigure;
 import com.lesson.source.spring.ioc.quickstart.service.ExampleService;
-import com.lesson.source.spring.ioc.quickstart.service.IUserInfoService;
-import com.lesson.source.spring.ioc.quickstart.service.UserInfoService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -13,18 +12,23 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ApplicationSample {
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException{
 
+
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(CoreConfigure.class);
 
         ClassPathXmlApplicationContext applicationContext =
                 new ClassPathXmlApplicationContext("classpath:spring-beans.xml");
+        applicationContext.addApplicationListener(event -> {
+            System.out.println(event.getClass().getSimpleName());
+        });
 
-        ExampleService exampleService = applicationContext.getBean(ExampleService.class);
+        applicationContext.setParent(annotationConfigApplicationContext);
+        ExampleService exampleService = (ExampleService)applicationContext.getBean("exampleService");
 
-        UserInfoService userInfoService = applicationContext.getBean(UserInfoService.class);
 
-        System.out.println(exampleService);
-        System.out.println(userInfoService);
+
+        Thread.currentThread().join();
 
 
 

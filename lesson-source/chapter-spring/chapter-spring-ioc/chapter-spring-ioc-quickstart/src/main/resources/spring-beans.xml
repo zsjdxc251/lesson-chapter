@@ -11,11 +11,11 @@
     <context:component-scan base-package="com.lesson.source.spring.ioc.quickstart"/>
 
     <!--<bean id="exampleService" class="com.lesson.source.spring.ioc.quickstart.service.ExampleService" scope="prototype">-->
-
+        <!--<property name="userInfoService" ref="userInfoService"/>-->
     <!--</bean>-->
 
     <!--<bean id="userInfoService" class="com.lesson.source.spring.ioc.quickstart.service.UserInfoService" scope="prototype">-->
-
+        <!--<property name="exampleService" ref="exampleService"/>-->
     <!--</bean>-->
 
 </beans>
