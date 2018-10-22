@@ -127,11 +127,11 @@
 
    6.  进入 `salve mysql` 
 
-      >change master to master_host='192.168.112.132', master_port=3306,master_user='m2ssync',master_password='12345',master_log_file='dbstore_binlog.000004',master_log_pos=334;
+      change master to master_host='192.168.112.132', master_port=3306,master_user='m2ssync',master_password='12345',master_log_file='dbstore_binlog.000004',master_log_pos=334;
 
   7. ` start salve`
 
-  8. `show slave status;`查看slave服务器状态
+  8. `show slave status;`查看slave服务器状态， `slave_sql_running=NO` 可以设置 `set GLOBAL SQL_SLAVE_SKIP_COUNTER=1; `
 
   9. Mysql 基于binlog的主从复制原理
 
@@ -233,6 +233,8 @@
 ## Mycat之注解
 
 ## Mycat命令行监控工具
+
+ **`./mysql -uroot -p123456 -h127.0.0.1 -P9066`** 登录
 
 * `show @@help;`
 
