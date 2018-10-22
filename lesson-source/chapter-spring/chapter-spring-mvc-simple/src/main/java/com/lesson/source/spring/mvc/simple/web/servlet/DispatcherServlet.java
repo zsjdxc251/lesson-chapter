@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -14,6 +15,9 @@ import java.util.Map;
  * @version created on 2018/10/23.
  */
 public class DispatcherServlet extends HttpServlet {
+
+    @Nullable
+    private List<ViewResolver> viewResolvers;
 
     @Override
     public void init() throws ServletException {
@@ -39,7 +43,7 @@ public class DispatcherServlet extends HttpServlet {
         Exception dispatchException = null;
 
         try {
-            
+
             mv = handlerAdapter.handle(req,resp,handlerMethod);
 
         } catch (Exception e) {
@@ -63,10 +67,13 @@ public class DispatcherServlet extends HttpServlet {
 
         String viewName = mv.getViewName();
 
-        View view = resolveViewName(viewName,mv.getModelInternal(),request);
+
 
 
         try {
+
+            View view = resolveViewName(viewName,mv.getModelInternal(),request);
+
             view.render(mv.getModelInternal(),request,response);
 
         } catch (Exception e) {
@@ -76,8 +83,16 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private View resolveViewName(String viewName, @Nullable Map<String, Object> model,
-                                 HttpServletRequest request){
+                                 HttpServletRequest request) throws Exception{
 
+        if (this.viewResolvers != null) {
+            for (ViewResolver viewResolver : this.viewResolvers) {
+                View view = viewResolver.resolveViewName(viewName);
+                if (view != null) {
+                    return view;
+                }
+            }
+        }
         return null;
 
     }
