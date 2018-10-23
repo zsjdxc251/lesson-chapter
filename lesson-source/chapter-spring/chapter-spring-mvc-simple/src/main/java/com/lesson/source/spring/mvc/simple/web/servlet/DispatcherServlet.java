@@ -1,5 +1,7 @@
 package com.lesson.source.spring.mvc.simple.web.servlet;
 
+import com.lesson.source.spring.mvc.simple.context.ApplicationContext;
+
 import javax.annotation.Nullable;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -7,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -19,15 +20,51 @@ public class DispatcherServlet extends HttpServlet {
     @Nullable
     private List<ViewResolver> viewResolvers;
 
+    @Nullable
+    private List<HandlerMapping> handlerMappings;
+
+    @Nullable
+    private List<HandlerAdapter> handlerAdapters;
+
+
+
     @Override
     public void init() throws ServletException {
-        super.init();
+        getServletContext();
+    }
+
+
+    public void onRefresh(ApplicationContext context){
+
+        initStrategies(context);
+    }
+
+    private void initStrategies(ApplicationContext context) {
+
+
+        initHandlerMappings(context);
+        
+        initHandlerAdapters(context);
+
+        
+        initViewResolvers(context);
+
+
+    }
+
+    private void initViewResolvers(ApplicationContext context) {
+    }
+
+    private void initHandlerAdapters(ApplicationContext context) {
+    }
+
+    private void initHandlerMappings(ApplicationContext context) {
+
+
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         doDispatch(req,resp);
     }
 
@@ -58,7 +95,6 @@ public class DispatcherServlet extends HttpServlet {
         boolean errorView = false;
         if (mv != null ) {
             render(mv, request, response);
-
         }
 
     }
@@ -67,14 +103,14 @@ public class DispatcherServlet extends HttpServlet {
 
         String viewName = mv.getViewName();
 
-
-
-
         try {
 
             View view = resolveViewName(viewName,mv.getModelInternal(),request);
 
-            view.render(mv.getModelInternal(),request,response);
+           if (view != null){
+
+               view.render(mv.getModelInternal(),request,response);
+           }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,12 +134,28 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private HandlerAdapter getHandlerAdapter(HandlerMethod handlerMethod) {
+        if (handlerAdapters != null){
+            for (HandlerAdapter handlerAdapter : handlerAdapters) {
+                if (handlerAdapter.supports(handlerMethod)){
+                    return handlerAdapter;
+                }
+            }
 
+        }
         return null;
     }
 
     private HandlerMethod getHandler(HttpServletRequest req) {
 
+        if (handlerMappings != null) {
+            HandlerMethod handlerMethod;
+            for(HandlerMapping handlerMapping : handlerMappings) {
+                handlerMethod = handlerMapping.getHandler(req);
+                if (handlerMethod != null){
+                    return handlerMethod;
+                }
+            }
+        }
         return null;
     }
     

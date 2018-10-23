@@ -17,6 +17,6 @@
 
     <dubbo:reference interface="com.chapter.distributed.dubbo.service.IUserInfoService"
                      id="userInfoService"
-                     url="dubbo://192.168.1.251:20880/com.chapter.distributed.dubbo.service.IUserInfoService"/>
+                     url="dubbo://192.168.1.251:20880/com.chapter.distributed.dubbo.service.IUserInfoService" />
 
 </beans>

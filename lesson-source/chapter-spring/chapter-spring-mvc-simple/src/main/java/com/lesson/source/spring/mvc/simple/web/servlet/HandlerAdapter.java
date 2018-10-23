@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author zhengshijun
  * @version created on 2018/10/23.
  */
-public class HandlerAdapter {
+public interface HandlerAdapter  {
 
 
-    public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler) throws Exception{
+     boolean supports(Object handler);
 
 
-        return null;
-    }
+     ModelAndView handle(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler) throws Exception;
+
 }
