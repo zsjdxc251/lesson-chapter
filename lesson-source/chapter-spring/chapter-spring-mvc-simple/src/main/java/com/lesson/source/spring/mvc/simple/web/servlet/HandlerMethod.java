@@ -16,6 +16,9 @@ public class HandlerMethod {
 
     private Pattern urlRex;
 
+    public HandlerMethod() {
+    }
+
     public HandlerMethod(Pattern urlRex , Object bean, Method method) {
         this.urlRex = urlRex;
         this.bean = bean;

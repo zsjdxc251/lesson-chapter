@@ -18,6 +18,29 @@ public class RequestMappingHandlerAdapter implements HandlerAdapter {
     @Override
     public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler) throws Exception {
 
+        return invokeHandlerMethod(request,response,handler);
+    }
+
+
+    public ModelAndView invokeHandlerMethod(HttpServletRequest request,
+                                            HttpServletResponse response, HandlerMethod handlerMethod) throws Exception{
+
+        ServletInvocableHandlerMethod invocableHandlerMethod = createInvocableHandlerMethod(handlerMethod);
+
+
+        ServletWebRequest webRequest = new ServletWebRequest(request, response);
+
+
+
+
+        invocableHandlerMethod.invokeAndHandle(webRequest);
+
         return null;
+    }
+
+
+    public ServletInvocableHandlerMethod createInvocableHandlerMethod(HandlerMethod handlerMethod){
+
+        return new ServletInvocableHandlerMethod(handlerMethod);
     }
 }
