@@ -1,9 +1,11 @@
 package com.lesson.microservice.boot.sample;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.context.XmlServletWebServerApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  *    org.springframework.boot.SpringApplicationRunListeners#starting
@@ -47,7 +49,14 @@ public class BootstrapBootSample
         application.addListeners(event -> {
             System.out.println(event.getClass().getSimpleName());
         });
-        application.run(args);
+        application.setLogStartupInfo(true);
+        application.setAdditionalProfiles(new String[]{"dev","pro"});
+
+        ConfigurableApplicationContext applicationContext = application.run(new String[]{"---3333"});
+
+
+        System.out.println(StringUtils.join(applicationContext.getBeanDefinitionNames(),"\n"));
+
 
 
     }

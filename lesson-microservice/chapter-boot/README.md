@@ -18,7 +18,11 @@
     * @ConditionalOnResource：类路径是否有指定的值
     * @ConditionalOnSingleCandidate：当指定Bean在SpringIoc容器内只有一个，或者虽然有多个但是指定首选的Bean
     * @ConditionalOnWebApplication：当前项目是Web项目的条件
-     **以上注解都是元注解@Conditional演变而来的，根据不用的条件对应创建以上的具体条件注解**
+       **以上注解都是元注解@Conditional演变而来的，根据不用的条件对应创建以上的具体条件注解**
+
+* `AutoConfigurationImportSelector` 类关系图
+
+  ![1540279728343](assets/1540279728343.png)
 
 ## SpringBoot目录
 
@@ -143,8 +147,6 @@
     ...
     ```
 
-    
-
   * 实现 `XXXAutoConfiguration`
 
 * 嵌入式Web容器
@@ -205,8 +207,6 @@
           
       }
       ```
-
-      
 
   * 非阻塞Servlet
 
@@ -300,8 +300,6 @@
   </dependency>
   ```
 
-  
-
 * 自定义`Servlet web Server`
 
   * `WebServerFactoryCustomizer`
@@ -389,6 +387,7 @@
 ##### SpringApplication
 
 * 失败分析
+
   * `FailureAnalysisReporter`
 
 * 应用特性
@@ -397,7 +396,6 @@
 
 * 事件监听
 
-  
 
 ##### SpringBoot配置
 
@@ -447,6 +445,23 @@
 ##### 自定义 Metrics
 
 
+## SpringBoot初始化过程
 
+### 加载过程
+1. 加载配置以及环境变量
+2. 创建ApplicationContext
+3. 准备ApplicationContext信息
+4. 加载或者刷新上下文信息
+5. 启动完成
+6. 运行中
 
+### 生命周期
+1.开始启动 -> `starting`（`ApplicationStartingEvent`）
+2.环境变量初始化完成 -> `environmentPrepared`（`ApplicationEnvironmentPreparedEvent`）
+3.应用初始化完成 -> `contextLoaded`（`ApplicationPreparedEvent`）
+4.应用刷新 -> `refreshContext`（`ContextRefreshedEvent`）
+5.Web应用初始化完成 -> `refreshContext`（`ServletWebServerInitializedEvent`）
+6.应用启动完成 -> `started`（`ApplicationStartedEvent`）
+7.应用运行中 -> `running`（`ApplicationReadyEvent`）
+8.应用关闭 -> `doClose`（`ContextClosedEvent`）
 
