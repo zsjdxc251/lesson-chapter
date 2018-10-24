@@ -6,14 +6,12 @@ package com.lesson.source.mybatis.simple;
  */
 public class MapperMethod {
 
-    private String statement;
+    private SqlCommand sqlCommand;
 
-    public MapperMethod(String statement) {
-        this.statement = statement;
-    }
+
 
     public Object execute(SqlSession session, Object[] args){
 
-        return session.selectOne(statement,args);
+        return session.selectOne(sqlCommand.getName(),args);
     }
 }

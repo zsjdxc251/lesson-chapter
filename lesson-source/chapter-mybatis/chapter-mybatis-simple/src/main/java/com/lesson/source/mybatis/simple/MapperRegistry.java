@@ -8,6 +8,10 @@ import java.lang.reflect.Proxy;
  */
 public class MapperRegistry {
 
+    public MapperRegistry(Configuration configuration) {
+
+    }
+
 
     @SuppressWarnings("unchecked")
     public <T> T getMapper(Class<T> entry,SqlSession sqlSession) {

@@ -1,7 +1,5 @@
 package com.lesson.source.mybatis.simple;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
@@ -23,8 +21,8 @@ public class MapperProxy implements InvocationHandler {
 
         Class<?> targetClass = method.getDeclaringClass();
 
-
         MapperMethod mapperMethod = null;
+
         return mapperMethod.execute(sqlSession,args);
     }
 }
