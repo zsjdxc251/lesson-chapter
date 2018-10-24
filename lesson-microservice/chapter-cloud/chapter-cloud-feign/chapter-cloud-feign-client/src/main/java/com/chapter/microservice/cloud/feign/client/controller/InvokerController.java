@@ -17,7 +17,7 @@ public class InvokerController {
     @GetMapping("/users")
     public ResponseEntity<String> customUsers(){
 
-        return ResponseEntity.ok(invokerService.customUsers());
+        return ResponseEntity.ok(invokerService.customUsers("小男孩",15));
     }
 
     @PostMapping("/create")

@@ -18,9 +18,9 @@ public class InvokerController {
     private String serverPort;
 
     @GetMapping("/users")
-    public ResponseEntity<String> customUsers(){
+    public ResponseEntity<String> customUsers(String name,Integer age){
 
-        return ResponseEntity.ok("This is port "+serverPort);
+        return ResponseEntity.ok("This is port "+serverPort+" name:"+name+" age:"+age);
     }
 
     @PostMapping("/create")
