@@ -17,6 +17,7 @@ public class CustomHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
+        System.out.println("postHandler");
 
     }
 }

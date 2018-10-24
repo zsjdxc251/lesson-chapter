@@ -2,6 +2,7 @@ package com.lesson.source.spring.mvc.simple.web.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * @author zhengshijun
@@ -30,12 +31,23 @@ public class RequestMappingHandlerAdapter implements HandlerAdapter {
 
         ServletWebRequest webRequest = new ServletWebRequest(request, response);
 
+        ModelAndViewContainer mavContainer = new ModelAndViewContainer();
 
 
+        invocableHandlerMethod.invokeAndHandle(webRequest,mavContainer);
 
-        invocableHandlerMethod.invokeAndHandle(webRequest);
+        return getModelAndView(mavContainer,  webRequest);
+    }
 
-        return null;
+    private ModelAndView getModelAndView(ModelAndViewContainer mavContainer, ServletWebRequest webRequest) {
+
+
+        Map<String,Object> model = mavContainer.getRedirectModel();
+        ModelAndView mav = new ModelAndView( model,mavContainer.getViewName(), mavContainer.getStatus());
+        if (!mavContainer.isViewReference()) {
+            mav.setView((View) mavContainer.getView());
+        }
+        return mav;
     }
 
 

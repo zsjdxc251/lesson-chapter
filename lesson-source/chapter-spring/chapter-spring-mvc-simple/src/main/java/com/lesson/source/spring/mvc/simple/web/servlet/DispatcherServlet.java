@@ -1,6 +1,7 @@
 package com.lesson.source.spring.mvc.simple.web.servlet;
 
 import com.lesson.source.spring.mvc.simple.context.ApplicationContext;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import javax.servlet.ServletException;
@@ -104,11 +105,15 @@ public class DispatcherServlet extends HttpServlet {
         String viewName = mv.getViewName();
 
         try {
+            View view = null;
+            if (StringUtils.isNotBlank(viewName)){
 
-            View view = resolveViewName(viewName,mv.getModelInternal(),request);
+                view = resolveViewName(viewName,mv.getModelInternal(),request);
+            } else {
+                view = mv.getView();
+            }
 
            if (view != null){
-
                view.render(mv.getModelInternal(),request,response);
            }
 

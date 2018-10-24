@@ -5,10 +5,11 @@ import com.chapter.microservice.rest.entitry.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @CustomAnnotation(paths = "/index")
 public class RestIndexController {
@@ -18,7 +19,7 @@ public class RestIndexController {
 
     @ResponseBody
     @PostMapping("/home")
-    public ResponseEntity<Person> home(@RequestParam Person person){
+    public ResponseEntity<Person> home(@RequestBody Person person){
 
 
         log.info("person :{}",person);

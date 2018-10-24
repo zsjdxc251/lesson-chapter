@@ -16,7 +16,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 
 
 
-    public Object invokeForRequest(ServletWebRequest servletWebRequest) throws Exception{
+    public Object invokeForRequest(ServletWebRequest servletWebRequest,ModelAndViewContainer mavContainer) throws Exception{
         Object[] args =getMethodArgumentValues(servletWebRequest);
 
         return doInvoke(args);
@@ -30,9 +30,6 @@ public class InvocableHandlerMethod extends HandlerMethod {
     }
 
     public Object doInvoke(Object... args) throws Exception{
-
-
-
         try {
             return getMethod().invoke(getBean(),args);
         } catch (Exception e) {

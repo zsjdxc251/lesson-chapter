@@ -41,7 +41,7 @@ public class ProducerApp extends Thread{
     @Override
     public void run() {
         CountDownLatch countDownLatch = new CountDownLatch(10000);
-        for (int i=0;i<10000;i++) {
+        for (int i=0;i<1;i++) {
             String message = "数据"+i;
             log.info("message:{}",message);
             if (isAysnc){
@@ -70,7 +70,7 @@ public class ProducerApp extends Thread{
 
     }
     public static void main(String[] args){
-        new ProducerApp("secondTopic",false).start();
+        new ProducerApp("test",false).start();
 
     }
 }
