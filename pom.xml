@@ -17,6 +17,7 @@
         <module>lesson-source</module>
         <module>lesson-builder</module>
         <module>lesson-structure</module>
+        <module>lesson-optimize</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
