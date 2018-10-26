@@ -35,6 +35,8 @@ public class ReentrantLockSample {
 
 
         thread.interrupt();
+
+
         System.out.println("sleep");
 
     }
