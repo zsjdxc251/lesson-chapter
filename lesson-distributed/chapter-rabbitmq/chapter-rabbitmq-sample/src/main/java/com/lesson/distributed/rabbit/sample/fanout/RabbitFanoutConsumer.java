@@ -3,6 +3,7 @@ package com.lesson.distributed.rabbit.sample.fanout;
 import com.lesson.distributed.rabbit.sample.RabbitApplication;
 import com.lesson.distributed.rabbit.sample.SampleHandler;
 import com.rabbitmq.client.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
@@ -30,15 +31,19 @@ public class RabbitFanoutConsumer implements SampleHandler {
 
         System.out.println(queueName);
 
+        String routingKey = "demo.#";
+
         // 通过随机创建的queue 与 交换机绑定
-        channel.queueBind(queueName, exchangeName, "demo.#");
+        channel.queueBind(queueName, exchangeName, routingKey);
+
+        //String queueName = "hello13";
 
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope,
                                        AMQP.BasicProperties properties, byte[] body) throws IOException {
                 String message = new String(body, "UTF-8");
-                System.out.println(" [x] Received '" + message + "'");
+                System.out.println(" [x] Received '" + message + "' routingKey："+envelope.getRoutingKey());
             }
         };
         channel.basicConsume(queueName, true, consumer);

@@ -4,6 +4,9 @@ import com.lesson.source.spring.ioc.quickstart.configure.CoreConfigure;
 import com.lesson.source.spring.ioc.quickstart.service.ExampleService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import sun.nio.cs.ext.MacCentralEurope;
+
+import java.lang.reflect.Method;
 
 /**
  * @author zhengshijun
@@ -27,8 +30,13 @@ public class ApplicationSample {
         ExampleService exampleService = (ExampleService)applicationContext.getBean("exampleService");
 
 
+        for(Method method : exampleService.getClass().getMethods()){
+            System.out.println(method);
+        }
 
-        Thread.currentThread().join();
+
+
+
 
 
 

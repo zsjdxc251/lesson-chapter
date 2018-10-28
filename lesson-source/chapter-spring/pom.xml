@@ -20,6 +20,7 @@
         <module>chapter-spring-data-binding</module>
         <module>chapter-spring-ioc</module>
         <module>chapter-spring-mvc-simple</module>
+        <module>chapter-spring-aop</module>
     </modules>
 
 

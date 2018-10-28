@@ -5,6 +5,7 @@ import com.lesson.distributed.rabbit.sample.SampleHandler;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.MessageProperties;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -39,11 +40,11 @@ public class RabbitFanoutProvider implements SampleHandler {
 
 
 
-        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);
+        //channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);
 
         String message = exchangeName+"/发送消息";
-
-        channel.basicPublish(exchangeName, "demo.info",
+        String routingKey = "demo.22";
+        channel.basicPublish(exchangeName, routingKey,
                 MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
 
 

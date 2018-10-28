@@ -17,6 +17,8 @@
     <url>http://www.example.com</url>
     <modules>
         <module>chapter-rabbitmq-sample</module>
+        <module>chapter-rabbitmq-spring</module>
+        <module>chapter-rabbitmq-boot</module>
     </modules>
 
 

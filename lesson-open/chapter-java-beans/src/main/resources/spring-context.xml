@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
        xsi:schemaLocation="
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <mvc:annotation-driven conversion-service="customFormat"/>
 
     <bean id="userInfo" class="com.lesson.open.java.beans.model.UserInfo">
         <property name="username" value="zsjdxc251"/>
@@ -14,5 +23,9 @@
                 <bean class="com.lesson.open.java.beans.CustomPropertyEditorRegistrar" />
             </list>
         </property>
+    </bean>
+
+    <bean id="customFormat" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+
     </bean>
 </beans>

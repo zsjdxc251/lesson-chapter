@@ -1,12 +1,16 @@
 package com.lesson.distributed.rabbit.sample.simple;
 
+import com.google.common.collect.Maps;
 import com.lesson.distributed.rabbit.sample.RabbitApplication;
 import com.lesson.distributed.rabbit.sample.SampleHandler;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.MessageProperties;
+import com.rabbitmq.client.*;
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -46,16 +50,45 @@ public class RabbitProvider implements SampleHandler {
     @Override
     public void execute(Channel channel) {
         try {
-            channel.queueDeclare("hello-1", true, false, false, null);
+
+            // 如果没有该queue则会创建该 queue
+
+            String queueName = "hello-11";
+
+
+            Map<String, Object> arguments = new HashMap<>();
+
+            //arguments.put("x-expires",10000);
+            //channel.queueDeclare(queueName, true, false, false, arguments);
 
 
 
+
+            channel.confirmSelect();
+
+            AMQP.BasicProperties props = new AMQP.BasicProperties().builder().deliveryMode(2).build();
             for (int i = 0; i < 10; i++) {
-                channel.basicPublish(StringUtils.EMPTY, "",
-                        MessageProperties.PERSISTENT_TEXT_PLAIN, ("消息" + i).getBytes());
-
-
+                final int index = i;
+                channel.basicPublish(StringUtils.EMPTY, queueName,
+                        props, ("等过期消息" + index).getBytes());
             }
+            channel.addConfirmListener(new ConfirmListener() {
+                public void handleNack(long deliveryTag, boolean multiple) throws IOException {
+                    System.out.println("Broker未确认消息，标识：" + deliveryTag);
+                }
+                public void handleAck(long deliveryTag, boolean multiple) throws IOException {
+                    // 如果true表示批量执行了deliveryTag这个值以前（小于deliveryTag的）的所有消息，如果为false的话表示单条确认
+                    System.out.println(String.format("Broker已确认消息，标识：%d，多个消息：%b", deliveryTag, multiple));
+                }
+            });
+
+
+
+
+
+
+            Thread.currentThread().join();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

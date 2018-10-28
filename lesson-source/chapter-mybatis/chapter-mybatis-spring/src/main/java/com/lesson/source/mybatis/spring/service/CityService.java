@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * @author zhengshijun
@@ -19,6 +20,9 @@ import java.util.List;
 @Service
 public class CityService {
 
+    private ThreadPoolExecutor executor =
+            new ThreadPoolExecutor(1,2,60, TimeUnit.SECONDS,new ArrayBlockingQueue<>(30));
+
     @Autowired
     private CityMapper cityMapper;
 
@@ -26,12 +30,21 @@ public class CityService {
     private SqlSessionTemplate sqlSessionTemplate;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = RuntimeException.class,isolation = Isolation.READ_UNCOMMITTED)
-    public int save(String name , String state){
+    public int save(String name , String state) throws ExecutionException, InterruptedException {
 
         City city = new City();
         city.setName(name);
         city.setState(state);
-        int result = cityMapper.insert(city);
+
+        Future<Integer> future  = executor.submit(()->{
+            return cityMapper.insert(city);
+        });
+
+
+        int result = future.get();
+
+
+
 
         //((CityService)AopContext.currentProxy()).save2(name,state);
 

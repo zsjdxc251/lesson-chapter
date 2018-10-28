@@ -4,6 +4,7 @@ import com.lesson.distributed.rabbit.sample.RabbitApplication;
 import com.lesson.distributed.rabbit.sample.SampleHandler;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -25,7 +26,7 @@ public class RabbitDirectProvider implements SampleHandler {
 
         channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT,Boolean.TRUE);
 
-        String routingKey = "*.warn";
+        String routingKey = "444.warn";
         String message = exchangeName+"/发送消息";
 
         channel.basicPublish(exchangeName, routingKey, null, message.getBytes());

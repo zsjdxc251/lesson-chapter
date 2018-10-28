@@ -1,5 +1,6 @@
 package com.lesson.distributed.rabbit.sample.topic;
 
+import com.lesson.distributed.rabbit.sample.RabbitApplication;
 import com.lesson.distributed.rabbit.sample.SampleHandler;
 import com.rabbitmq.client.*;
 
@@ -19,11 +20,12 @@ public class RabbitTopicConsumer implements SampleHandler {
     public void execute(Channel channel) throws Exception {
 
 
-        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.TOPIC);
+//        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.TOPIC);
+//
+//        String queueName = channel.queueDeclare().getQueue();
 
-        String queueName = channel.queueDeclare().getQueue();
-
-        String routingKey = "";
+        String queueName = "queue_name_info";
+        String routingKey = "*.info";
         channel.queueBind(queueName,exchangeName,routingKey);
 
 
@@ -41,7 +43,7 @@ public class RabbitTopicConsumer implements SampleHandler {
         channel.basicConsume(queueName, true, consumer);
 
 
-
+        Thread.currentThread().join();
 
 
 
@@ -49,6 +51,6 @@ public class RabbitTopicConsumer implements SampleHandler {
 
 
     public static void main(String[] args){
-
+        RabbitApplication.execute(new RabbitTopicConsumer("logs.trace"));
     }
 }

@@ -10,7 +10,7 @@ public class CityServiceTest extends BaseAppTest {
     private CityService cityService;
 
     @Test
-    public void save() {
+    public void save() throws Exception{
 
         System.out.println(cityService.getClass());
         cityService.save("22","11");

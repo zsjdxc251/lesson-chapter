@@ -22,7 +22,7 @@ public class RabbitTopicProvider implements SampleHandler {
 
         channel.exchangeDeclare(exchangeName, BuiltinExchangeType.TOPIC,true);
 
-        String routingKey = "demo.info";
+        String routingKey = "1.info";
         String message = exchangeName+"/发送消息";
         channel.basicPublish(exchangeName,routingKey,null,message.getBytes());
 
