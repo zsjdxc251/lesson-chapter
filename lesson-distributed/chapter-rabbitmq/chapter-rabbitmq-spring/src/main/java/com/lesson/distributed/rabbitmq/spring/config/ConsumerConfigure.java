@@ -5,12 +5,10 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.config.ListenerContainerFactoryBean;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -61,16 +59,16 @@ public class ConsumerConfigure {
     }
 
 
-//    @Bean
-//    public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(ConnectionFactory connectionFactory){
-//        SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory
-//                = new SimpleRabbitListenerContainerFactory();
-//
-//        simpleRabbitListenerContainerFactory.setConnectionFactory(connectionFactory);
-//
-//        return simpleRabbitListenerContainerFactory;
-//
-//    }
+    @Bean
+    public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(ConnectionFactory connectionFactory){
+        SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory
+                = new SimpleRabbitListenerContainerFactory();
+
+        simpleRabbitListenerContainerFactory.setConnectionFactory(connectionFactory);
+
+        return simpleRabbitListenerContainerFactory;
+
+    }
 
 
 }
