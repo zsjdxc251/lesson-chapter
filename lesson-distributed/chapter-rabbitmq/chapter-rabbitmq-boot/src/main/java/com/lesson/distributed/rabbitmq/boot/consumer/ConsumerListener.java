@@ -15,12 +15,14 @@ import org.springframework.stereotype.Component;
 public class ConsumerListener {
 
     @RabbitHandler
-    public void process(Channel channel, Object message){
+    public void process(Channel channel, Message message){
+
 
         if (message instanceof Message){
 
             System.out.println("匹配");
         }
+
         System.out.println(message.getClass());
     }
 }
