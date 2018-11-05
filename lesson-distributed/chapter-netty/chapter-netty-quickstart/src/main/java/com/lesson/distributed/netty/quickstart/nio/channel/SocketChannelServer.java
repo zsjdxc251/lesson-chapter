@@ -42,10 +42,10 @@ public class SocketChannelServer {
             serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.configureBlocking(false);
 
-            // 设置绑定服务器端口 设置最大的连接缓存数为100
+            // 设置绑定服务器端口 设置最大的连接缓存数为100 客户端大小
             serverSocketChannel.bind(inetSocketAddress,100);
 
-            // 注册
+            // 注册 tcp
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
             log.info("start success");

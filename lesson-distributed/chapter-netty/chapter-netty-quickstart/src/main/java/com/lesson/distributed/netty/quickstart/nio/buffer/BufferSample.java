@@ -134,17 +134,41 @@ public class BufferSample {
         byteBuffer.put("cleanSimple".getBytes());
         byteBuffer.flip();
 
-        Charset charset = Charset.forName("UTF-8");
-        CharBuffer charBuffer = charset.decode(byteBuffer);
-        System.out.println(charBuffer.get());
-        charBuffer.clear();
 
-        System.out.println(charBuffer.get());
+        System.out.println(byteBuffer.get());
+
+
+        byteBuffer.clear();
+
+        byteBuffer.put("l".getBytes());
+        byteBuffer.flip();
+        System.out.println(new String(byteBuffer.array()));
     }
+
+
+    /**
+     *
+     *   判断是否有可读数据，需要先调用 {@link ByteBuffer#flip()}
+     *
+     */
+    public static void remainingSimple(){
+        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+        byteBuffer.put("remainingSimple".getBytes());
+
+        byteBuffer.flip();
+
+        // 只读缓冲区
+        byteBuffer.asReadOnlyBuffer();
+        System.out.println(byteBuffer.remaining());
+
+
+    }
+
+
 
     public static void main(String[] args){
 
-        rewindSimple();
+        remainingSimple();
 
 
 
