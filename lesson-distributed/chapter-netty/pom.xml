@@ -23,6 +23,11 @@
             <artifactId>netty-all</artifactId>
             <version>4.1.12.Final</version>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>example-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
 </project>

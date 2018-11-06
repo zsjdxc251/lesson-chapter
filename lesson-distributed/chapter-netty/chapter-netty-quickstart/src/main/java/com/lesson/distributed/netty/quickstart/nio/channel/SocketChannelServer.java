@@ -13,6 +13,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 /**
@@ -35,16 +36,17 @@ public class SocketChannelServer {
         public TcpEchoServer(int port) throws IOException {
             inetSocketAddress = new InetSocketAddress(port);
 
-            // 创建选择器
-            selector = Selector.open();
-
             // 创建服务通道
             serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.configureBlocking(false);
 
+
             // 设置绑定服务器端口 设置最大的连接缓存数为100 客户端大小
             serverSocketChannel.bind(inetSocketAddress,100);
 
+
+            // 创建选择器
+            selector = Selector.open();
             // 注册 tcp
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
@@ -108,7 +110,7 @@ public class SocketChannelServer {
 
 
                             // 向客户端发送数据
-                            writeBuffer.put("echo from service:".getBytes("UTF-8"));
+                            writeBuffer.put("echo from service:".getBytes(StandardCharsets.UTF_8));
                             writeBuffer.put(readBuffer);
 
                             readBuffer.clear();
