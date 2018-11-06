@@ -98,7 +98,20 @@
 
 
 
+## Nginx 进程模型
+
+* 多路复用+多进程
+* master 进程 、worker 进程
+
+
+
+
+
+
+
 ## Nginx的高可用方案
+
+F5 LVS
 
 ### Keepalived
 
