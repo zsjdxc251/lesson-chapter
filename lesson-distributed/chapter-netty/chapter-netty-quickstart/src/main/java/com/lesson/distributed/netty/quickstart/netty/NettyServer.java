@@ -1,5 +1,6 @@
 package com.lesson.distributed.netty.quickstart.netty;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,10 +13,14 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.InetSocketAddress;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * @author zhengshijun
@@ -36,17 +41,23 @@ public class NettyServer {
         @Override
         public void run() {
 
-            EventLoopGroup masterGroup = new NioEventLoopGroup(1);
+            ThreadFactory masterBuilder = new ThreadFactoryBuilder().setNameFormat("masterGroup-%d").build();
+            EventLoopGroup masterGroup = new NioEventLoopGroup(1,masterBuilder);
 
-            EventLoopGroup workerGroup = new NioEventLoopGroup();
+            ThreadFactory workerBuilder = new ThreadFactoryBuilder().setNameFormat("workerGroup-%d").build();
 
-            ServerBootstrap serverBootstrap =  new ServerBootstrap().group(masterGroup,workerGroup).channel(NioServerSocketChannel.class).localAddress(new InetSocketAddress(port))
-            .childHandler(new ChannelInitializer<SocketChannel>() {
+            EventLoopGroup workerGroup = new NioEventLoopGroup(1,workerBuilder);
+
+            ServerBootstrap serverBootstrap =  new ServerBootstrap();
+            serverBootstrap.group(masterGroup,workerGroup);
+            serverBootstrap.channel(NioServerSocketChannel.class);
+            serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel channel) {
+                    log.info("channel:{}",channel.getClass().getName());
 
-                    channel.pipeline().addLast(new StringDecoder());
-                    channel.pipeline().addLast(new StringEncoder());
+                    channel.pipeline().addLast(new StringDecoder(CharsetUtil.UTF_8));
+                    channel.pipeline().addLast(new StringEncoder(CharsetUtil.UTF_8));
                     channel.pipeline().addLast(new ServerProcessHandler());
                 }
             });
@@ -60,6 +71,9 @@ public class NettyServer {
                future.channel().closeFuture().sync();
            } catch (InterruptedException e) {
                log.error(StringUtils.EMPTY,e);
+           }finally {
+               masterGroup.shutdownGracefully();
+               workerGroup.shutdownGracefully();
            }
 
         }
@@ -76,6 +90,22 @@ public class NettyServer {
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
             log.info("ServerProcessHandler channelRead");
+
+            log.info("ServerProcessHandler msg:{}",msg);
+
+            ctx.channel().writeAndFlush("处理之后的："+msg);
+
+            ctx.close();
+
+
+            Iterator<Map.Entry<Thread,StackTraceElement[]>> iterator = Thread.getAllStackTraces().entrySet().iterator();
+
+            while (iterator.hasNext()) {
+
+                Map.Entry<Thread,StackTraceElement[]> entry = iterator.next();
+
+                System.out.println(entry.getKey().getName());
+            }
         }
 
 
@@ -85,6 +115,7 @@ public class NettyServer {
             cause.printStackTrace();
             ctx.close();
         }
+
 
     }
 

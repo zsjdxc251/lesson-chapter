@@ -50,6 +50,10 @@ public class NettyClient {
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
             log.info("ClientProcessHandler channelRead");
 
+            log.info("ClientProcessHandler msg:{}",msg);
+
+
+
         }
 
         @Override
@@ -76,18 +80,21 @@ public class NettyClient {
 
         try {
             ChannelFuture future =  bootstrap.connect(new InetSocketAddress("127.0.0.1",8080)).sync();
-            Channel channel = future.channel();
+
 
             while (true) {
 
                 Scanner scanner = new Scanner(System.in);
                 String message = scanner.nextLine();
-                channel.writeAndFlush(message);
+                log.info("message:{}",message);
+                future.channel().writeAndFlush(message);
 
             }
 
         } catch (InterruptedException e) {
             log.error(StringUtils.EMPTY,e);
+        } finally {
+            group.shutdownGracefully();
         }
     }
 }
