@@ -1,17 +1,19 @@
 package com.lesson.distributed.netty.quickstart.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.net.InetSocketAddress;
 
@@ -38,7 +40,7 @@ public class NettyServer {
 
             EventLoopGroup workerGroup = new NioEventLoopGroup();
 
-            ServerBootstrap serverBootstrap =  new ServerBootstrap().group(masterGroup,workerGroup).channel(ServerSocketChannel.class).localAddress(new InetSocketAddress(port))
+            ServerBootstrap serverBootstrap =  new ServerBootstrap().group(masterGroup,workerGroup).channel(NioServerSocketChannel.class).localAddress(new InetSocketAddress(port))
             .childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel channel) {
@@ -51,7 +53,14 @@ public class NettyServer {
             serverBootstrap.option(ChannelOption.SO_BACKLOG,128);
             serverBootstrap.childOption(ChannelOption.SO_KEEPALIVE,true);
 
+           try {
+               ChannelFuture future = serverBootstrap.bind(port).sync();
 
+               System.out.println("Server start listen at " + port );
+               future.channel().closeFuture().sync();
+           } catch (InterruptedException e) {
+               log.error(StringUtils.EMPTY,e);
+           }
 
         }
     }
@@ -84,6 +93,7 @@ public class NettyServer {
 
 
 
+        new Thread(new TcpEchoServer(8080)).start();
 
 
     }

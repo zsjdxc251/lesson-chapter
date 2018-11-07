@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.InetSocketAddress;
+import java.util.Scanner;
 
 /**
  * @author zhengshijun
@@ -32,29 +33,7 @@ public class NettyClient {
         @Override
         public void run() {
 
-            EventLoopGroup group = new NioEventLoopGroup();
 
-            Bootstrap bootstrap = new Bootstrap();
-            bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true);
-            bootstrap.handler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel channel) throws Exception {
-                    channel.pipeline().addLast(new StringDecoder());
-                    channel.pipeline().addLast(new StringEncoder());
-                    channel.pipeline().addLast(new ClientProcessHandler());
-                }
-            });
-
-            try {
-                ChannelFuture future =  bootstrap.connect(new InetSocketAddress("127.0.0.1",8080)).sync();
-                Channel channel = future.channel();
-
-                
-
-
-            } catch (InterruptedException e) {
-                log.error(StringUtils.EMPTY,e);
-            }
 
         }
     }
@@ -82,6 +61,33 @@ public class NettyClient {
 
     public static void main(String[] args){
 
+        EventLoopGroup group = new NioEventLoopGroup();
 
+        Bootstrap bootstrap = new Bootstrap();
+        bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true);
+        bootstrap.handler(new ChannelInitializer<SocketChannel>() {
+            @Override
+            protected void initChannel(SocketChannel channel) throws Exception {
+                channel.pipeline().addLast(new StringDecoder());
+                channel.pipeline().addLast(new StringEncoder());
+                channel.pipeline().addLast(new ClientProcessHandler());
+            }
+        });
+
+        try {
+            ChannelFuture future =  bootstrap.connect(new InetSocketAddress("127.0.0.1",8080)).sync();
+            Channel channel = future.channel();
+
+            while (true) {
+
+                Scanner scanner = new Scanner(System.in);
+                String message = scanner.nextLine();
+                channel.writeAndFlush(message);
+
+            }
+
+        } catch (InterruptedException e) {
+            log.error(StringUtils.EMPTY,e);
+        }
     }
 }
