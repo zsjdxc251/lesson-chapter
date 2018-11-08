@@ -18,8 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.InetSocketAddress;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.concurrent.ThreadFactory;
 
 /**
@@ -51,6 +49,7 @@ public class NettyServer {
             ServerBootstrap serverBootstrap =  new ServerBootstrap();
             serverBootstrap.group(masterGroup,workerGroup);
             serverBootstrap.channel(NioServerSocketChannel.class);
+            serverBootstrap.localAddress(new InetSocketAddress(port));
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel channel) {
@@ -58,7 +57,9 @@ public class NettyServer {
 
                     channel.pipeline().addLast(new StringDecoder(CharsetUtil.UTF_8));
                     channel.pipeline().addLast(new StringEncoder(CharsetUtil.UTF_8));
+
                     channel.pipeline().addLast(new ServerProcessHandler());
+
                 }
             });
             serverBootstrap.option(ChannelOption.SO_BACKLOG,128);
@@ -89,32 +90,30 @@ public class NettyServer {
 
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+
+
+
+
             log.info("ServerProcessHandler channelRead");
 
             log.info("ServerProcessHandler msg:{}",msg);
-
-            ctx.channel().writeAndFlush("处理之后的："+msg);
-
-            ctx.close();
+            ctx.writeAndFlush("处理之后的："+msg);
 
 
-            Iterator<Map.Entry<Thread,StackTraceElement[]>> iterator = Thread.getAllStackTraces().entrySet().iterator();
-
-            while (iterator.hasNext()) {
-
-                Map.Entry<Thread,StackTraceElement[]> entry = iterator.next();
-
-                System.out.println(entry.getKey().getName());
-            }
         }
 
+        @Override
+        public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+            log.info("ServerProcessHandler channelUnregistered");
+        }
 
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-            log.info("ServerProcessHandler channelRead");
-            cause.printStackTrace();
+            log.info("ServerProcessHandler exceptionCaught");
+            log.error(StringUtils.EMPTY,cause);
             ctx.close();
         }
+
 
 
     }
@@ -124,7 +123,7 @@ public class NettyServer {
 
 
 
-        new Thread(new TcpEchoServer(8080)).start();
+        new Thread(new TcpEchoServer(8081)).start();
 
 
     }

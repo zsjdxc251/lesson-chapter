@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.net.InetSocketAddress;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author zhengshijun
@@ -26,15 +27,51 @@ import java.util.Scanner;
 @Slf4j
 public class NettyClient {
 
-    public static class TcpEchoClient implements Runnable {
+    public static class TcpEchoClient extends Thread {
 
 
-
+        private Channel channel;
+        private CountDownLatch countDownLatch = new CountDownLatch(1);
         @Override
         public void run() {
 
+            EventLoopGroup group = new NioEventLoopGroup();
 
+            Bootstrap bootstrap = new Bootstrap();
+            bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true);
+            bootstrap.handler(new ChannelInitializer<SocketChannel>() {
+                @Override
+                protected void initChannel(SocketChannel channel) throws Exception {
+                    channel.pipeline().addLast(new StringDecoder());
+                    channel.pipeline().addLast(new StringEncoder());
+                    channel.pipeline().addLast(new ClientProcessHandler());
+                }
+            });
 
+            try {
+                ChannelFuture future =  bootstrap.connect(new InetSocketAddress("127.0.0.1",8081)).sync();
+                try {
+                    channel = future.channel();
+                } finally {
+                    countDownLatch.countDown();
+                }
+                log.info("closeFuture before");
+                channel.closeFuture().sync();
+                log.info("closeFuture after");
+            } catch (InterruptedException e) {
+                log.error(StringUtils.EMPTY,e);
+            } finally {
+                group.shutdownGracefully();
+            }
+
+        }
+
+        private void writeAndFlush(String message) throws InterruptedException {
+            countDownLatch.await();
+            if (channel == null){
+                throw new NullPointerException();
+            }
+            channel.writeAndFlush(message);
         }
     }
 
@@ -52,8 +89,6 @@ public class NettyClient {
 
             log.info("ClientProcessHandler msg:{}",msg);
 
-
-
         }
 
         @Override
@@ -64,37 +99,21 @@ public class NettyClient {
     }
 
     public static void main(String[] args){
+        TcpEchoClient tcpEchoClient = new TcpEchoClient();
+        tcpEchoClient.start();
 
-        EventLoopGroup group = new NioEventLoopGroup();
-
-        Bootstrap bootstrap = new Bootstrap();
-        bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true);
-        bootstrap.handler(new ChannelInitializer<SocketChannel>() {
-            @Override
-            protected void initChannel(SocketChannel channel) throws Exception {
-                channel.pipeline().addLast(new StringDecoder());
-                channel.pipeline().addLast(new StringEncoder());
-                channel.pipeline().addLast(new ClientProcessHandler());
-            }
-        });
-
-        try {
-            ChannelFuture future =  bootstrap.connect(new InetSocketAddress("127.0.0.1",8080)).sync();
-
-
-            while (true) {
-
-                Scanner scanner = new Scanner(System.in);
-                String message = scanner.nextLine();
-                log.info("message:{}",message);
-                future.channel().writeAndFlush(message);
-
+        while (!Thread.currentThread().isInterrupted()) {
+            Scanner scanner = new Scanner(System.in);
+            String msg = scanner.nextLine();
+            log.info("console println:{}",msg);
+            try {
+                tcpEchoClient.writeAndFlush(msg);
+            } catch (InterruptedException e) {
+                log.error(StringUtils.EMPTY,e);
             }
 
-        } catch (InterruptedException e) {
-            log.error(StringUtils.EMPTY,e);
-        } finally {
-            group.shutdownGracefully();
         }
+
+
     }
 }
