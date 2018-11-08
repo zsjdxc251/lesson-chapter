@@ -1,5 +1,10 @@
 package com.lesson.distributed.netty.quickstart;
 
+import io.netty.channel.ChannelHandlerAdapter;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelOutboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -48,7 +53,12 @@ import java.io.OutputStreamWriter;
  *                  {@link DataOutputStream}
  *                  {@link BufferedOutputStream}
  *
+ *     {@link ChannelHandlerAdapter}
  *
+ *           {@link ChannelInboundHandlerAdapter}          ChannelInboundHandler
+ *                  {@link SimpleChannelInboundHandler}
+ *
+ *           {@link ChannelOutboundHandlerAdapter}         ChannelOutboundHandler
  *
  *
  * @author zhengshijun

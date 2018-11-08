@@ -27,17 +27,19 @@ import java.util.concurrent.CountDownLatch;
 @Slf4j
 public class NettyClient {
 
-    public static class TcpEchoClient extends Thread {
+    public static class TcpEchoClient implements Runnable {
 
 
+        private Bootstrap bootstrap;
+        private EventLoopGroup group;
         private Channel channel;
         private CountDownLatch countDownLatch = new CountDownLatch(1);
-        @Override
-        public void run() {
+        private volatile boolean stopWrite = false;
 
-            EventLoopGroup group = new NioEventLoopGroup();
+        public TcpEchoClient() {
+            group = new NioEventLoopGroup();
 
-            Bootstrap bootstrap = new Bootstrap();
+            bootstrap = new Bootstrap();
             bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true);
             bootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
@@ -47,6 +49,12 @@ public class NettyClient {
                     channel.pipeline().addLast(new ClientProcessHandler());
                 }
             });
+        }
+
+        @Override
+        public void run() {
+
+            log.info("bootstrap:{}",bootstrap.hashCode());
 
             try {
                 ChannelFuture future =  bootstrap.connect(new InetSocketAddress("127.0.0.1",8081)).sync();
@@ -62,11 +70,16 @@ public class NettyClient {
                 log.error(StringUtils.EMPTY,e);
             } finally {
                 group.shutdownGracefully();
+                stopWrite = true;
             }
 
         }
 
         private void writeAndFlush(String message) throws InterruptedException {
+            if (stopWrite){
+                Thread.currentThread().interrupt();
+                return;
+            }
             countDownLatch.await();
             if (channel == null){
                 throw new NullPointerException();
@@ -89,6 +102,15 @@ public class NettyClient {
 
             log.info("ClientProcessHandler msg:{}",msg);
 
+
+
+        }
+
+        @Override
+        public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+            log.info("ClientProcessHandler channelUnregistered");
+            // 关闭连接 触发 closeFuture
+            ctx.close();
         }
 
         @Override
@@ -100,7 +122,17 @@ public class NettyClient {
 
     public static void main(String[] args){
         TcpEchoClient tcpEchoClient = new TcpEchoClient();
-        tcpEchoClient.start();
+        Thread thread = new Thread(tcpEchoClient);
+        thread.start();
+//
+//        thread = new Thread(tcpEchoClient);
+//        thread.start();
+//
+//        thread = new Thread(tcpEchoClient);
+//        thread.start();
+//
+//        thread = new Thread(tcpEchoClient);
+//        thread.start();
 
         while (!Thread.currentThread().isInterrupted()) {
             Scanner scanner = new Scanner(System.in);

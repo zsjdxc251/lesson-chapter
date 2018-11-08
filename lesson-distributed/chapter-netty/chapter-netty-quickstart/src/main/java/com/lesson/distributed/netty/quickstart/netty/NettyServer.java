@@ -7,6 +7,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -17,7 +18,6 @@ import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.net.InetSocketAddress;
 import java.util.concurrent.ThreadFactory;
 
 /**
@@ -49,20 +49,21 @@ public class NettyServer {
             ServerBootstrap serverBootstrap =  new ServerBootstrap();
             serverBootstrap.group(masterGroup,workerGroup);
             serverBootstrap.channel(NioServerSocketChannel.class);
-            serverBootstrap.localAddress(new InetSocketAddress(port));
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel channel) {
                     log.info("channel:{}",channel.getClass().getName());
+                    ChannelPipeline pipeline = channel.pipeline();
+                    pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
+                    pipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
 
-                    channel.pipeline().addLast(new StringDecoder(CharsetUtil.UTF_8));
-                    channel.pipeline().addLast(new StringEncoder(CharsetUtil.UTF_8));
+                    pipeline.addLast(new ServerProcessHandler());
 
-                    channel.pipeline().addLast(new ServerProcessHandler());
+
 
                 }
             });
-            serverBootstrap.option(ChannelOption.SO_BACKLOG,128);
+            serverBootstrap.option(ChannelOption.SO_BACKLOG,2);
             serverBootstrap.childOption(ChannelOption.SO_KEEPALIVE,true);
 
            try {
@@ -100,11 +101,15 @@ public class NettyServer {
             ctx.writeAndFlush("处理之后的："+msg);
 
 
+            // 关闭连接
+            ctx.close();
+
         }
 
         @Override
         public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
             log.info("ServerProcessHandler channelUnregistered");
+            ctx.close();
         }
 
         @Override
