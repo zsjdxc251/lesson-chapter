@@ -1,7 +1,5 @@
 package com.lesson.distributed.netty.quickstart.nio.buffer;
 
-import com.example.common.utils.StringTools;
-
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
@@ -10,7 +8,6 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.channels.SelectionKey;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -338,15 +335,7 @@ public class BufferSample {
 
 
 
-        System.out.println(StringTools.toBinaryString(~SelectionKey.OP_WRITE&(SelectionKey.OP_READ|SelectionKey.OP_WRITE)));
-        System.out.println(StringTools.toBinaryString(SelectionKey.OP_READ|SelectionKey.OP_WRITE));
 
-        System.out.println(StringTools.toBinaryString((SelectionKey.OP_READ|SelectionKey.OP_WRITE)^SelectionKey.OP_WRITE));
-        System.out.println();
-        System.out.println(StringTools.toBinaryString(SelectionKey.OP_READ));
-        System.out.println(StringTools.toBinaryString(SelectionKey.OP_WRITE));
-        System.out.println(StringTools.toBinaryString(SelectionKey.OP_CONNECT));
-        System.out.println(StringTools.toBinaryString(SelectionKey.OP_ACCEPT));
 
 
 
