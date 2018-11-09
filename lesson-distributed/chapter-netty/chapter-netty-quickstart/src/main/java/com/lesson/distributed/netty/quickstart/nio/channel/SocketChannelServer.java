@@ -133,7 +133,6 @@ public class SocketChannelServer {
 
                             // 获取对应通道
                             SocketChannel socketChannel = (SocketChannel)selectionKey.channel();
-
                             int len = 0;
                             while (writeBuffer.hasRemaining()) {
                                 len = socketChannel.write(writeBuffer);

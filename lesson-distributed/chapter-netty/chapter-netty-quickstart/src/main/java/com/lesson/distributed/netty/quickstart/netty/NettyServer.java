@@ -64,12 +64,19 @@ public class NettyServer {
                 }
             });
             serverBootstrap.option(ChannelOption.SO_BACKLOG,2);
-            serverBootstrap.childOption(ChannelOption.SO_KEEPALIVE,true);
 
+
+
+
+
+            serverBootstrap.childOption(ChannelOption.SO_KEEPALIVE,true);
            try {
                ChannelFuture future = serverBootstrap.bind(port).sync();
 
                System.out.println("Server start listen at " + port );
+               Thread.getAllStackTraces().forEach((thread, stackTraceElements) -> {
+                   System.out.println(thread.getName());
+               });
                future.channel().closeFuture().sync();
            } catch (InterruptedException e) {
                log.error(StringUtils.EMPTY,e);
