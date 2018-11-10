@@ -9,9 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>chapter-netty-websocket</artifactId>
+    <artifactId>chapter-netty-http</artifactId>
 
-    <name>chapter-netty-websocket</name>
+    <name>chapter-netty-http</name>
+
 
     <dependencies>
         <dependency>

@@ -16,6 +16,7 @@
     <modules>
         <module>chapter-netty-quickstart</module>
         <module>chapter-netty-websocket</module>
+        <module>chapter-netty-http</module>
     </modules>
 
     <dependencies>

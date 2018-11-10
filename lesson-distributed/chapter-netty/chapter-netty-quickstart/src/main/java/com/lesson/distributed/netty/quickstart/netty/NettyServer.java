@@ -74,9 +74,7 @@ public class NettyServer {
                ChannelFuture future = serverBootstrap.bind(port).sync();
 
                System.out.println("Server start listen at " + port );
-               Thread.getAllStackTraces().forEach((thread, stackTraceElements) -> {
-                   System.out.println(thread.getName());
-               });
+
                future.channel().closeFuture().sync();
            } catch (InterruptedException e) {
                log.error(StringUtils.EMPTY,e);
