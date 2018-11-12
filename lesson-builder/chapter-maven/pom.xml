@@ -17,6 +17,7 @@
   <url>http://www.example.com</url>
   <modules>
     <module>chapter-maven-plugin</module>
+      <module>chapter-maven-archetype</module>
   </modules>
 
 
