@@ -6,6 +6,7 @@
 
   * `@ConfigurationProperties` configure `@EnableConfigurationProperties`
   * SpringBoot内置条件注解
+    * @Profile : 匹配当前 profile 是什么为条件才加载
     * @ConditionalOnBean：当SpringIoc容器内存在指定Bean的条件
     * @ConditionalOnClass：当SpringIoc容器内存在指定Class的条件
     * @ConditionalOnExpression：基于SpEL表达式作为判断条件
