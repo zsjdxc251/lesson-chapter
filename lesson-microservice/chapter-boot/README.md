@@ -36,17 +36,7 @@
 #### 条件装配
 
 #### 加载机制
-```java
-public abstract class SpringFactoriesLoader {
 
-	/**
-	 * The location to look for factories.
-	 * <p>Can be present in multiple JAR files.
-	 */
-	public static final String FACTORIES_RESOURCE_LOCATION = "META-INF/spring.factories";
-	...
-}
-```
 
 ### 外部化配置
 
@@ -158,6 +148,20 @@ public abstract class SpringFactoriesLoader {
     ```
 
   * 实现 `XXXAutoConfiguration`
+  * 加载自动装配核心类
+      ```java
+     
+      public abstract class SpringFactoriesLoader {
+      
+      	/**
+      	 * The location to look for factories.
+      	 * <p>Can be present in multiple JAR files.
+      	 */
+      	public static final String FACTORIES_RESOURCE_LOCATION = "META-INF/spring.factories";
+      	...
+      }
+     
+     ```
 
 * 嵌入式Web容器
 
