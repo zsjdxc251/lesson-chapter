@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author zhengshijun
@@ -30,7 +29,7 @@ public class UserInfoController {
     private CustomProperties customProperties;
 
     @GetMapping("/getName")
-    public ResponseEntity<String> getName(@Valid UserInfo userInfo){
+    public ResponseEntity<String> getName(@Valid UserInfo userInfo,BindingResult bindingResult){
         //userInfoRepository.find();
         CustomProperties customProperties = new CustomProperties();
         BeanUtils.copyProperties(this.customProperties,customProperties);
