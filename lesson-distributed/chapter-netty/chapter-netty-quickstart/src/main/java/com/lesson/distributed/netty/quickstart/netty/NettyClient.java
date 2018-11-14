@@ -1,13 +1,7 @@
 package com.lesson.distributed.netty.quickstart.netty;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -32,7 +26,8 @@ public class NettyClient {
 
         private Bootstrap bootstrap;
         private EventLoopGroup group;
-        private Channel channel;
+
+        private ThreadLocal<Channel> channelLocal = new ThreadLocal<>();
         private CountDownLatch countDownLatch = new CountDownLatch(1);
         private volatile boolean stopWrite = false;
 
@@ -46,7 +41,13 @@ public class NettyClient {
                 protected void initChannel(SocketChannel channel) throws Exception {
                     channel.pipeline().addLast(new StringDecoder());
                     channel.pipeline().addLast(new StringEncoder());
-                    channel.pipeline().addLast(new ClientProcessHandler());
+
+                    ClientProcessHandler clientProcessHandler = new ClientProcessHandler();
+
+                    // 如果 ClientProcessHandler 不 添加 @ChannelHandler.Sharable 添加两次会报错
+                    channel.pipeline().addLast(clientProcessHandler);
+
+                    channel.pipeline().addLast(clientProcessHandler);
                 }
             });
         }
@@ -59,18 +60,22 @@ public class NettyClient {
             try {
                 ChannelFuture future =  bootstrap.connect(new InetSocketAddress("127.0.0.1",8081)).sync();
                 try {
-                    channel = future.channel();
+                    channelLocal.set(future.channel());
                 } finally {
                     countDownLatch.countDown();
                 }
                 log.info("closeFuture before");
-                channel.closeFuture().sync();
+
+
+
+                channelLocal.get().closeFuture().sync();
                 log.info("closeFuture after");
             } catch (InterruptedException e) {
                 log.error(StringUtils.EMPTY,e);
             } finally {
                 group.shutdownGracefully();
                 stopWrite = true;
+
             }
 
         }
@@ -81,18 +86,21 @@ public class NettyClient {
                 return;
             }
             countDownLatch.await();
-            if (channel == null){
+            if (channelLocal.get() == null){
                 throw new NullPointerException();
             }
-            channel.writeAndFlush(message);
+            channelLocal.get().writeAndFlush(message);
         }
     }
 
+    @ChannelHandler.Sharable
     public static class ClientProcessHandler extends ChannelInboundHandlerAdapter {
 
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
             log.info("ClientProcessHandler channelActive");
+
+
 
         }
 
@@ -124,27 +132,27 @@ public class NettyClient {
         TcpEchoClient tcpEchoClient = new TcpEchoClient();
         Thread thread = new Thread(tcpEchoClient);
         thread.start();
-//
-//        thread = new Thread(tcpEchoClient);
-//        thread.start();
-//
-//        thread = new Thread(tcpEchoClient);
-//        thread.start();
-//
-//        thread = new Thread(tcpEchoClient);
-//        thread.start();
 
-        while (!Thread.currentThread().isInterrupted()) {
-            Scanner scanner = new Scanner(System.in);
-            String msg = scanner.nextLine();
-            log.info("console println:{}",msg);
-            try {
-                tcpEchoClient.writeAndFlush(msg);
-            } catch (InterruptedException e) {
-                log.error(StringUtils.EMPTY,e);
-            }
+        thread = new Thread(tcpEchoClient);
+        thread.start();
 
-        }
+        thread = new Thread(tcpEchoClient);
+        thread.start();
+
+        thread = new Thread(tcpEchoClient);
+        thread.start();
+
+//        while (!Thread.currentThread().isInterrupted()) {
+//            Scanner scanner = new Scanner(System.in);
+//            String msg = scanner.nextLine();
+//            log.info("console println:{}",msg);
+//            try {
+//                tcpEchoClient.writeAndFlush(msg);
+//            } catch (InterruptedException e) {
+//                log.error(StringUtils.EMPTY,e);
+//            }
+//
+//        }
 
 
     }

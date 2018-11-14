@@ -2,13 +2,7 @@ package com.lesson.distributed.netty.quickstart.netty;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -86,12 +80,17 @@ public class NettyServer {
         }
     }
 
+    @ChannelHandler.Sharable
     private static class ServerProcessHandler extends ChannelInboundHandlerAdapter {
+
+
 
         @Override
         public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
 
             log.info("ServerProcessHandler channelRegistered");
+
+
         }
 
         @Override
@@ -108,6 +107,8 @@ public class NettyServer {
 
             // 关闭连接
             ctx.close();
+
+
 
         }
 
