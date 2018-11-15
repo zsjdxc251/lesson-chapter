@@ -135,6 +135,7 @@ public class FileBootstrapServer {
             HttpResponse response = new DefaultHttpResponse(HttpVersion.HTTP_1_1,HttpResponseStatus.OK);
 
             response.headers().add("content-length",fileLength);
+            response.headers().add("content-type","text/html;charset=UTF-8");
 
             ctx.write(response);
 
@@ -170,6 +171,6 @@ public class FileBootstrapServer {
 
     public static void main(String[] args){
 
-        new TcpEchoServer(8080,"D:\\Temp").start();
+        new TcpEchoServer(8080,"F:\\tmp").start();
     }
 }
