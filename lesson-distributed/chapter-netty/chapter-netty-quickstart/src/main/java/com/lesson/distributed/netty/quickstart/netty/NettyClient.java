@@ -17,6 +17,9 @@ import io.netty.handler.codec.string.StringEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.util.concurrent.CountDownLatch;
 
@@ -74,9 +77,23 @@ public class NettyClient {
 
 
 
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+                while (!Thread.currentThread().isInterrupted()) {
+                    String msg = bufferedReader.readLine();
+                    log.info("console println:{}",msg);
+                    try {
+                        writeAndFlush(msg);
+                    } catch (InterruptedException e) {
+                        log.error(StringUtils.EMPTY,e);
+                    }
+
+                }
+
+
                 channelLocal.get().closeFuture().sync();
                 log.info("closeFuture after");
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | IOException e) {
                 log.error(StringUtils.EMPTY,e);
             } finally {
                 group.shutdownGracefully();
@@ -96,6 +113,9 @@ public class NettyClient {
                 throw new NullPointerException();
             }
             channelLocal.get().writeAndFlush(message);
+
+
+            System.out.println(channelLocal.get().eventLoop().inEventLoop());
 
         }
     }
@@ -135,31 +155,12 @@ public class NettyClient {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         TcpEchoClient tcpEchoClient = new TcpEchoClient();
         Thread thread = new Thread(tcpEchoClient);
         thread.start();
 
-        thread = new Thread(tcpEchoClient);
-        thread.start();
 
-        thread = new Thread(tcpEchoClient);
-        thread.start();
-
-        thread = new Thread(tcpEchoClient);
-        thread.start();
-
-//        while (!Thread.currentThread().isInterrupted()) {
-//            Scanner scanner = new Scanner(System.in);
-//            String msg = scanner.nextLine();
-//            log.info("console println:{}",msg);
-//            try {
-//                tcpEchoClient.writeAndFlush(msg);
-//            } catch (InterruptedException e) {
-//                log.error(StringUtils.EMPTY,e);
-//            }
-//
-//        }
 
 
     }

@@ -106,7 +106,7 @@ public class NettyServer {
 
 
             // 关闭连接
-            ctx.close();
+            // ctx.close();
 
 
 
