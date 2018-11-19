@@ -5,6 +5,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
 
 /**
  * @author zhengshijun
@@ -32,5 +33,12 @@ public class AutoConfigDispatcherServletInitializer extends AbstractAnnotationCo
     @Override
     protected Filter[] getServletFilters() {
         return super.getServletFilters();
+    }
+
+    @Override
+    protected void registerDispatcherServlet(ServletContext servletContext) {
+
+        super.registerDispatcherServlet(servletContext);
+
     }
 }
