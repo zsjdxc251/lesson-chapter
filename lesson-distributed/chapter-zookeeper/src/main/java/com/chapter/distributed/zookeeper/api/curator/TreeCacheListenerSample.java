@@ -9,7 +9,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 /**
  *
  *
- *    对指定路径下面节点监听 添加 删除 数据修改 
+ *    对指定路径下面节点监听 添加 删除 数据修改
  * @author zhengshijun
  * @version created on 2018/11/21.
  */
