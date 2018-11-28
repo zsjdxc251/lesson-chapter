@@ -3,6 +3,7 @@ package com.lesson;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.ActionFuture;
+import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequestBuilder;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;

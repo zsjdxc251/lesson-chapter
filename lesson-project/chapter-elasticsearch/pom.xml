@@ -15,6 +15,7 @@
     <name>chapter-elasticsearch</name>
     <modules>
         <module>chapter-elasticsearch-quickstart</module>
+        <module>chapter-elasticsearch-springboot</module>
     </modules>
 
 </project>

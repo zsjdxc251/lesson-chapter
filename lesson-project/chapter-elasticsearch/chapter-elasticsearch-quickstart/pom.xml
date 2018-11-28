@@ -54,6 +54,14 @@
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>com.taobao.arthas</groupId>
+            <artifactId>arthas-core</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+
         <!--<dependency>-->
             <!--<groupId>org.elasticsearch.plugin</groupId>-->
             <!--<artifactId>transport-netty3-client</artifactId>-->
