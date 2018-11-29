@@ -131,6 +131,13 @@ public class NettyClient {
 
         }
 
+
+        @Override
+        public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+            super.channelRegistered(ctx);
+           System.out.println("demo");
+        }
+
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
             log.info("ClientProcessHandler channelRead");
