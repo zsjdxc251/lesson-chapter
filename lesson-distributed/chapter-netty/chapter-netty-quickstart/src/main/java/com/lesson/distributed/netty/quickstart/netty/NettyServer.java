@@ -3,6 +3,7 @@ package com.lesson.distributed.netty.quickstart.netty;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
+import io.netty.channel.nio.NioEventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -43,6 +44,9 @@ public class NettyServer {
             ServerBootstrap serverBootstrap =  new ServerBootstrap();
             serverBootstrap.group(masterGroup,workerGroup);
             serverBootstrap.channel(NioServerSocketChannel.class);
+
+
+
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel channel) {

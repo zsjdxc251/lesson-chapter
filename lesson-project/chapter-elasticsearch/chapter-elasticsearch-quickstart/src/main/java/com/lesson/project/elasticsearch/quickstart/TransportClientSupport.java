@@ -25,9 +25,9 @@ public class TransportClientSupport {
 
         try {
             Settings settings = Settings.builder()
-                    .put("cluster.name", "es-first").put("client.transport.sniff", true).build();  //设置ES实例的名称
+                    .put("cluster.name", "first_cluster").put("client.transport.sniff", true).build();  //设置ES实例的名称
             client= new PreBuiltTransportClient(settings)
-                    .addTransportAddress(new TransportAddress(InetAddress.getByName("192.168.112.139"), 9300));
+                    .addTransportAddress(new TransportAddress(InetAddress.getByName("121.196.232.248"), 9300));
         } catch (UnknownHostException e) {
             log.error(StringUtils.EMPTY,e);
         }

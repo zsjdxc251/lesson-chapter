@@ -16,6 +16,7 @@
     <modules>
         <module>chapter-elasticsearch-quickstart</module>
         <module>chapter-elasticsearch-springboot</module>
+        <module>chapter-elasticsearch-spring</module>
     </modules>
 
 </project>

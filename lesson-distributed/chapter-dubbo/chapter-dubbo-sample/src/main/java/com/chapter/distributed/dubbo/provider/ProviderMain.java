@@ -17,7 +17,7 @@ public class ProviderMain {
 
 
         ClassPathXmlApplicationContext classPathXmlApplicationContext =
-                new ClassPathXmlApplicationContext("9/provider.xml");
+                new ClassPathXmlApplicationContext("7/provider.xml");
                // new ClassPathXmlApplicationContext("6/provider-cluster-2.xml");
         classPathXmlApplicationContext.start();
 

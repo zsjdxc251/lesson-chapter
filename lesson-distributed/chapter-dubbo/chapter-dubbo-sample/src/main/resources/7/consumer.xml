@@ -14,7 +14,7 @@
 
     <dubbo:application name="consumer"/>
 
-    <dubbo:registry id = "zoo1" address="zookeeper://127.0.0.1:2181" check="false"/>
+    <dubbo:registry id = "zoo1" address="zookeeper://121.196.232.248:2181" check="false"/>
 
 
     <dubbo:reference interface="com.chapter.distributed.dubbo.service.IUserInfoService"

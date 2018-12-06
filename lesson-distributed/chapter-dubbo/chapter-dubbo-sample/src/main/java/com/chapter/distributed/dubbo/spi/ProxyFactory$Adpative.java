@@ -1,6 +1,8 @@
 package com.chapter.distributed.dubbo.spi;
 
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
+import com.alibaba.dubbo.rpc.Invoker;
+import com.alibaba.dubbo.rpc.RpcException;
 
 public class ProxyFactory$Adpative implements com.alibaba.dubbo.rpc.ProxyFactory {
     public java.lang.Object getProxy(com.alibaba.dubbo.rpc.Invoker arg0) throws com.alibaba.dubbo.rpc.RpcException {
@@ -23,5 +25,10 @@ public class ProxyFactory$Adpative implements com.alibaba.dubbo.rpc.ProxyFactory
             throw new IllegalStateException("Fail to get extension(com.alibaba.dubbo.rpc.ProxyFactory) name from url(" + url.toString() + ") use keys([proxy])");
         com.alibaba.dubbo.rpc.ProxyFactory extension = (com.alibaba.dubbo.rpc.ProxyFactory) ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.rpc.ProxyFactory.class).getExtension(extName);
         return extension.getInvoker(arg0, arg1, arg2);
+    }
+
+    @Override
+    public <T> T getProxy(Invoker<T> invoker, boolean b) throws RpcException {
+        return null;
     }
 }

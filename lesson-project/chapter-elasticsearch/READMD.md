@@ -159,6 +159,30 @@ http.cors.allow-origin: "*"Elasticsearch
 
 
 
+## logstash
+
+### quickstart
+
+* 配置控制台输出 `../bin/logstash -f logstash.conf -r`
+
+  ```json
+  input {
+      stdin {}
+  }
+  
+  
+  output {
+  
+      stdout {
+  
+  
+      }
+  }
+  ```
+
+
+
+
 
 
 

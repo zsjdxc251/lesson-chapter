@@ -13,11 +13,11 @@
 
     <dubbo:application name="provider"/>
 
-    <dubbo:registry id = "zoo1"  address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry id = "zoo1"  address="zookeeper://121.196.232.248:2181"/>
 
 
     <!-- 如果不指定协议则会该接口注册多协议 -->
-    <dubbo:service interface="com.chapter.distributed.dubbo.service.IUserInfoService" ref="userInfoService"/>
+    <dubbo:service interface="com.chapter.distributed.dubbo.service.IUserInfoService" ref="userInfoService" generic="true"/>
 
     <bean id="userInfoService" class="com.chapter.distributed.dubbo.provider.impl.UserInfoService"/>
 
