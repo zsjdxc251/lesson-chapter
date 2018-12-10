@@ -35,7 +35,8 @@ public class ThreadPoolExecutorSample {
         ThreadFactory threadFactory = Executors.defaultThreadFactory();
 
         ThreadPoolExecutor threadPoolExecutor =
-                new ThreadPoolExecutor(2,20,300, TimeUnit.SECONDS,new ArrayBlockingQueue<>(200),threadFactory,(r,e)->{
+                new ThreadPoolExecutor(2,20,300,
+                        TimeUnit.SECONDS,new ArrayBlockingQueue<>(200),threadFactory,(r,e)->{
 
                 });
 

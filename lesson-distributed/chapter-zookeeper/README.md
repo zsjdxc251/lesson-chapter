@@ -101,7 +101,8 @@
 
 ## Zookeeper 集群角色
 
-### Zookeeper 的集群 ![1537194812807](README.assets/1537194812807.png)
+### Zookeeper 的集群 
+![1537194812807](README.assets/1537194812807.png)
 
 在Zookeeper 中客户端随机连接到Zookeeper集群中的一个节点，如果是读请求就直接在当前节点中读取数据，如果是写请求，那么请求会被转发给`leader`提交事务，然后`leader`会广播事务，只要超过半数节点写入成功，那么写请求就会被提交（类2PC事务）。
 
@@ -168,7 +169,6 @@
 
   * `create` ，`delete` ，`setData`
 
-    
 
 ### Watcher事件类型
 
