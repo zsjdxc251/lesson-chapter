@@ -47,6 +47,12 @@ public class ScheduledThreadPoolExecutorSample {
         },1,2,TimeUnit.SECONDS);
 
 
+
+        Executors.newCachedThreadPool();
+
+        Executors.newFixedThreadPool(1);
+
+
     }
 }
 
