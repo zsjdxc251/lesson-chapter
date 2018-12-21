@@ -20,6 +20,7 @@
         <module>chapter-mybatis-generator</module>
         <module>chapter-mybatis-spring</module>
         <module>chapter-mybatis-simple</module>
+        <module>chapter-mybatis-spring-boot</module>
     </modules>
 
 
