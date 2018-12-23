@@ -1,18 +1,27 @@
-package com.lesson.microservice.boot.sample.microservice.cloud.stream.sample.source;
+package com.lesson.microservice.cloud.stream.rabbit;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
+/**
+ * @author zhengshijun
+ * @version created on 2018/12/22.
+ */
+public interface ChannalManager {
 
-public interface MessageSource{
+
     @Output("channel_name_arg0")
     MessageChannel outputChannel();
 
     @Input("channel_name_arg1")
-    SubscribableChannel inputChannel();
+    SubscribableChannel inputChannel1();
 
-    @Output("channel_name_arg2")
-    MessageChannel kafkaOutputChannel();
+    @Input("channel_name_arg2")
+    SubscribableChannel inputChannel2();
+
+
 }
+
+

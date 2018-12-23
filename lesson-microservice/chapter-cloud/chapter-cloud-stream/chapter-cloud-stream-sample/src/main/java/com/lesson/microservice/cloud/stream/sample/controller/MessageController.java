@@ -1,7 +1,7 @@
-package com.lesson.microservice.boot.sample.microservice.cloud.stream.sample.controller;
+package com.lesson.microservice.cloud.stream.sample.controller;
 
 
-import com.lesson.microservice.boot.sample.microservice.cloud.stream.sample.source.MessageSource;
+import com.lesson.microservice.cloud.stream.sample.source.MessageSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.support.GenericMessage;

@@ -33,7 +33,7 @@ public class MessageController implements ApplicationEventPublisherAware {
         applicationContext.getDisplayName();
         applicationContext.getApplicationName();
         String[] names = {applicationContext.getId(),
-                applicationContext.getDisplayName(),applicationContext.getApplicationName()};
+                applicationContext.getDisplayName(),applicationContext.getApplicationName(),busProperties.getId()};
         MessageRemoteApplicationEvent event
                 = new MessageRemoteApplicationEvent(message, busProperties.getId(), "spring-cloud-bus-consumer:0");
 

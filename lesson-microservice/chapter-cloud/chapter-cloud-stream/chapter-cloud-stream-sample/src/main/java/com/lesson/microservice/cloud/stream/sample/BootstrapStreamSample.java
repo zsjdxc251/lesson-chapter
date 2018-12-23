@@ -1,7 +1,7 @@
-package com.lesson.microservice.boot.sample.microservice.cloud.stream.sample;
+package com.lesson.microservice.cloud.stream.sample;
 
 
-import com.lesson.microservice.boot.sample.microservice.cloud.stream.sample.source.MessageSource;
+import com.lesson.microservice.cloud.stream.sample.source.MessageSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -35,6 +35,10 @@ public class BootstrapStreamSample
         System.out.println("kafkaOnMesssage"+message);
 
     }
+
+
+
+
 
 
 }

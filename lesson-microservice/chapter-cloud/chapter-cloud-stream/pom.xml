@@ -20,6 +20,7 @@
         <module>chapter-cloud-stream-eureka</module>
         <module>chapter-cloud-stream-rocket</module>
         <module>chapter-cloud-stream-active</module>
+        <module>chapter-cloud-stream-rabbit</module>
     </modules>
 
 

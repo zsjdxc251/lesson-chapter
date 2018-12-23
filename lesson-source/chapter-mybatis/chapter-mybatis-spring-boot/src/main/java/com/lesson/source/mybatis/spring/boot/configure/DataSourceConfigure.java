@@ -10,13 +10,25 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.Lifecycle;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.ResolvableType;
 
 /**
+ *
+ *  {@link ApplicationContextInitializer}
+ *  {@link BeanDefinitionRegistryPostProcessor}
+ *  {@link Lifecycle}
+ *  {@link ResolvableType}
+ *  {@link ConfigurationProperties}
+ *  {@link org.springframework.boot.autoconfigure.condition.ConditionalOnProperty}
  * @author zhengshijun
  * @version created on 2018/12/21.
  */
@@ -49,6 +61,8 @@ public class DataSourceConfigure implements BeanFactoryAware, InitializingBean {
         dataSourceProperties.forEach((key,value)->{
 
             beanDefinitionBuilder.addPropertyValue(String.valueOf(key),value);
+
+
 
         });
 

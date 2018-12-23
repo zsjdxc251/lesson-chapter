@@ -16,6 +16,8 @@
 
     <modules>
         <module>chapter-maven</module>
+        <module>chapter-gradle</module>
+        <module>chapter-git</module>
     </modules>
 
 </project>
