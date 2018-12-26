@@ -146,8 +146,36 @@
 * 提交容器
   * `docker commit -m='NAME' -a='作者'`容器ID 目标镜像名称:TAG
 
+* 容器内安装 `vim`
+
+  > apt-get update
+  >
+  > apt-get install vim
 
 
+
+
+
+
+
+
+
+
+## 附加问题
+
+* `docker ` 内启动 `tomcat` 慢
+
+  修改 ` $JAVA_PATH/jre/lib/security/java.security `
+
+  ```properties
+  securerandom.source=file:/dev/random
+  ```
+
+  修改后
+
+  ```properties
+  securerandom.source=file:/dev/./urandom
+  ```
 
 
 ## 
