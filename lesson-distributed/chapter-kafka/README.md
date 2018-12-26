@@ -14,7 +14,7 @@
   * 副本数据的同步原理
 
 ## 集群配置
-* 启动命令 `./kafka-server-start.sh -daemon ../config/server.propertie`
+* 启动命令 `./kafka-server-start.sh -daemon ../config/server.properties`
 * 在server.properties中配置
   * broker.id= 配置节点id
   * listeners=PLAINTEXT://ip:port 配置该节点访问监听如果该不配置远程调用不到

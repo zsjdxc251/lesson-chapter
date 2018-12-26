@@ -30,7 +30,7 @@ public class ZookeeperSample {
 
             CountDownLatch countDownLatch = new CountDownLatch(1);
 
-            ZooKeeper zooKeeper = new ZooKeeper("localhost:2181",4000,watchedEvent -> {
+            ZooKeeper zooKeeper = new ZooKeeper("121.196.232.248:2181",4000,watchedEvent -> {
 
                 if (watchedEvent.getState() == Watcher.Event.KeeperState.SyncConnected){
                     countDownLatch.countDown();
@@ -39,7 +39,7 @@ public class ZookeeperSample {
                 System.out.println(watchedEvent.getPath()+"-"+watchedEvent.getState()+"-"+watchedEvent.getType().name());
             });
             countDownLatch.await();
-            Stat stat = zooKeeper.exists("/locks/",false);
+            Stat stat = zooKeeper.exists("/locks",false);
             if (stat == null){
 
                 /**
@@ -48,13 +48,13 @@ public class ZookeeperSample {
                  *
                  *
                  */
-                zooKeeper.create("/locks/","".getBytes(),ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+                zooKeeper.create("/locks","".getBytes(),ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             }
 
-            stat = zooKeeper.exists("/locks/",true);
+            stat = zooKeeper.exists("/locks",true);
 
 
-            zooKeeper.create("/locks/","".getBytes(),ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
+            zooKeeper.create("/locks","".getBytes(),ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
 
             List<String> childrenUrls = zooKeeper.getChildren("/locks",false);
 
