@@ -129,7 +129,9 @@
 
   9. >archives配置项中包含项目生成的文件（如Jar文件）
 
-  10. >providedRuntime
+  10. >providedRuntime  和 apply plugin: 'war'共存
+
+  11. >optional 
 
 * 排除依赖
 
@@ -375,6 +377,14 @@
   }
   apply plugin: 'java'
   apply plugin: 'war'
+  
+  ```
+
+* `application`插件
+
+  ```groovy
+  apply plugin: 'application'
+  mainClassName = appMainClass
   ```
 
 * 自定义插件之创建目录
@@ -457,7 +467,14 @@
           from configurations.runtime
       } 
   }
+  
   ```
+
+  ```groovy
+  
+  ```
+
+
 
   * 打包排除
 
@@ -506,3 +523,29 @@
         }
     }
     ```
+
+* `compileJava.dependsOn(processResources)`
+
+  处理 Spring  `additional-spring-configuration-metadata.json`数据,`spring-boot-configuration-processor` 
+
+  在`gradle4.5`之前版本使用
+
+  ```groovy
+  dependencies {
+  	compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+  }
+  compileJava.dependsOn(processResources)
+  ```
+
+  在`gradle4.6`之后
+
+  ```groovy
+  dependencies {
+  	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+  }
+  compileJava.dependsOn(processResources)
+  ```
+
+  必须使用`org.springframework.boot.context.properties.ConfigurationProperties`注解
+
+  [参考资料](https://docs.spring.io/spring-boot/docs/2.0.7.RELEASE/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor)
