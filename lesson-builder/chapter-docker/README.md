@@ -144,6 +144,7 @@
     * `docker cp 89ec5f991a31:/usr/local/tomcat/webapps/ROOT/index.jsp /usr/`
 
 * 提交容器
+
   * `docker commit -m='NAME' -a='作者'`容器ID 目标镜像名称:TAG
 
 * 容器内安装 `vim`
@@ -152,11 +153,128 @@
   >
   > apt-get install vim
 
+* `mysql` 使用示例
+
+  操作命令行在 `/usr/local/mysql`
+
+  ```shell
+  docker run -p 3309:3306 -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+  ```
 
 
 
 
+## Docker 数据卷
 
+**数据卷就是容器在宿主机挂载的目录磁盘**
+
+### 基本命令
+
+* 简单挂载
+
+  ```shell
+  docker run -it -v /usr/workspace/docker/data:/datacontainer centos
+  ```
+
+  把 宿主机 的`/usr/workspace/docker/data` 目录挂载在 容器 `centos` 的`/datacontainer` 目录
+
+* 数据容器卷
+
+  ```shell
+  docker run -it --name n0 -v /usr/workspace/docker/data:/datacontainer centos
+  ```
+
+  ```shell
+  docker run -it --name n1 --volumes-from n0 centos
+  ```
+
+  `n1` 容器 共享 `n0`容器卷
+
+## Dockerfile
+
+### 关键字
+
+* `FROM` 基础镜像，当前新镜像是基于哪个镜像的
+
+* `MAINTAINER` 进行的维护者的姓名和邮箱
+
+* `RUN` 镜像构建时需要运行的命令
+
+* `WORKDIR` 容器创建后 , 默认在哪个目录
+
+* `EXPOSE ` 当前容器对外暴露的端口
+
+* `ENV` 用来在构建镜像时设置的环境变量
+
+* `ADD` 将宿主机的目录下的文件拷贝到镜像且`ADD` 命令会自动解压压缩包`tar.gz`
+
+* `COPY` 
+
+* `VOLUME` 容器数据卷，勇仔保存和持久化
+
+* `CMD` 指定容器的启动过程中需要运行的命令
+
+  坑：多条CMD命令，只有一条生效，CMD命令会被`doker run` 之后的参数替换
+
+* `ENTRYPOINT` 指定容器启动过程中需要运行的命令
+
+  ENTRYPOINT会把`docker run` 命令的参数追加到后面
+
+* `ONBUILD`
+
+
+
+## Docker 网络
+
+[参考资料](https://www.cnblogs.com/whych/p/9595671.html)
+
+### 示例
+
+[参考资料](https://hub.docker.com/search/?q=tomcat&type=image)
+
+[tomcatDockerfile示例] (https://github.com/docker-library/tomcat/blob/4b7edb6276a275185ddeb3db989573bf35aca2b5/8.5/jre8/Dockerfile)
+
+* 简单`Dockerfile`
+
+  ```dockerfile
+  FROM centos
+  MAINTAINER zsjdxc251<zsjdxc251@live.com>
+  COPY test.txt /usr/local/testincontainer.txt
+  ADD apache-tomcat-9.0.14.tar.gz /usr/local/
+  ADD jdk-8u191-linux-x64.tar.gz /usr/local
+  #RUN yum -y install vim
+  
+  ENV MYPATH /usr/local
+  WORKDIR $MYPATH
+  ENV JAVA_HOME /usr/local/jdk1.8.0_191
+  ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+  ENV CATALINA_HOME /usr/local/apache-tomcat-9.0.14
+  ENV CATALINA_BASE /usr/local/apache-tomcat-9.0.14
+  ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin
+  
+  EXPOSE 8080
+  
+  
+  CMD /usr/local/apache-tomcat-9.0.14/bin/startup.sh && tail -F /usr/local/apache-tomcat-9.0.14/log/catalina.out
+  ```
+
+
+* 构建`dockerfile`
+
+  ```shell
+  docker build -f /usr/workspace/docker/Dockerfile -t tomcat9-1 .
+  ```
+
+* 运行构建镜像
+
+  ```shell
+  docker run -it -d --name tomcat9-run1 -p 8092:8080 tomcat9-1
+  ```
+
+
+## Docker 总架构
+
+![1546155204219](README.assets/1546155204219.png)
 
 
 
@@ -177,12 +295,18 @@
   securerandom.source=file:/dev/./urandom
   ```
 
+* 找不到`ifconfig` 命令
 
-## 
+  ```shell
+  yum install net-tools 
+  或者
+  apt-get install net-tools
+  ```
 
 
 
-docker exec -it [] /bin/bash
+
+
 
 ## docker 提交 备份 导出 
 

@@ -76,6 +76,21 @@
 
 17. 远程连接 `mysql -h192.168.112.133 -P3306 -uroot -p`
 
+### Mysql 基本使用命令
+
+* 查看 mysql 表结构 `desc table`
+
+* navicat连接mysql报错1251解决方案
+
+  ```shell
+  ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;
+  
+  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123';
+  
+   FLUSH PRIVILEGES;
+  ```
+
+
 ### Mysql 组从 
 
 * 组备配置
@@ -98,8 +113,6 @@
      replicate_do_db=db_store   数据库名
      ```
 
-     
-
   4. 通过`SHOW MASTER STATUS`查看Master db状态.
 
      ​		
@@ -107,8 +120,6 @@
      | File                  | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
      | --------------------- | -------- | ------------ | ---------------- | ----------------- |
      | dbstore_binlog.000004 | 344      | db_store     |                  |                   |
-
-     
 
   5. 在`slave` mysql  `my.cnf` 配置如下
 
@@ -158,7 +169,6 @@
   wrapper.ping.timeout=3600
   ```
 
-  
 
 ## Mycat 概念
 
