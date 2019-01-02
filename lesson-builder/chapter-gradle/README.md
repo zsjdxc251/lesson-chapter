@@ -51,6 +51,7 @@
       // 本地仓库
       mavenLocal()
       // 设置远程
+      maven {url  "F:/workspace/apache-maven-3.3.9/repo"}
       maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
       mavenCentral()
   
@@ -197,6 +198,7 @@
     ```groovy
     configurations.all {
        resolutionStrategy{
+          failOnVersionConflict();
           force 'org.slf4j:slf4japi:1.7.25'
        }
     }
