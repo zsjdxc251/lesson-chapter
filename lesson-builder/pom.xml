@@ -19,6 +19,7 @@
         <module>chapter-gradle</module>
         <module>chapter-git</module>
         <module>chapter-docker</module>
+        <module>chapter-kubernetes</module>
     </modules>
 
 </project>
