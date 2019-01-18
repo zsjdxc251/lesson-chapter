@@ -1,4 +1,8 @@
 spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: false
   application:
     name: spring-cloud-gateway-sample
   cloud:
@@ -11,6 +15,8 @@ spring:
         uri: lb://spring-cloud-zookeeper-provider
         predicates:
         - Path=/invoker/**
+
+
 logging:
   level:
     root: INFO
