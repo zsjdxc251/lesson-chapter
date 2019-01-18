@@ -11,7 +11,9 @@ spring:
         uri: lb://spring-cloud-zookeeper-provider
         predicates:
         - Path=/invoker/**
-
+logging:
+  level:
+    root: INFO
 server:
   port: 7071
 

@@ -43,8 +43,8 @@ public class BootstrapGatewaySample
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder locatorBuilder){
 
-        return locatorBuilder.routes().route("service",route->
-                route.path("/service").uri("http://localhost:13473/invoker/users")).build();
+        return locatorBuilder
+                .routes().route("service",route->route.path("/service/*").uri("lb://spring-cloud-zookeeper-provider")).build();
 
 
     }

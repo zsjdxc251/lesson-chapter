@@ -26,8 +26,6 @@ public class BootstrapServer
 {
     public static void main( String[] args ){
 
-        System.setProperty("nacos.standalone","true");
-        System.setProperty("nacos.home","D:\\workspace\\nacos");
         SpringApplication.run(BootstrapServer.class,args);
     }
 
@@ -36,22 +34,22 @@ public class BootstrapServer
      * 自定义数据源 config server
      * @return
      */
-//    @Bean
-//    public EnvironmentRepository environmentRepository(){
-//
-//        return (String application, String profile, String label)->{
-//
-//            Environment environment = new Environment("custom-environment", profile);
-//            List<PropertySource> propertySources = environment.getPropertySources();
-//
-//
-//            Map<String, Object> source = new HashMap<>();
-//            source.put("userName","custom-userName");
-//            PropertySource propertySource = new PropertySource("custom-map",source);
-//
-//            propertySources.add(propertySource);
-//            return environment;
-//        };
-//    }
+    @Bean
+    public EnvironmentRepository environmentRepository(){
+
+        return (String application, String profile, String label)->{
+
+            Environment environment = new Environment("custom-environment", profile);
+            List<PropertySource> propertySources = environment.getPropertySources();
+
+
+            Map<String, Object> source = new HashMap<>();
+            source.put("userName","custom-userName");
+            PropertySource propertySource = new PropertySource("custom-map",source);
+
+            propertySources.add(propertySource);
+            return environment;
+        };
+    }
 
 }
