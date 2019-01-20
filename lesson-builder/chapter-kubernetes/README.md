@@ -73,6 +73,15 @@ apt-get install -y kubelet kubeadm kubectl
 
 * [官网下载](https://download.virtualbox.org/virtualbox/6.0.2/VirtualBox-6.0-6.0.2_128162_el7-1.x86_64.rpm)
 
+* `yum` 安装
+
+  >cd /etc/yum.repos.d
+  >wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+  >yum makecache
+  >yum install VirtualBox-6.0 --nogpgcheck
+
+  在安装过程中出现了`[Errno -1] Gpg Keys not imported, cannot verify repomd.xml for repo virtualbox` 问题 在安装后面添加 `--nogpgcheck`
+
 
 
 
