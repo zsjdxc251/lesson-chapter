@@ -61,3 +61,20 @@
 
 
 
+### kubeadm 安装
+
+```sh
+apt-get install -y kubelet kubeadm kubectl
+```
+
+
+
+### VirtualBox 安装
+
+* [官网下载](https://download.virtualbox.org/virtualbox/6.0.2/VirtualBox-6.0-6.0.2_128162_el7-1.x86_64.rpm)
+
+
+
+
+
+

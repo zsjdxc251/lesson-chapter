@@ -69,7 +69,6 @@
   }
   ```
 
-  
 
 
 ### 基本命令
@@ -128,6 +127,21 @@ F5 LVS
 >lvs(四层) ->HAproxy 七层应用层
 >
 >lvs(四层)->Nginx七层
+
+
+
+### 脚本
+
+* 判断`nginx` 是否宕机，则释放`keepalived`
+
+```sh
+#!bin/sh
+A=`ps -C java --no-header |wc -l`
+if [$A -eq 0] the
+   service keepalived stop
+
+fi
+```
 
 #### 安装
 
