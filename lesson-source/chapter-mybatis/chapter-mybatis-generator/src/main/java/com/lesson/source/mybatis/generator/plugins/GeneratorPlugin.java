@@ -141,7 +141,7 @@ public class GeneratorPlugin extends PluginAdapter {
 
 		if (useBaseMapper) {
 			/**
-			 * 主键默认采用java.lang.Integer
+			 * 主键默认采用java.lang.Long
 			 */
 			FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType("BaseMapper<"
 					+ introspectedTable.getBaseRecordType() + ","
@@ -205,45 +205,4 @@ public class GeneratorPlugin extends PluginAdapter {
 		element.addAttribute(new Attribute("useGeneratedKeys", "true"));
 		return true;
 	}
-
-//	/**
-//	 * 加入分页的方法. 以及按 hander 处理结果集的方法
-//	 */
-//	@Override
-//	public boolean clientSelectByExampleWithBLOBsMethodGenerated(Method method,
-//			Interface interfaze, IntrospectedTable introspectedTable) {
-//		FullyQualifiedJavaType pageType = new FullyQualifiedJavaType("com.github.miemiedev.mybatis.paginator.domain.PageBounds");
-//		interfaze.addImportedType(pageType);
-//
-//		// 加入分页方法
-//		Method pageBoundsMethod = new Method(method);
-//		pageBoundsMethod.addParameter(new Parameter(pageType, "page"));
-//		interfaze.addMethod(pageBoundsMethod);
-//
-//
-//		FullyQualifiedJavaType typeHandlerType = new FullyQualifiedJavaType("org.apache.ibatis.session.ResultHandler");
-//		interfaze.addImportedType(typeHandlerType);
-//
-//		// 加入 hander 处理结果集方法
-//		Method handlerMethod = new Method(method);
-//		handlerMethod.addParameter(new Parameter(typeHandlerType, "handler"));
-//		handlerMethod.setReturnType(new FullyQualifiedJavaType("void")); //注意要返回void
-//		interfaze.addMethod(handlerMethod);
-//
-//		// 加入分页及用 hander 处理结果集方法
-//		Method handlerMethod2 = new Method(method);
-//		handlerMethod2.addParameter(new Parameter(pageType, "page"));
-//		handlerMethod2.addParameter(new Parameter(typeHandlerType, "handler"));
-//		handlerMethod2.setReturnType(new FullyQualifiedJavaType("void")); //注意要返回void
-//		interfaze.addMethod(handlerMethod2);
-//
-//		return true;
-//	}
-	@Override
-	public boolean clientSelectByExampleWithoutBLOBsMethodGenerated(Method method,
-			Interface interfaze, IntrospectedTable introspectedTable) {
-		return clientSelectByExampleWithBLOBsMethodGenerated(method, interfaze, introspectedTable);
-	}
-
-
 }

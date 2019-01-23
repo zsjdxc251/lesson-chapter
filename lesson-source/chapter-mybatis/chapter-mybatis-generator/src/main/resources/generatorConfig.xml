@@ -7,7 +7,7 @@
 
     <properties resource="generator.properties"/>
 
-    <context id="Mysql" targetRuntime="com.lesson.source.mybatis.generator.IntrospectedTableMyBatis3Impl" defaultModelType="flat">
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
 
 
 

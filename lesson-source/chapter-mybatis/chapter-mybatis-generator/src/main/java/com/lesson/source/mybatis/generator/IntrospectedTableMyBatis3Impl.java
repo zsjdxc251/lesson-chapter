@@ -1,6 +1,7 @@
 package com.lesson.source.mybatis.generator;
 
 import org.mybatis.generator.api.GeneratedXmlFile;
+import org.mybatis.generator.codegen.AbstractJavaClientGenerator;
 import org.mybatis.generator.config.TableConfiguration;
 
 import java.util.List;
@@ -21,5 +22,14 @@ public class IntrospectedTableMyBatis3Impl extends org.mybatis.generator.codegen
 
 
 		return super.getTableConfiguration();
+	}
+
+
+	@Override
+	protected AbstractJavaClientGenerator createJavaClientGenerator() {
+		if (tableConfiguration != null){
+			tableConfiguration.setDomainObjectName("C"+tableConfiguration.getDomainObjectName());
+		}
+		return super.createJavaClientGenerator();
 	}
 }

@@ -14,7 +14,7 @@ import org.apache.ibatis.type.Alias;
 * @version created on 2019/01/23.
 */
 @Table(name = "t_user_bank_info")
-@Alias("cCCCCCCCUserBankInfo")
+@Alias("cCCCCCCCCUserBankInfo")
 @Data
 @Builder
 @NoArgsConstructor
