@@ -20,6 +20,7 @@
         <module>chapter-git</module>
         <module>chapter-docker</module>
         <module>chapter-kubernetes</module>
+        <module>chapter-jenkins</module>
     </modules>
 
 </project>
