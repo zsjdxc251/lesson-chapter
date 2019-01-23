@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lesson.source.mybatis.spring.mapper.UserBankInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lesson.source.mybatis.spring.model.UserBankInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="bank_first_name" jdbcType="VARCHAR" property="bankFirstName" />
+    <result column="bank_middle_name" jdbcType="VARCHAR" property="bankMiddleName" />
+    <result column="bank_last_name" jdbcType="VARCHAR" property="bankLastName" />
+    <result column="bank_id" jdbcType="INTEGER" property="bankId" />
+    <result column="account_no" jdbcType="VARCHAR" property="accountNo" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="json_bank_images" jdbcType="VARCHAR" property="jsonBankImages" />
+    <result column="sub_branch" jdbcType="VARCHAR" property="subBranch" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    `id`, `uid`, `bank_first_name`, `bank_middle_name`, `bank_last_name`, `bank_id`, 
+    `account_no`, `status`, `create_time`, `json_bank_images`, `sub_branch`
+  </sql>
+  <select id="selectByExample" parameterType="com.lesson.source.mybatis.spring.model.UserBankInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user_bank_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_bank_info
+    where `id` = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user_bank_info
+    where `id` = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lesson.source.mybatis.spring.model.UserBankInfoExample">
+    delete from t_user_bank_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lesson.source.mybatis.spring.model.UserBankInfo" useGeneratedKeys="true">
+    insert into t_user_bank_info (`id`, `uid`, `bank_first_name`, 
+      `bank_middle_name`, `bank_last_name`, `bank_id`, 
+      `account_no`, `status`, `create_time`, 
+      `json_bank_images`, `sub_branch`)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{bankFirstName,jdbcType=VARCHAR}, 
+      #{bankMiddleName,jdbcType=VARCHAR}, #{bankLastName,jdbcType=VARCHAR}, #{bankId,jdbcType=INTEGER}, 
+      #{accountNo,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}, 
+      #{jsonBankImages,jdbcType=VARCHAR}, #{subBranch,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lesson.source.mybatis.spring.model.UserBankInfo" useGeneratedKeys="true">
+    insert into t_user_bank_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        `id`,
+      </if>
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="bankFirstName != null">
+        `bank_first_name`,
+      </if>
+      <if test="bankMiddleName != null">
+        `bank_middle_name`,
+      </if>
+      <if test="bankLastName != null">
+        `bank_last_name`,
+      </if>
+      <if test="bankId != null">
+        `bank_id`,
+      </if>
+      <if test="accountNo != null">
+        `account_no`,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createTime != null">
+        `create_time`,
+      </if>
+      <if test="jsonBankImages != null">
+        `json_bank_images`,
+      </if>
+      <if test="subBranch != null">
+        `sub_branch`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="bankFirstName != null">
+        #{bankFirstName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankMiddleName != null">
+        #{bankMiddleName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLastName != null">
+        #{bankLastName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null">
+        #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="accountNo != null">
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="jsonBankImages != null">
+        #{jsonBankImages,jdbcType=VARCHAR},
+      </if>
+      <if test="subBranch != null">
+        #{subBranch,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lesson.source.mybatis.spring.model.UserBankInfoExample" resultType="java.lang.Long">
+    select count(*) from t_user_bank_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_user_bank_info
+    <set>
+      <if test="record.id != null">
+        `id` = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null">
+        `uid` = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.bankFirstName != null">
+        `bank_first_name` = #{record.bankFirstName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankMiddleName != null">
+        `bank_middle_name` = #{record.bankMiddleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankLastName != null">
+        `bank_last_name` = #{record.bankLastName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankId != null">
+        `bank_id` = #{record.bankId,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountNo != null">
+        `account_no` = #{record.accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null">
+        `create_time` = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.jsonBankImages != null">
+        `json_bank_images` = #{record.jsonBankImages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subBranch != null">
+        `sub_branch` = #{record.subBranch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_user_bank_info
+    set `id` = #{record.id,jdbcType=BIGINT},
+      `uid` = #{record.uid,jdbcType=BIGINT},
+      `bank_first_name` = #{record.bankFirstName,jdbcType=VARCHAR},
+      `bank_middle_name` = #{record.bankMiddleName,jdbcType=VARCHAR},
+      `bank_last_name` = #{record.bankLastName,jdbcType=VARCHAR},
+      `bank_id` = #{record.bankId,jdbcType=INTEGER},
+      `account_no` = #{record.accountNo,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=TINYINT},
+      `create_time` = #{record.createTime,jdbcType=BIGINT},
+      `json_bank_images` = #{record.jsonBankImages,jdbcType=VARCHAR},
+      `sub_branch` = #{record.subBranch,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lesson.source.mybatis.spring.model.UserBankInfo">
+    update t_user_bank_info
+    <set>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="bankFirstName != null">
+        `bank_first_name` = #{bankFirstName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankMiddleName != null">
+        `bank_middle_name` = #{bankMiddleName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLastName != null">
+        `bank_last_name` = #{bankLastName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null">
+        `bank_id` = #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="accountNo != null">
+        `account_no` = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        `create_time` = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="jsonBankImages != null">
+        `json_bank_images` = #{jsonBankImages,jdbcType=VARCHAR},
+      </if>
+      <if test="subBranch != null">
+        `sub_branch` = #{subBranch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where `id` = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lesson.source.mybatis.spring.model.UserBankInfo">
+    update t_user_bank_info
+    set `uid` = #{uid,jdbcType=BIGINT},
+      `bank_first_name` = #{bankFirstName,jdbcType=VARCHAR},
+      `bank_middle_name` = #{bankMiddleName,jdbcType=VARCHAR},
+      `bank_last_name` = #{bankLastName,jdbcType=VARCHAR},
+      `bank_id` = #{bankId,jdbcType=INTEGER},
+      `account_no` = #{accountNo,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      `create_time` = #{createTime,jdbcType=BIGINT},
+      `json_bank_images` = #{jsonBankImages,jdbcType=VARCHAR},
+      `sub_branch` = #{subBranch,jdbcType=VARCHAR}
+    where `id` = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

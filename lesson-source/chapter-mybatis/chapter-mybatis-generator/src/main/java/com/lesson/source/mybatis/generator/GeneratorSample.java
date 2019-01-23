@@ -5,12 +5,17 @@ import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.mybatis.generator.plugins.EqualsHashCodePlugin;
+import org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
+ *  {@link EqualsHashCodePlugin}
+ *  {@link UnmergeableXmlMappersPlugin}
  * @author zhengshijun
  * @version created on 2018/10/9.
  */
@@ -28,6 +33,7 @@ public class GeneratorSample {
 
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+
         myBatisGenerator.generate(null);
 
     }

@@ -7,7 +7,9 @@
 
     <properties resource="generator.properties"/>
 
-    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+    <context id="Mysql" targetRuntime="com.lesson.source.mybatis.generator.IntrospectedTableMyBatis3Impl" defaultModelType="flat">
+
+
 
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
@@ -22,19 +24,31 @@
                   value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
 
         <plugin type="com.lesson.source.mybatis.generator.plugins.GeneratorPlugin"/>
+        <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>-->
+        <!--<plugin type="org.mybatis.generator.plugins.LombokPlugin" >-->
+            <!--<property name="hasLombok" value="true"/>-->
+        <!--</plugin>-->
 
         <!--去除注释  -->
-        <commentGenerator>
+        <commentGenerator type="com.lesson.source.mybatis.generator.StyleCommentGenerator">
 
-            <property name="suppressDate" value="true"/>
+            <property name="suppressDate" value="false"/>
             <property name="suppressAllComments" value="false" />
+            <property name="addRemarkComments" value="true"/>
+            <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
         </commentGenerator>
 
+        <!--<commentGenerator type="com.lesson.source.mybatis.generator.StyleCommentGenerator">-->
+
+        <!--<property name="suppressDate" value="true"/>-->
+        <!--<property name="suppressAllComments" value="false" />-->
+        <!--<property name="addRemarkComments" value="true"/>-->
+        <!--</commentGenerator> -->
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/test?useSSL=true"
+                        connectionURL="jdbc:mysql://10.0.20.4:3306/asetku-japan?autoReconnect=true&amp;rewriteBatchedStatements=true&amp;userUnicode=true&amp;characterEncoding=utf8&amp;useAffectedRows=true&amp;useSSL=true"
                         userId="root"
-                        password="12345">
+                        password="123456">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -43,7 +57,10 @@
 
         <javaModelGenerator targetPackage="${entity.target.package}" targetProject="${project.root}\java">
             <property name="enableSubPackages" value="true"/>
-            <property name="trimStrings" value="true"/>
+            <property name="trimStrings" value="false"/>
+            <!-- 合并 -->
+            <property name="mergeable" value="false" />
+            <property name="rootClass" value="com.lesson.source.mybatis.spring.model.BaseEntity"/>
         </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="${sqlMapper.target.package}" targetProject="${project.root}\resources">
@@ -55,7 +72,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table tableName="sys_user">-->
+        <!-- <table tableName="sys_user">-->
             <!--&lt;!&ndash;mysql 配置&ndash;&gt;-->
             <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="Mysql" identity="true"/>&ndash;&gt;-->
             <!--&lt;!&ndash;oracle 配置&ndash;&gt;-->
@@ -66,10 +83,13 @@
             <!--<property name="endingDelimiter" value="`"/>-->
             <!--<property name="delimitIdentifiers" value="true"/>-->
         <!--</table>-->
-        <table tableName="user_info" delimitAllColumns="true">
+
+        <table tableName="t_user_bank_info" delimitAllColumns="true"  domainObjectName="UserBankInfo">
             <property name="beginningDelimiter" value="`"/>
             <property name="endingDelimiter" value="`"/>
             <property name="delimitIdentifiers" value="true"/>
+
         </table>
+
     </context>
 </generatorConfiguration>

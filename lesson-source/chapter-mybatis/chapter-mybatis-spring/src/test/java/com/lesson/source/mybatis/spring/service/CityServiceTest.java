@@ -9,6 +9,8 @@ public class CityServiceTest extends BaseAppTest {
     @Autowired
     private CityService cityService;
 
+
+
     @Test
     public void save() throws Exception{
 
