@@ -1,7 +1,10 @@
 package com.lesson.source.mybatis.generator.plugins;
 
 import com.lesson.source.mybatis.generator.StyleCommentGenerator;
+import com.lesson.source.mybatis.spring.model.OrderByEnum;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.GeneratedXmlFile;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -9,11 +12,13 @@ import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
+import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
+import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.Date;
@@ -113,18 +118,7 @@ public class GeneratorPlugin extends PluginAdapter {
 		return true;
 	}
 
-	/**
-	 * 生成 Example
-	 *
-	 * @param topLevelClass
-	 * @param introspectedTable
-	 * @return
-	 */
-	@Override
-	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		Stream.of(javaDocLines).forEach(topLevelClass::addJavaDocLine);
-		return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
-	}
+
 
 
 	/**
@@ -204,5 +198,148 @@ public class GeneratorPlugin extends PluginAdapter {
 		element.addAttribute(new Attribute("keyColumn", introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName()));
 		element.addAttribute(new Attribute("useGeneratedKeys", "true"));
 		return true;
+	}
+
+
+	/**
+	 * 生成 Example
+	 *
+	 * @param topLevelClass
+	 * @param introspectedTable
+	 * @return
+	 */
+	@Override
+	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+		Stream.of(javaDocLines).forEach(topLevelClass::addJavaDocLine);
+
+		addOrder(topLevelClass,introspectedTable);
+
+
+		addLimit(topLevelClass, introspectedTable, "limitStart");
+
+		addLimit(topLevelClass, introspectedTable, "limitEnd");
+
+		addLimit(topLevelClass, introspectedTable, "limit");
+		return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
+	}
+
+
+	private void addOrder(TopLevelClass topLevelClass, IntrospectedTable introspectedTable){
+		CommentGenerator commentGenerator = context.getCommentGenerator();
+		Field field = new Field("orderBuffer",new FullyQualifiedJavaType(StringBuilder.class.getName()));
+		field.setVisibility(JavaVisibility.PROTECTED);
+		topLevelClass.addField(field);
+
+		Stream.concat(introspectedTable.getBaseColumns().stream(),introspectedTable.getPrimaryKeyColumns()
+				.stream())
+				.filter(column->
+						StringUtils.equalsAnyIgnoreCase( column.getFullyQualifiedJavaType().getFullyQualifiedName(),Long.class.getName(),Integer.class.getName())
+				)
+				.forEach(column->{
+					String name = column.getJavaProperty();
+					char c = name.charAt(0);
+					String camel = Character.toUpperCase(c) + name.substring(1);
+
+
+					Method method = new Method();
+					method.setVisibility(JavaVisibility.PUBLIC);
+
+
+					method.setName("addOrder" + camel);
+
+					topLevelClass.addImportedType(StringUtils.class.getName());
+					topLevelClass.addImportedType(OrderByEnum.class.getName());
+
+					method.addParameter(new Parameter(new FullyQualifiedJavaType(OrderByEnum.class.getName()),"orderType"));
+
+					method.addBodyLine("if (orderBuffer == null) {");
+					method.addBodyLine("orderBuffer = new StringBuilder();");
+					method.addBodyLine("} else {");
+					method.addBodyLine("orderBuffer.append(\",\");");
+					method.addBodyLine("}");
+					method.addBodyLine("orderBuffer.append(\""+column.getTableAlias()+"."+column.getActualColumnName()+" \"+orderType.name());");
+//			method.addBodyLine("orderByClause = orderByClause.concat((orderByClause != null?\",\":StringUtils.EMPTY)+ \""+column.getTableAlias()+"."+column.getActualColumnName()+" \"+orderType.name());");
+
+					commentGenerator.addGeneralMethodComment(method, introspectedTable);
+
+					topLevelClass.addMethod(method);
+				});
+
+		topLevelClass.getMethods().stream().filter(method->StringUtils.equals(method.getName(),"getOrderByClause")).forEach(method->{
+
+			method.getBodyLines().set(0,"return orderBuffer != null ? orderBuffer.toString() : null; ");
+
+		});
+	}
+
+	private void addLimit(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, String name) {
+
+		CommentGenerator commentGenerator = context.getCommentGenerator();
+
+
+		Field field = new Field();
+
+		field.setVisibility(JavaVisibility.PROTECTED);
+		field.setType(FullyQualifiedJavaType.getIntInstance());
+
+		field.setName(name);
+		field.setInitializationString("-1");
+
+		commentGenerator.addFieldComment(field, introspectedTable);
+
+		topLevelClass.addField(field);
+
+		char c = name.charAt(0);
+
+		String camel = Character.toUpperCase(c) + name.substring(1);
+
+		Method method = new Method();
+
+		method.setVisibility(JavaVisibility.PUBLIC);
+
+		method.setName("set" + camel);
+
+		method.addParameter(new Parameter(FullyQualifiedJavaType.getIntInstance(), name));
+
+		method.addBodyLine("this." + name + "=" + name + ";");
+
+		commentGenerator.addGeneralMethodComment(method, introspectedTable);
+
+		topLevelClass.addMethod(method);
+
+		method = new Method();
+
+		method.setVisibility(JavaVisibility.PUBLIC);
+
+		method.setReturnType(FullyQualifiedJavaType.getIntInstance());
+
+		method.setName("get" + camel);
+
+		method.addBodyLine("return " + name + ";");
+
+		commentGenerator.addGeneralMethodComment(method, introspectedTable);
+
+		topLevelClass.addMethod(method);
+
+	}
+
+
+	@Override
+	public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
+
+		XmlElement isNotNullElement = new XmlElement("if");
+
+		isNotNullElement.addAttribute(new Attribute("test", "limitStart != null and limitStart >=0"));
+		isNotNullElement.addElement(new TextElement("limit #{limitStart},#{limitEnd}"));
+		element.addElement(isNotNullElement);
+
+
+		//$NON-NLS-1$
+		isNotNullElement = new XmlElement("if");
+		//$NON-NLS-1$ //$NON-NLS-2$
+		isNotNullElement.addAttribute(new Attribute("test", "limit != null and limit >=0"));
+		isNotNullElement.addElement(new TextElement("limit #{limit}"));
+		element.addElement(isNotNullElement);
+		return super.sqlMapExampleWhereClauseElementGenerated(element, introspectedTable);
 	}
 }
