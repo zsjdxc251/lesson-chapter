@@ -228,6 +228,12 @@
 
 [参考资料](https://www.cnblogs.com/whych/p/9595671.html)
 
+* 查看网络设备 `docker network ls`
+* 进入 `docker network inspect id`
+* 创建网络设备`docker network create -d bridge test-bridge`
+* 运行时选取网络设备 `docker run -d -name network-test --network test-bridge bushbox /bin/sh -c "while true; do sleep 36000; doone"`
+* 把一个容器指定到一个网卡中 `docker network connect test-bridge cId`
+
 ### 示例
 
 [参考资料](https://hub.docker.com/search/?q=tomcat&type=image)
