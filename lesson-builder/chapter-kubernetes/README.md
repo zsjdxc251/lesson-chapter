@@ -155,7 +155,7 @@ apt-get install -y kubelet kubeadm kubectl
 
 ### 简单应用
 
-* `kubectl create -f nginx.yml`  创建一个 `pod`
+* `kubectl create/replace  -f nginx.yml`  创建一个 `pod`
 
   ```yaml
   apiVersion: v1
