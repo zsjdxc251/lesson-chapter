@@ -77,6 +77,14 @@ apt-get install -y kubelet kubeadm kubectl
     --apiserver-advertise-address=192.168.61.11 \
    --ignore-preflight-errors=Swap \
    --token-ttl 0
+   
+    mkdir -p $HOME/.kube
+  cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ chown $(id -u):$(id -g) $HOME/.kube/config
+   
+    kubectl taint nodes --all node-role.kubernetes.io/master-
+    
+     kubeadm join 192.168.112.140:6443 --token vkn1to.37k1jvt5hp75w9o8 --discovery-token-ca-cert-hash sha256:022a745cb73e3653e9a7050c452b80b59e7f6ce93c8106737e161048f8b9d6bb --ignore-preflight-errors=Swap
 ```
 
 
