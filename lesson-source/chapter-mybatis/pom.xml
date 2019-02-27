@@ -21,6 +21,8 @@
         <module>chapter-mybatis-spring</module>
         <module>chapter-mybatis-simple</module>
         <module>chapter-mybatis-spring-boot</module>
+        <module>chapter-mybatis-plus</module>
+        <module>chapter-mybatis-plus-generator</module>
     </modules>
 
 
