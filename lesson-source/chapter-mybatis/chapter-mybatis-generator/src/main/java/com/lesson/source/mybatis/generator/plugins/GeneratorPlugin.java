@@ -1,6 +1,7 @@
 package com.lesson.source.mybatis.generator.plugins;
 
-import com.lesson.source.mybatis.generator.StyleCommentGenerator;
+import com.lesson.source.mybatis.generator.common.BaseExample;
+import com.lesson.source.mybatis.generator.common.PropertyColumn;
 import com.lesson.source.mybatis.spring.model.OrderByEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -17,9 +18,11 @@ import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.Attribute;
-import org.mybatis.generator.api.dom.xml.Document;
+import org.mybatis.generator.api.dom.xml.Element;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
+import org.mybatis.generator.internal.DefaultCommentGenerator;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -31,7 +34,7 @@ import java.util.stream.Stream;
  */
 public class GeneratorPlugin extends PluginAdapter {
 
-	private boolean useBaseMapper = false;
+	private boolean useBaseMapper = true;
 
 
 	public String[] javaDocLines = {
@@ -48,7 +51,8 @@ public class GeneratorPlugin extends PluginAdapter {
 
 	/**
 	 * 生成 Model
-	 *  {@link StyleCommentGenerator#addModelClassComment(org.mybatis.generator.api.dom.java.TopLevelClass, org.mybatis.generator.api.IntrospectedTable)}
+	 * {@link DefaultCommentGenerator#addModelClassComment(TopLevelClass, IntrospectedTable)}
+	 *
 	 * @param topLevelClass
 	 * @param introspectedTable
 	 * @return
@@ -65,6 +69,8 @@ public class GeneratorPlugin extends PluginAdapter {
 		topLevelClass.addImportedType("javax.persistence.Column");
 		topLevelClass.addImportedType("javax.persistence.Id");
 		topLevelClass.addImportedType("javax.persistence.Table");
+		topLevelClass.addImportedType("javax.persistence.GeneratedValue");
+		topLevelClass.addImportedType("javax.validation.constraints.NotNull");
 		topLevelClass.addImportedType("org.apache.ibatis.type.Alias");
 
 		//添加domain的注解
@@ -82,12 +88,15 @@ public class GeneratorPlugin extends PluginAdapter {
 	}
 
 	/**
-	 *  首字母转小写
+	 * 首字母转小写
 	 *
 	 * @param s 字符串
 	 * @return 结果
 	 */
 	private static String toLowerCaseFirstOne(String s) {
+		if (StringUtils.isNotBlank(s)) {
+			s = StringUtils.substringAfterLast(s, ".");
+		}
 		if (Character.isLowerCase(s.charAt(0))) {
 			return s;
 		} else {
@@ -98,10 +107,14 @@ public class GeneratorPlugin extends PluginAdapter {
 
 
 	/**
-	 * {@link StyleCommentGenerator#addFieldComment(org.mybatis.generator.api.dom.java.Field, org.mybatis.generator.api.IntrospectedTable, org.mybatis.generator.api.IntrospectedColumn)}
+	 * {@link DefaultCommentGenerator#addFieldComment(Field, IntrospectedTable, IntrospectedColumn)}
 	 */
 	@Override
 	public boolean modelFieldGenerated(Field field, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
+
+		if (!introspectedColumn.isNullable()) {
+			field.addAnnotation("@NotNull");
+		}
 		//添加注解
 		if (field.isTransient()) {
 			//@Column
@@ -112,13 +125,17 @@ public class GeneratorPlugin extends PluginAdapter {
 		for (IntrospectedColumn col : primaryKeyColumns) {
 			if (col.getActualColumnName().equals(introspectedColumn.getActualColumnName())) {
 				field.addAnnotation("@Id");
+
+				if (col.isAutoIncrement()) {
+					field.addAnnotation("@GeneratedValue");
+				}
 			}
+
+
 		}
 		field.addAnnotation("@Column(name = \"" + introspectedColumn.getActualColumnName() + "\")");
 		return true;
 	}
-
-
 
 
 	/**
@@ -142,7 +159,7 @@ public class GeneratorPlugin extends PluginAdapter {
 					+ introspectedTable.getExampleType() + ","
 					+ introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType().getFullyQualifiedName() + ">");
 			FullyQualifiedJavaType imp = new FullyQualifiedJavaType(
-					"com.lesson.source.mybatis.spring.BaseMapper");
+					"com.asetku.japan.commons.mapper.BaseMapper");
 			/**
 			 * 添加 extends MybatisBaseMapper
 			 */
@@ -210,9 +227,11 @@ public class GeneratorPlugin extends PluginAdapter {
 	 */
 	@Override
 	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+
 		Stream.of(javaDocLines).forEach(topLevelClass::addJavaDocLine);
 
-		addOrder(topLevelClass,introspectedTable);
+
+		addOrder(topLevelClass, introspectedTable);
 
 
 		addLimit(topLevelClass, introspectedTable, "limitStart");
@@ -220,22 +239,56 @@ public class GeneratorPlugin extends PluginAdapter {
 		addLimit(topLevelClass, introspectedTable, "limitEnd");
 
 		addLimit(topLevelClass, introspectedTable, "limit");
+		topLevelClass.getMethods().clear();
+		topLevelClass.getInnerClasses().clear();
+		topLevelClass.getFields().clear();
+		topLevelClass.getImportedTypes().clear();
+
+		addField(topLevelClass, introspectedTable);
 		return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
 	}
 
+	private void addField(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+		topLevelClass.addImportedType(PropertyColumn.class.getName());
+		topLevelClass.addImportedType(BaseExample.class.getName());
+		topLevelClass.setSuperClass(new FullyQualifiedJavaType(BaseExample.class.getName()));
+		String alias = introspectedTable.getTableConfiguration().getAlias() != null ? introspectedTable.getTableConfiguration().getAlias() : StringUtils.EMPTY;
 
-	private void addOrder(TopLevelClass topLevelClass, IntrospectedTable introspectedTable){
+		Stream.concat(introspectedTable.getBaseColumns().stream(), introspectedTable.getPrimaryKeyColumns()
+				.stream())
+				.forEach(column -> {
+					Field field = new Field();
+					field.setVisibility(JavaVisibility.PUBLIC);
+					field.setStatic(true);
+					String name = column.getJavaProperty();
+					field.setName(name);
+					field.setType(new FullyQualifiedJavaType(PropertyColumn.class.getName()));
+
+					field.addJavaDocLine("/**");
+					field.addJavaDocLine(" *" + column.getRemarks());
+					field.addJavaDocLine(" */");
+
+					// field.setInitializationString("new PropertyColumn(\"" + MyBatis3FormattingUtilities.getAliasedActualColumnName(column) + "\",\"" + name + "\",\"" + alias + "\")");
+
+					field.setInitializationString("new PropertyColumn(\"" + column.getActualColumnName() + "\",\"" + name + "\",\"" + alias + "\")");
+
+					topLevelClass.addField(field);
+
+				});
+	}
+
+	private void addOrder(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 		CommentGenerator commentGenerator = context.getCommentGenerator();
-		Field field = new Field("orderBuffer",new FullyQualifiedJavaType(StringBuilder.class.getName()));
+		Field field = new Field("orderBuffer", new FullyQualifiedJavaType(StringBuilder.class.getName()));
 		field.setVisibility(JavaVisibility.PROTECTED);
 		topLevelClass.addField(field);
 
-		Stream.concat(introspectedTable.getBaseColumns().stream(),introspectedTable.getPrimaryKeyColumns()
+		Stream.concat(introspectedTable.getBaseColumns().stream(), introspectedTable.getPrimaryKeyColumns()
 				.stream())
-				.filter(column->
-						StringUtils.equalsAnyIgnoreCase( column.getFullyQualifiedJavaType().getFullyQualifiedName(),Long.class.getName(),Integer.class.getName())
+				.filter(column ->
+						StringUtils.equalsAnyIgnoreCase(column.getFullyQualifiedJavaType().getFullyQualifiedName(), Long.class.getName(), Integer.class.getName())
 				)
-				.forEach(column->{
+				.forEach(column -> {
 					String name = column.getJavaProperty();
 					char c = name.charAt(0);
 					String camel = Character.toUpperCase(c) + name.substring(1);
@@ -250,14 +303,14 @@ public class GeneratorPlugin extends PluginAdapter {
 					topLevelClass.addImportedType(StringUtils.class.getName());
 					topLevelClass.addImportedType(OrderByEnum.class.getName());
 
-					method.addParameter(new Parameter(new FullyQualifiedJavaType(OrderByEnum.class.getName()),"orderType"));
+					method.addParameter(new Parameter(new FullyQualifiedJavaType(OrderByEnum.class.getName()), "orderType"));
 
 					method.addBodyLine("if (orderBuffer == null) {");
 					method.addBodyLine("orderBuffer = new StringBuilder();");
 					method.addBodyLine("} else {");
 					method.addBodyLine("orderBuffer.append(\",\");");
 					method.addBodyLine("}");
-					method.addBodyLine("orderBuffer.append(\""+column.getTableAlias()+"."+column.getActualColumnName()+" \"+orderType.name());");
+					method.addBodyLine("orderBuffer.append(\"" + column.getTableAlias() + "." + column.getActualColumnName() + " \"+orderType.name());");
 //			method.addBodyLine("orderByClause = orderByClause.concat((orderByClause != null?\",\":StringUtils.EMPTY)+ \""+column.getTableAlias()+"."+column.getActualColumnName()+" \"+orderType.name());");
 
 					commentGenerator.addGeneralMethodComment(method, introspectedTable);
@@ -265,9 +318,9 @@ public class GeneratorPlugin extends PluginAdapter {
 					topLevelClass.addMethod(method);
 				});
 
-		topLevelClass.getMethods().stream().filter(method->StringUtils.equals(method.getName(),"getOrderByClause")).forEach(method->{
+		topLevelClass.getMethods().stream().filter(method -> StringUtils.equals(method.getName(), "getOrderByClause")).forEach(method -> {
 
-			method.getBodyLines().set(0,"return orderBuffer != null ? orderBuffer.toString() : null; ");
+			method.getBodyLines().set(0, "return orderBuffer != null ? orderBuffer.toString() : null; ");
 
 		});
 	}
@@ -341,5 +394,30 @@ public class GeneratorPlugin extends PluginAdapter {
 		isNotNullElement.addElement(new TextElement("limit #{limit}"));
 		element.addElement(isNotNullElement);
 		return super.sqlMapExampleWhereClauseElementGenerated(element, introspectedTable);
+	}
+
+
+	@Override
+	public boolean sqlMapDeleteByExampleElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
+
+		String alias = introspectedTable.getTableConfiguration().getAlias() != null ? introspectedTable.getTableConfiguration().getAlias() : StringUtils.EMPTY;
+
+		if (StringUtils.isNotBlank(alias) && !ObjectUtils.isEmpty(element.getElements())) {
+			// 补充 deleteByExample 删除 bug -->  `delete from t_user_bank_info ubi` updated `delete ubi from t_user_bank_info ubi`
+			Element e;
+			for (int i = 0; i < element.getElements().size(); i++) {
+				e = element.getElements().get(i);
+				if (e instanceof TextElement) {
+					String content = TextElement.class.cast(e).getContent();
+					if (StringUtils.isNotBlank(content)) {
+						String newContent = StringUtils.replace(content, "delete", "delete " + alias);
+
+						element.getElements().set(i, new TextElement(newContent));
+					}
+
+				}
+			}
+		}
+		return super.sqlMapDeleteByExampleElementGenerated(element, introspectedTable);
 	}
 }
