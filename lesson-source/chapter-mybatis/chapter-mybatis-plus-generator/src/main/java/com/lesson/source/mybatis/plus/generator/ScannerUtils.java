@@ -9,14 +9,14 @@ import java.util.Scanner;
  * @author zhengshijun
  * @version created on 2019/2/28.
  */
-public class ScannerUtils {
+class ScannerUtils {
 
     /**
      * <p>
      * 读取控制台内容
      * </p>
      */
-    public static String scanner(String tip) {
+    static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
         String help = "请输入" + tip + "：";
         System.out.println(help);
