@@ -29,6 +29,9 @@ public class FlowRecordServiceImplTest extends AbstractSpringBootTest {
 		flowRecord.setCreateTime(LocalDateTime.now());
 		flowRecord.setSum(new BigDecimal(22L));
 
+		flowRecord.setId(2L);
+		flowRecordService.save(flowRecord);
+
 		QueryWrapper<FlowRecord> wrapper = new QueryWrapper<>();
 
 		wrapper.eq("id",22);

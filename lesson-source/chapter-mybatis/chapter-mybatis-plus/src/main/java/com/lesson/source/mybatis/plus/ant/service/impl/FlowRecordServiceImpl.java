@@ -17,4 +17,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class FlowRecordServiceImpl extends ServiceImpl<FlowRecordMapper, FlowRecord> implements IFlowRecordService {
 
+
+	public void flow(){
+
+
+
+
+	}
 }
