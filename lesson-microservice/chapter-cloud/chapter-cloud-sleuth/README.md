@@ -73,3 +73,17 @@ server:
   ```shell
   java -DKAFKA_BOOTSTRAP_SERVERS=ip:port,ip:port -jar zipkin.jar
   ```
+* `client` 配置
+  
+  ```yaml 
+  spring:
+    zipkin:
+      sender:
+        type: kafka
+      kafka:
+        topic: asetku-japan-zipkin
+    sleuth:
+      traceId128: true
+      sampler:
+        probability: 1.0
+  ```
