@@ -22,7 +22,8 @@
         <module>chapter-spring-mvc-simple</module>
         <module>chapter-spring-aop</module>
         <module>chapter-spring-five</module>
-    </modules>
+		<module>chapter-spring-async</module>
+	</modules>
 
 
     <dependencyManagement>
