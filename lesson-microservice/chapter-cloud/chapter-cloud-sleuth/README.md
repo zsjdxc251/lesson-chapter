@@ -67,7 +67,7 @@ server:
   ```
 
 ## 配置消息总线 zipkin 上报
-
+* [参考文档](http://www.mamicode.com/info-detail-2292005.html)
 * 启动`zipkin.jar` 命令
 
   ```shell
