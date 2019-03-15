@@ -27,7 +27,18 @@ http.cors.allow-origin: "*"Elasticsearch
   sysctl -p
   ulimit -l unlimited
   ```
-
+  
+* 临时处理
+  ```shell
+  sysctl -w vm.max_map_count=262144
+  ```
+  
+* 永久处理
+  /etc/sysctl.conf文件最后添加一行
+  ```shell
+  vm.max_map_count=262144
+  ```
+  
 
 ### 集群配置
 
