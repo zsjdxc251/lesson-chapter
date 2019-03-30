@@ -96,6 +96,18 @@
 
   * 查询事务是否自动开启`SELECT @@autocommit;`
 
+  * 示例
+
+    ```sql
+    set session autocommit = OFF;   -- 第一步
+    SELECT @@autocommit;   -- 第二步
+    start transaction -- 第三步
+    UPDATE t_article SET `status` = 3 WHERE id = 1  -- 第四部
+    COMMIT  -- 第五步
+    ```
+
+    
+
 ### 事务ACID 特性
 
 * 原子性（`atomicity`）
