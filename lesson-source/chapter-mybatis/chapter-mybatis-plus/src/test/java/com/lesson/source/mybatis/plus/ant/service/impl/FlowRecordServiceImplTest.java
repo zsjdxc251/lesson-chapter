@@ -24,13 +24,15 @@ public class FlowRecordServiceImplTest extends AbstractSpringBootTest {
 		FlowRecord flowRecord = new FlowRecord();
 		flowRecord.setName("1");
 		flowRecord.setOrderId(1L);
-		flowRecord.setId(22L);
+
 		flowRecord.setUserId(45L);
 		flowRecord.setCreateTime(LocalDateTime.now());
 		flowRecord.setSum(new BigDecimal(22L));
 
-		flowRecord.setId(2L);
-		flowRecordService.save(flowRecord);
+
+		flowRecordService.getById(1116249535312572418L);
+
+		//flowRecordService.save(flowRecord);
 
 		QueryWrapper<FlowRecord> wrapper = new QueryWrapper<>();
 

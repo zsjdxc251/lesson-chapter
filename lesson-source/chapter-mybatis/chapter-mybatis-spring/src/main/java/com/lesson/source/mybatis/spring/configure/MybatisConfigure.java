@@ -71,6 +71,7 @@ public class MybatisConfigure {
         SqlSessionFactory sqlSessionFactory = null;
         try {
             sqlSessionFactory = sqlSessionFactoryBean.getObject();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,6 +82,7 @@ public class MybatisConfigure {
     @Bean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory){
         SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
+
         return sqlSessionTemplate;
     }
 

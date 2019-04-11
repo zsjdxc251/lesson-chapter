@@ -23,7 +23,8 @@
         <module>chapter-mybatis-spring-boot</module>
         <module>chapter-mybatis-plus</module>
         <module>chapter-mybatis-plus-generator</module>
-    </modules>
+		<module>chapter-mybatis-custom</module>
+	</modules>
 
 
     <dependencies>
