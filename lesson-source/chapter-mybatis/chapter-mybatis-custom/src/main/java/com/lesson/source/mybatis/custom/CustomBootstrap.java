@@ -52,9 +52,6 @@ public class CustomBootstrap {
 
 		List<SqlNode> sqlNodes = Lists.newArrayList();
 
-
-
-
 		sqlNodes.add(new StaticTextSqlNode("select * from flow_record limit 1"));
 
 		MixedSqlNode mixedSqlNode = new MixedSqlNode(sqlNodes);
