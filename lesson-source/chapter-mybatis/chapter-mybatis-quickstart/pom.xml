@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>example-common</artifactId>
+            <artifactId>common-lang</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

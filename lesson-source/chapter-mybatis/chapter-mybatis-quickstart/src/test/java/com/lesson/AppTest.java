@@ -1,6 +1,6 @@
 package com.lesson;
 
-import com.example.common.utils.StringTools;
+import com.example.common.lang.StringTools;
 import org.junit.Test;
 
 import java.lang.reflect.Modifier;
