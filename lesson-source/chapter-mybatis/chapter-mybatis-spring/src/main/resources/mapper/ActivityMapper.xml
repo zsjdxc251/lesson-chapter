@@ -1,0 +1,15 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lesson.source.mybatis.spring.mapper.ActivityMapper">
+
+
+
+
+	<select id="findAll" resultType="com.lesson.source.mybatis.spring.model.Activity">
+
+
+		SELECT * FROM t_activity
+
+	</select>
+
+
+</mapper>

@@ -84,7 +84,7 @@
             <!--<property name="delimitIdentifiers" value="true"/>-->
         <!--</table>-->
 
-        <table tableName="t_user_bank_info" delimitAllColumns="true"  domainObjectName="UserBankInfo">
+        <table tableName="t_user_bank_info" delimitAllColumns="true"  domainObjectName="base.UserBankInfo">
             <property name="beginningDelimiter" value="`"/>
             <property name="endingDelimiter" value="`"/>
             <property name="delimitIdentifiers" value="true"/>
