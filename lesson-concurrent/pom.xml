@@ -17,7 +17,8 @@
     <url>http://www.example.com</url>
     <modules>
         <module>chapter-concurrent-api</module>
-    </modules>
+		<module>chapter-concurrent-bit</module>
+	</modules>
 
 
 </project>
