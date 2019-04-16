@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
 import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.config.server.environment.EnvironmentController;
 import org.springframework.cloud.config.server.environment.EnvironmentRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -18,6 +19,16 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ *
+ *
+ *
+ *   {@link EnvironmentController}
+ * @author zhengshijun
+ * @version created on 2018/12/22.
+ *
+ *
+ */
 @SpringBootApplication
 @EnableConfigServer
 @EnableScheduling
