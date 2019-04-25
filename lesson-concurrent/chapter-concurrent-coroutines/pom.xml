@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>lesson-concurrent</artifactId>
+		<groupId>com.lesson</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>chapter-concurrent-coroutines</artifactId>
+
+	<name>chapter-concurrent-coroutines</name>
+	<properties>
+		<coroutines.version>1.4.2</coroutines.version>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>com.offbynull.coroutines</groupId>
+			<artifactId>user</artifactId>
+			<version>${coroutines.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.offbynull.coroutines</groupId>
+			<artifactId>instrumenter</artifactId>
+			<version>${coroutines.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-sync</artifactId>
+			<version>3.7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>co.paralleluniverse</groupId>
+			<artifactId>quasar-core</artifactId>
+			<version>0.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>co.paralleluniverse</groupId>
+			<artifactId>capsule</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+
+
+	</dependencies>
+
+
+	<build>
+
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<!--<plugin>-->
+			<!--<groupId>com.offbynull.coroutines</groupId>-->
+			<!--<artifactId>maven-plugin</artifactId>-->
+			<!--<version>${coroutines.version}</version>-->
+			<!--<executions>-->
+			<!--&lt;!&ndash; Instruments main classes at process-classes phase &ndash;&gt;-->
+			<!--<execution>-->
+			<!--<id>coroutines-instrument-id</id>-->
+			<!--<goals>-->
+			<!--<goal>instrument</goal>-->
+			<!--</goals>-->
+			<!--</execution>-->
+			<!--&lt;!&ndash; Instruments test classes at process-test-classes phase &ndash;&gt;-->
+			<!--<execution>-->
+			<!--<id>test-coroutines-instrument-id</id>-->
+			<!--<goals>-->
+			<!--<goal>test-instrument</goal>-->
+			<!--</goals>-->
+			<!--</execution>-->
+			<!--</executions>-->
+			<!--<configuration>-->
+			<!--&lt;!&ndash; Uncomment if you'll be stepping through your coroutines in an IDE. &ndash;&gt;-->
+			<!--&lt;!&ndash;<debugMode>true</debugMode>&ndash;&gt;-->
+			<!--</configuration>-->
+			<!--</plugin>-->
+
+			<plugin>
+				<groupId>com.vlkan</groupId>
+				<artifactId>quasar-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<configuration>
+					<check>true</check>
+					<debug>true</debug>
+					<verbose>true</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>instrument</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.5.1</version>
+				<executions>
+					<execution>
+						<id>getClasspathFilenames</id>
+						<goals>
+							<goal>properties</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<argLine>-Dco.paralleluniverse.fibers.verifyInstrumentation=true</argLine>
+
+					<!-- Quasar Agent -->
+					<argLine>-javaagent:${co.paralleluniverse:quasar-core:jar}</argLine>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
