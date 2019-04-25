@@ -33,6 +33,7 @@
 **执行引擎负责解释命令，提交操作系统执行**
 
 * Native Interface 本地接口
+
   * 本地接口的作用是融合不同的编程语言为`Java`所用
 
 * Native Method Stack
@@ -61,6 +62,8 @@
     ![1555735863441](assets/1555735863441.png)
 
 [JDK8 Docs](https://docs.oracle.com/javase/8/docs/)
+
+[The class File Format](<https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html>)
 
 ## Jvm 实操
 
