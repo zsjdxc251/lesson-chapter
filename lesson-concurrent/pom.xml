@@ -18,6 +18,7 @@
     <modules>
         <module>chapter-concurrent-api</module>
 		<module>chapter-concurrent-bit</module>
+		<module>chapter-concurrent-coroutines</module>
 	</modules>
 
 
