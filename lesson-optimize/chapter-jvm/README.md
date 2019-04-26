@@ -65,6 +65,8 @@
 
 [The class File Format](<https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html>)
 
+[Java HotSpot VM Options](<https://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html#Options>)
+
 ## Jvm 实操
 
 ### JDK 命令信息
