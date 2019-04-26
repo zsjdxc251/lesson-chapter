@@ -67,6 +67,14 @@
 
 ## Jvm 实操
 
+### JDK 命令信息
+
+* `jps`
+* `jmap -heap PID` 查看堆内存情况
+* `jinfo -flags PID` 打印JVM配置的参数信息
+* `jmap -histo  PID` 打印该实例加载了哪些类
+* `jmap -dump:format=b,file=dump.log PID`  生成`dump`二进制文件  通过` jhat dump.log` 生成web默认`7000`端口可查看具体信息
+
 ### JDK自带监控工具
 
 
@@ -84,3 +92,28 @@
 2.  OpenJDK [官网](<http://openjdk.java.net/projects/jdk/>)
    * 下载路径 [JDK11](<http://jdk.java.net/11/>) [JDK12](<http://jdk.java.net/12/>)
 
+
+
+
+
+
+
+## 常用调优参数
+
+- \- : 标准VM选项，VM规范的选项
+- -X: 非标准VM选项，不保证所有VM支持
+- -XX: 高级选项，高级特性，但属于不稳定的选项
+
+### 内存分配
+
+* `-Xmx1024M` 最大堆内存`1024M` 等同于`-XX:MaxHeapSize`
+* `-Xms1024M` 初始化堆内存 `1024M `  ，`ms`就是`memory size` 缩写
+* `-Xmn1024` 堆中新生代初始及最大大小，如果需要进一步细化，初始化大小用`-XX:NewSize`，最大大小用`-XX:MaxNewSize`
+* `-Xss256K` 线程栈大小，等同于`-XX:ThreadStackSize`   `ss`就是`stack size` 的缩写
+* `-XX:NewRatio=5` 新生代老年代比例 `new:old=1:5`
+* `-XX:SurvivorRatio=8`  `eden:from:to=8:1:1`
+
+### 内存调试
+
+* `-XX:+PrintGCDetails` 打印GC日志详情和堆内存情况
+* `-verbose:gc` 执行GC时打印GC日志
