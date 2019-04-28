@@ -71,6 +71,8 @@
 
 ### JDK 命令信息
 
+ [官方文档](<https://docs.oracle.com/javase/8/docs/technotes/tools/unix/>)
+
 * `jps`     `java process status` 缩写
 
   * `jps -m` 运行传入主类的参数
@@ -118,71 +120,6 @@
     * `LVMID `: 本地虚拟机进程ID `PID`
     * `[interval]` : 连续输出的时间间隔
     * `[count]` : 连续输出的次数
-
-  * `option`参数总览
-
-    | Option           | Displays…                                                    |
-    | ---------------- | ------------------------------------------------------------ |
-    | class            | class loader的行为统计。Statistics on the behavior of the class loader. |
-    | compiler         | HotSpt JIT编译器行为统计。Statistics of the behavior of the HotSpot Just-in-Time compiler. |
-    | gc               | 垃圾回收堆的行为统计。Statistics of the behavior of the garbage collected heap. |
-    | gccapacity       | 各个垃圾回收代容量(young,old,perm)和他们相应的空间统计。Statistics of the capacities of the generations and their corresponding spaces. |
-    | gcutil           | 垃圾回收统计概述。Summary of garbage collection statistics.  |
-    | gccause          | 垃圾收集统计概述（同-gcutil），附加最近两次垃圾回收事件的原因。Summary of garbage collection statistics (same as -gcutil), with the cause of the last and |
-    | gcnew            | 新生代行为统计。Statistics of the behavior of the new generation. |
-    | gcnewcapacity    | 新生代与其相应的内存空间的统计。Statistics of the sizes of the new generations and its corresponding spaces. |
-    | gcold            | 年老代和永生代行为统计。Statistics of the behavior of the old and permanent generations. |
-    | gcoldcapacity    | 年老代行为统计。Statistics of the sizes of the old generation. |
-    | gcpermcapacity   | 永生代行为统计。Statistics of the sizes of the permanent generation. |
-    | printcompilation | HotSpot编译方法统计。HotSpot compilation method statistics.  |
-
-  * 示例 `jstat -class PID`
-
-    >Loaded  Bytes  Unloaded  Bytes     Time
-    >   620  1243.9        0     0.0       0.16
-
-    * `Loaded `: 加载class的数量
-    * `Bytes `: class字节大小
-    * `Unloaded `: 未加载class的数量
-    * `Bytes `: 未加载class的字节大小
-    * `Time `: 加载时间
-
-  * ` jstat -compiler PID`
-
-    >Compiled Failed Invalid   Time   FailedType FailedMethod
-    >      93      0       0     0.12          0
-
-    * Compiled : 编译数量
-    * Failed : 编译失败数量
-    * Invalid : 无效数量
-    * Time : 编译耗时
-    * FailedType : 失败类型
-    * FailedMethod : 失败方法的全限定名
-
-  * `jstat -gc PID`
-
-    >  S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT
-    > 8192.0 8192.0  0.0    0.0   49152.0   7946.8   131072.0     0.0     4480.0 775.8  384.0   76.4       0    0.000   0      0.000    0.000
-
-    **C即Capacity 总容量，U即Used 已使用的容量**
-
-    * S0C : survivor0区的总容量
-    * S1C : survivor1区的总容量
-    * S0U : survivor0区已使用的容量
-    * S1U : survivor1区已使用的容量
-    * EC : Eden区的总容量
-    * EU : Eden区已使用的容量
-    * OC : Old区的总容量
-    * OU : Old区已使用的容量
-    * PC	当前perm的容量 (KB)
-    * PU	perm的使用 (KB)
-    * YGC : 新生代垃圾回收次数
-    * YGCT : 新生代垃圾回收时间
-    * FGC : 老年代垃圾回收次数
-    * FGCT : 老年代垃圾回收时间
-    * GCT : 垃圾回收总消耗时间
-
-    `jstat -gc 1262 2000 20` 这个命令意思就是每隔2000ms输出1262的gc情况，一共输出20次
 
 ### JDK自带监控工具
 
