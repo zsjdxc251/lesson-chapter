@@ -18,4 +18,13 @@ public interface FlowRecordMapper {
 	@Select("select * from flow_record limit 1")
 	FlowRecord selectOne1();
 
+
+	/**
+	 *
+	 * @param name
+	 * @return
+	 */
+	@Select("select * from flow_record limit 1")
+	FlowRecord selectOne1(String name);
+
 }

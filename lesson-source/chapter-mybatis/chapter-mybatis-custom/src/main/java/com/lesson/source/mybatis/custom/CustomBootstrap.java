@@ -35,6 +35,9 @@ import java.util.Map;
 /**
  *
  *  {@link Configuration#addMappedStatement(org.apache.ibatis.mapping.MappedStatement)}
+ *
+ *
+ *  {@link Configuration.StrictMap#put(java.lang.String, java.lang.Object)} 不能有相同的方法名 参数不同也不行
  * @author zhengshijun
  * @version created on 2019/4/11.
  */
