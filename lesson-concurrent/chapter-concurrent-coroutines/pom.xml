@@ -54,31 +54,31 @@
 
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
-			<!--<plugin>-->
-			<!--<groupId>com.offbynull.coroutines</groupId>-->
-			<!--<artifactId>maven-plugin</artifactId>-->
-			<!--<version>${coroutines.version}</version>-->
-			<!--<executions>-->
-			<!--&lt;!&ndash; Instruments main classes at process-classes phase &ndash;&gt;-->
-			<!--<execution>-->
-			<!--<id>coroutines-instrument-id</id>-->
-			<!--<goals>-->
-			<!--<goal>instrument</goal>-->
-			<!--</goals>-->
-			<!--</execution>-->
-			<!--&lt;!&ndash; Instruments test classes at process-test-classes phase &ndash;&gt;-->
-			<!--<execution>-->
-			<!--<id>test-coroutines-instrument-id</id>-->
-			<!--<goals>-->
-			<!--<goal>test-instrument</goal>-->
-			<!--</goals>-->
-			<!--</execution>-->
-			<!--</executions>-->
-			<!--<configuration>-->
-			<!--&lt;!&ndash; Uncomment if you'll be stepping through your coroutines in an IDE. &ndash;&gt;-->
-			<!--&lt;!&ndash;<debugMode>true</debugMode>&ndash;&gt;-->
-			<!--</configuration>-->
-			<!--</plugin>-->
+			<plugin>
+			<groupId>com.offbynull.coroutines</groupId>
+			<artifactId>maven-plugin</artifactId>
+			<version>${coroutines.version}</version>
+			<executions>
+			<!-- Instruments main classes at process-classes phase -->
+			<execution>
+			<id>coroutines-instrument-id</id>
+			<goals>
+			<goal>instrument</goal>
+			</goals>
+			</execution>
+			<!-- Instruments test classes at process-test-classes phase -->
+			<execution>
+			<id>test-coroutines-instrument-id</id>
+			<goals>
+			<goal>test-instrument</goal>
+			</goals>
+			</execution>
+			</executions>
+			<configuration>
+			<!-- Uncomment if you'll be stepping through your coroutines in an IDE. -->
+			<!--<debugMode>true</debugMode>-->
+			</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>com.vlkan</groupId>
@@ -100,30 +100,23 @@
 			</plugin>
 
 			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.5.1</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.version}</version>
+				<configuration>
+					<mainClass>com.lesson.concurrent.conroutines.CoroutineSample</mainClass>
+				</configuration>
 				<executions>
 					<execution>
-						<id>getClasspathFilenames</id>
 						<goals>
-							<goal>properties</goal>
+							<goal>repackage</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
 
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<argLine>-Dco.paralleluniverse.fibers.verifyInstrumentation=true</argLine>
 
-					<!-- Quasar Agent -->
-					<argLine>-javaagent:${co.paralleluniverse:quasar-core:jar}</argLine>
-				</configuration>
-			</plugin>
 
 		</plugins>
 	</build>

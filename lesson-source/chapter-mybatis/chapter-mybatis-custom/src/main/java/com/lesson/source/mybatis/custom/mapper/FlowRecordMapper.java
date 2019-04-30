@@ -25,6 +25,6 @@ public interface FlowRecordMapper {
 	 * @return
 	 */
 	@Select("select * from flow_record limit 1")
-	FlowRecord selectOne1(String name);
+	FlowRecord selectOne12(String name);
 
 }
