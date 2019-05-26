@@ -17,7 +17,11 @@
   <modules>
     <module>chapter-maven-plugin</module>
       <module>chapter-maven-archetype</module>
+      <module>chapter-maven-plugin-sample</module>
   </modules>
+
+
+
 
 
 </project>
