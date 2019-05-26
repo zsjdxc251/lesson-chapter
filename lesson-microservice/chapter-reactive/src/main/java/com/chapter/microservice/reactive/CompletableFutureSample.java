@@ -34,6 +34,7 @@ public class CompletableFutureSample {
         }).thenRun(()->{
 
             println("多线程");
+            throw new RuntimeException("");
 
         }).whenComplete((data,error)->{
             System.out.println(data+"-"+error);
