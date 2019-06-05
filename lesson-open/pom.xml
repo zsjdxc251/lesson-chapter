@@ -19,7 +19,8 @@
         <module>chapter-java-beans</module>
         <module>chapter-java-resource</module>
         <module>chapter-interface-design</module>
-    </modules>
+		<module>chapter-javase-i18n</module>
+	</modules>
 
 
 </project>
