@@ -69,10 +69,14 @@ public class EncodedControl extends ResourceBundle.Control {
 			throw (IOException) e.getException();
 		}
 		if (stream != null) {
+			Reader reader = null;
 			try {
-				Reader reader = new InputStreamReader(stream);
+				reader = new InputStreamReader(stream);
 				bundle = new PropertyResourceBundle(reader);
 			} finally {
+				if (reader != null){
+					reader.close();
+				}
 				stream.close();
 			}
 		}
