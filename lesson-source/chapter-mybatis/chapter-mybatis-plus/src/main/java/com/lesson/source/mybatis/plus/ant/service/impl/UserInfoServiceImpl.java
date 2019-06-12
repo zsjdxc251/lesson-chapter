@@ -34,7 +34,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
         lambda1.ge(UserInfo::getAge,1);
 
-        lambda1.select()
+     
         List<UserInfo> list = new LambdaQueryChainWrapper<>(baseMapper).gt(UserInfo::getPassword,"1231231").list();
 
     }
