@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.0.20.4:3306/pandadb
+    username: root
+    password: 123456
+  output:
+    ansi:
+      enabled: ALWAYS
+
+
+logging:
+  level:
+    root: INFO
+    'com.lesson.source.mybatis.plus.quickstart.mapper': trace
