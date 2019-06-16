@@ -27,7 +27,10 @@
 ### mysql 客户端/服务端通信-查询状态
 
 * `show variables like'max_connections'` 查看当前最大连接数
-* `set global max_connections=1000` 设置最大的连接数
+  * `set global max_connections=1000` 设置最大的连接数
+* `show processlist`
+* `show full processlist`
+* `show status like '%Uptime'` 
 
 ### 查询缓存
 
