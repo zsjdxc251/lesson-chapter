@@ -5,7 +5,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://121.196.232.248:3306/mysql-engine?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
     username: root
-    password: 12345678
+    password: xxxx
   output:
     ansi:
       enabled: ALWAYS
