@@ -1,4 +1,6 @@
 spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://121.196.232.248:3306/mysql-engine?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
@@ -11,5 +13,7 @@ spring:
 
 logging:
   level:
-    root: INFO
-    'com.lesson.source.mybatis.plus.quickstart.mapper': trace
+    root: DEBUG
+
+
+

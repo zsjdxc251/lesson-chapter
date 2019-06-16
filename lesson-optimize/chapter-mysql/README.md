@@ -10,9 +10,39 @@
 
 ## 理解Mysql底层B+tree索引机制
 
+[索引演示](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
+
+### 索引是什么
+
+**索引是为了加速对表中数据行的检索而创建的一种分散存储数据结构**
 
 
 
+
+
+
+
+## Mysql查询优化详解
+
+### mysql 客户端/服务端通信-查询状态
+
+
+
+### 查询缓存
+
+* `show variables like 'query_cache%'` 查看缓存开启情况
+
+  * `quer_cache_type`  
+    * `0` 关闭
+    * `1` 开启
+    * `2` 按需开启
+
+* `show status like 'Qcache%'` 缓存情况 
+
+  * `Qcache_hits` 缓存命中次数
+  * `Qcache_inserts` 缓存插入条数
+
+  **`select sql_no_cache * from users where id = 33`** 表示不走缓存
 
 ## 执行计划
 

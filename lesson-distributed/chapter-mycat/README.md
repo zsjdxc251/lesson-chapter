@@ -21,7 +21,11 @@
 8. 初始化 `mysql` 数据 
 
    >./bin/mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data/
-   >
+
+   ```shell
+   ./bin/mysqld --initialize --user=mysql --basedir=/data/service/mysql-5.7.10/  --datadir=/data/mysql3306
+   ```
+
    >./bin/mysqld --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data/
 
 9. 在`/etc` 目录下 寻找 `my.cnf`文件 ，如果有编辑，如果没有新增该文件
