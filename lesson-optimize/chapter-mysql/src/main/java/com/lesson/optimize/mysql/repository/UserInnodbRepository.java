@@ -12,5 +12,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * @author zhengshijun
  * @version created on 2019/6/14.
  */
-public interface UserInnodbRepository extends CrudRepository<UserInnodb, Long> {
+public interface UserInnodbRepository extends CrudRepository<UserInnodb, Long>,JpaRepository<UserInnodb, Long> {
 }
