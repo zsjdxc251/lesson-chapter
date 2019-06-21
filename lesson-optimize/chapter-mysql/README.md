@@ -16,7 +16,134 @@
 
 **索引是为了加速对表中数据行的检索而创建的一种分散存储数据结构**
 
+### 为什么要使用索引
 
+* 索引能极大的减少存储引擎需要扫描的数据量
+* 索引可以把随机IO变成顺序IO
+* 索引可以帮助我们在进行分组、排序等操作时，避免使用临时表
+
+### 二叉查找树Binary Search Tree
+
+![1560954301757](assets/1560954301757.png)
+
+#### 平衡二叉查找树
+
+![1560954747567](assets/1560954747567.png)
+
+#### 使用二叉树弊端
+
+* 它太深了
+  * 数据处的（高）深度决定着他的IO操作次数，IO操作耗时大
+* 它太小了
+  * 每一个磁盘块（节点/页）保存的数据量太小了
+  * 没有很好的利用操作磁盘`IO`的数据交换特效，页没有利用好磁盘`IO`的预读能力（空间局部性原理），从而带来频繁的`IO`操作
+
+
+
+### 多路平衡查找树 ，B-Tree
+
+![1560955542307](assets/1560955542307.png)
+
+
+
+### 加强版多路平衡查找树 B+树
+
+![1560955599709](assets/1560955599709.png)
+
+### B+Tree 与B-Tree的区别
+
+* B+节点关键字搜索采用闭合区间
+* B+非叶节点不保存数据相关信息，只保存关键字和子节点的引用
+* B+关键字对应的数据保存在叶子节点中
+* B+叶子节点是顺序排列的，并且相邻节点具有顺序引用的关系
+
+### 为什么选B+Tree 
+
+* B+树是B-树的变种（PLUS版）多路绝对平衡查找树，他拥有B-树的优势
+* B+树扫库、表能力更强
+* B+树的磁盘读写能力更强
+* B+树的排序能力更强
+* B+树的查询效率更加稳定
+  * 由于都需要找到末尾页子节点才能找到数据
+
+## Mysql B+Treee 索引体系形式
+
+### Mysql 中 B+Tree 索引体系形式 - Myisam
+
+![1560955897527](assets/1560955897527.png)
+
+![1560955928285](assets/1560955928285.png)
+
+### Mysql中B+Tree 索引体现形式-Innodb
+
+![1560956002470](assets/1560956002470.png)
+
+![1561041169040](assets/1561041169040.png)
+
+* 聚集索引
+  * 数据库表行中数据的物理顺序与键值的逻辑（索引） 顺序相同
+
+
+
+### Innodb VS Myisam
+
+![1561041017550](assets/1561041017550.png)
+
+
+
+## Mysql 插拔式的存储引擎
+
+
+
+
+
+![1560954051633](assets/1560954051633.png)
+
+
+
+### 存储引擎介绍
+
+* 插拔式的插件方式
+* 存储引擎是制定在表之上的，即一个库中的每一个表都可以制定专用的存储引擎
+* 不管表采用什么样的方式的存储引擎，都会在数据区，产生对应的`frm`文件（表结构定义描述文件）
+
+### CSV存储引擎
+
+* 数据存储以`CSV`文件
+
+* 特点
+
+  * 不能定义没有索引、列定义必须为`NOT NULL` 、不能设置自增列
+  * 不适合大表或者数据的在线处理
+
+  * `CSV` 数据存储用`,`隔开，可直接编辑`CSV`文件进行数据的编排
+
+  * 数据安全性低
+
+    **编辑之后，要生效使用`flush tables XXX` 命令**
+
+* 应用场景
+
+  * 数据的快速导入导出
+  * 表直接转换成CSV
+
+### Archive存储引擎
+
+### Memory存储引擎
+
+### Myisam存储引擎
+
+### Innodb存储引擎
+
+## Mysql体系结构及运行机理
+
+### Mysql体系结构
+
+* `Client Connectors` 接入方支持协议很多
+* `Management Services & Utilities`
+  * 系统管理和控制工具`mysqldump`，`mysql`复制集群、分区管理等
+* `Connection Poll`
+  * 连接池：管理缓冲用户连接、用户名、密码
 
 
 
@@ -27,10 +154,30 @@
 ### mysql 客户端/服务端通信-查询状态
 
 * `show variables like'max_connections'` 查看当前最大连接数
+
   * `set global max_connections=1000` 设置最大的连接数
+
 * `show processlist`
+
 * `show full processlist`
+
 * `show status like '%Uptime'` 
+
+  >a. show tables或show tables from 'database_name'; -- 显示当前数据库中所有表的名称。
+  >b. show databases; -- 显示mysql中所有数据库的名称。
+  >c. show columns from table_name from 'database_name'; 或show columns from database_name.table_name; -- 显示表中列名称。
+  >d. show grants for user_name; -- 显示一个用户的权限，显示结果类似于grant 命令。
+  >e. show index from table_name; -- 显示表的索引。
+  >f. show status; -- 显示一些系统特定资源的信息，例如，正在运行的线程数量。
+  >g. show variables; -- 显示系统变量的名称和值。
+  >h. show processlist; -- 显示系统中正在运行的所有进程，也就是当前正在执行的查询。大多数用户可以查看他们自己的进程，但是如果他们拥有process权限，就可以查看所有人的进程，包括密码。
+  >i. show table status; -- 显示当前使用或者指定的database中的每个表的信息。信息包括表类型和表的最新更新时间。
+  >j. show privileges; -- 显示服务器所支持的不同权限。
+  >k. show create database database_name; -- 显示create database 语句是否能够创建指定的数据库。
+  >l. show create table table_name; -- 显示create database 语句是否能够创建指定的数据库。
+  >m. show engies; -- 显示安装以后可用的存储引擎和默认引擎。
+  >p. show warnings; -- 显示最后一个执行的语句所产生的错误、警告和通知。
+  >q. show errors; -- 只显示最后一个执行语句所产生的错误。
 
 ### 查询缓存
 
@@ -243,6 +390,16 @@
 ### 意向锁共享锁（表锁）： Intention Shared Locks
 
 ### 意向锁排它锁（表锁）：Intention Exclusive Locks
+
+
+
+### 事物和锁Mysql存储的关系
+
+**到`information_schema`库中查一下表**
+
+* `innodb_trx` 当前运行的所有事务
+* `innodb_locks` 当前出现的锁
+* `innodb_lock_waits` 锁等待的对饮关系
 
 
 

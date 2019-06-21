@@ -28,6 +28,7 @@
         <module>chapter-cloud-stream</module>
         <module>chapter-cloud-bus</module>
         <module>chapter-cloud-sleuth</module>
+        <module>chapter-cloud-consul</module>
     </modules>
 
     <properties>
