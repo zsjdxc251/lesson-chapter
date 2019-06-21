@@ -4,7 +4,14 @@
 
 ## 启动相关配置
 
-* `-config-dir` 
+* `agent`
+
+  * `consul agent` 有两种模式
+  * `consul agent -server` 和`consul agent -dev`
+  * `server`要参与consensus quorum，当遇到故障情况时，这些节点通过Raft提供强一致性和强有效性，在Server节点上的较高负载意味着它们应该运行在专属的实例——它们比客户端节点更为资源密集型。在整个集群中，绝大部分都为Client节点
+  * `client`把所有的RPCs转发到server端，是相对无状态的。唯一在后台运行的时client端执行了LAN gossip pool，只消耗极少的资源和网络带宽
+
+* -config-dir` 
 
   * 就是指定加载置文件的目录，我们只需要填写配置文件的目录就可以帮助我们把该目录下所有的以.json结尾配置文件加载进去，它的加载顺序是根据26个字母的顺序加进行加载配置文件的。文件内容都是json格式的数据。默认后面文件定义配置会覆盖前面文件定义的配置
 
@@ -42,7 +49,7 @@
 
   * 节点在集群中的名称，在一个集群中必须是唯一的，默认是该节点的主机名
 
-* `-server` 对应`-dev`
+* `-server` 
 
   * 定义`agent`运行在`server`模式
 
@@ -100,7 +107,7 @@
 >ui_dir：等同于-ui-dir
 
 * `-ui`
-* 
+* `-dev`
 
 
 
