@@ -13,7 +13,7 @@
     
         "ports": {
     
-        "http": 8501 , ##consul web UI
+        "http": 8501 , -- consul web UI
     
         "dns": 8601,
     
