@@ -247,6 +247,9 @@
 
 ### mysql 客户端/服务端通信-查询状态
 
+* `show status like 'table%'` 表级锁的争用状态变量
+* `show status like 'innodb_row_lock%' ` 行级锁争用状态变量
+
 * `show variables like'max_connections'` 查看当前最大连接数
 
   * `set global max_connections=1000` 设置最大的连接数
