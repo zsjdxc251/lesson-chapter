@@ -1,5 +1,11 @@
 spring:
   datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximumPoolSize: 25
+      minimum-idle: 2
+      poolName: hikariPOOL
+      transactionIsolationName: 123456
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://121.196.232.248:3306/mysql-engine?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
     username: root
