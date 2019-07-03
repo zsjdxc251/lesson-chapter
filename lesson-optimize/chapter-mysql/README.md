@@ -247,6 +247,12 @@
 
 ### mysql 客户端/服务端通信-查询状态
 
+* `profiles`
+  * `set profiling = 1` 
+  * `select * from t_user_innodb limit 1`
+  * `show profiles`
+  * `show profile cpu,block io for query 17`  `17=show profiles QueryId`
+
 * `show status like 'table%'` 表级锁的争用状态变量
 * `show status like 'innodb_row_lock%' ` 行级锁争用状态变量
 
