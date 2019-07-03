@@ -384,7 +384,53 @@
     COMMIT  -- 第五步
     ```
 
-    
+* 事务隔离级别
+
+  * 查看当前会话隔离级别
+
+    ```sql
+    select @@tx_isolation;
+    ```
+
+  * 查看系统当前隔离级别
+
+    ```sql
+    select @@global.tx_isolation;
+    ```
+
+  * 设置当前会话隔离级别
+
+    ```sql
+    set session transaction ISOLATION level repeatable read;
+    ```
+
+  * 设置系统当前隔离级别
+
+    ```sql
+    set global transaction isolation level repeatable read;
+    ```
+
+  * 命令行，开始事务时
+
+    ```sql
+    set autocommit=off 或者 start transaction
+    ```
+
+  * 隔离级别
+
+    * `read uncommitted` (脏读)
+
+      假设两个事务  a 事务查询到 b 事务没有提交的数据，b事务有可能提交或回滚，如果回滚了a 读到的数据就是脏数据
+
+    * `read committed`（不可重复读，幻读）
+
+      假设两个事务  a 事务读取一条数据，b 事务修改了这条数据且提交了，a再去读这条数据的时候 两次读出来的不一样
+
+    * `repeatable read` 
+
+    * `serializable`
+
+      串行化，可读，不可写
 
 ### 事务ACID 特性
 
