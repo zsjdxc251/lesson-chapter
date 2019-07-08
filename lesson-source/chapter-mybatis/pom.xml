@@ -25,6 +25,7 @@
         <module>chapter-mybatis-plus-generator</module>
 		<module>chapter-mybatis-custom</module>
 		<module>chapter-mybatis-plus-quickstart</module>
+		<module>chapter-mybatis-dynamic-sql</module>
 	</modules>
 
 
