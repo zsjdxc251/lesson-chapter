@@ -580,7 +580,37 @@
 
 ### 意向锁共享锁（表锁）： Intention Shared Locks
 
+* 表示事务准备给数据行加入共享锁，即一个数据行加共享锁钱必须先取得IS锁，意向共享锁之间是可以相互兼容的
+
 ### 意向锁排它锁（表锁）：Intention Exclusive Locks
+
+* 表示事务准备给数据行加入排他锁，即一个数据行加排他锁前必须先取得该表的IX锁，意向排它锁之间是可以相互兼容的
+
+**意向锁（`IX`,`IS`）是`Innodb`数据操作之前自动加的，不需要用户干预**
+
+**意义**
+
+* 当事务想去进行锁表时，可以先判断意向锁是否存在，存在时则可快速返回该表不能启用表锁
+
+* ```sql
+  ----- IS锁的意义
+  set session autocommit = OFF;
+  update users set lastUpdate=NOW() where id = 1;
+  rollback;
+  
+  -- 其他会话执行
+  update users set lastUpdate=NOW() where phoneNum = '13777777777';
+  ```
+
+
+
+### 自增锁Auto-InC Locks
+
+* 针对自增锁的一个特殊的表级别锁
+* `show variables like 'innodb_autoinc_lock_mode'`
+* 默认取值`1`,代表连续，事务未提交`ID`永久丢失
+
+
 
 
 
