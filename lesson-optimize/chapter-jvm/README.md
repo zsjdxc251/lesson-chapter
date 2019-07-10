@@ -20,9 +20,9 @@
 
 * `ClassLoader` 依次顺序
   * 虚拟机自带的加载器
-  * 启动类加载器`Bootstrap` - C++
-  * 扩展类加载器 `Extension` - Java
-  * 应用程序类加载器 `AppClassLoader` - Java 系统类加载器，加载当前引用的`classpath`的所有类
+  * 启动类加载器`Bootstrap` - C++   `$JAVA_HOME/jre/lib/rt.jar`
+  * 扩展类加载器 `Extension` - Java   `$JAVA_HOME/jre/lib/ext/*.jar`
+  * 应用程序类加载器 `AppClassLoader` - Java 系统类加载器，加载当前引用的`classpath`的所有类   `$CLASSPATH`
   * 用户自定义加载器
     * `java.lang.ClassLoader` 的子类，用户可用定制类的加载方式
 
@@ -60,6 +60,13 @@
   * 示例图：
 
     ![1555735863441](assets/1555735863441.png)
+
+* 栈帧包含哪些内容
+  * 局部变量表
+  * 操作数栈
+  * 动态链接
+  * 方法返回地址
+  * 帧数据区
 
 [JDK8 Docs](https://docs.oracle.com/javase/8/docs/)
 
