@@ -16,6 +16,12 @@ import reactor.core.publisher.Mono;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
+/**
+ * https://windmt.com/2019/01/16/spring-cloud-19-spring-cloud-gateway-read-and-modify-request-body/
+ *
+ *
+ * https://windmt.com/2019/01/20/spring-cloud-20-gateway-dynamic-routing/
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 public class BootstrapGatewaySample
