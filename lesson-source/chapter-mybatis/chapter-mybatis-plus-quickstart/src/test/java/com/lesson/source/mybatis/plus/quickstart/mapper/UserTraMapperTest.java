@@ -60,7 +60,7 @@ public class UserTraMapperTest extends AbstractSpringBootTest {
 	@Test
 	public void test2() {
 
-		//TableInfoHelper.initTableInfo(null,UserTraAndInnodbTwo.class);
+		TableInfoHelper.initTableInfo(null,UserTraAndInnodbTwo.class);
 		LambdaQueryWrapper<UserTraAndInnodbTwo> lambdaQueryWrapper =
 				new QueryWrapper<UserTraAndInnodbTwo>().lambda().select(UserTraAndInnodbTwo::getPassword).eq(UserTraAndInnodbTwo::getUsername, "12345");
 		userTraMapper.selectTraAndInnAll(lambdaQueryWrapper);
@@ -71,9 +71,10 @@ public class UserTraMapperTest extends AbstractSpringBootTest {
 
 	@Test
 	public void test3(){
+		TableInfoHelper.initTableInfo(null,UserTraAndInnodbTwo.class);
 		TableInfo tableInfoHelper = TableInfoHelper.getTableInfo(UserTraAndInnodbTwo.class);
 
-		System.out.println(tableInfoHelper);
+		System.out.println(JSON.toJSONString(tableInfoHelper,true));
 	}
 
 

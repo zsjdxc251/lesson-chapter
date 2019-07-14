@@ -9,7 +9,7 @@ import lombok.Data;
  * @version created on 2019/7/12.
  */
 @Data
-
+@TableName("t_user_tra tut left join t_user_innodb tui ON tut.id = tui.id")
 public class UserTraAndInnodbTwo {
 
 
