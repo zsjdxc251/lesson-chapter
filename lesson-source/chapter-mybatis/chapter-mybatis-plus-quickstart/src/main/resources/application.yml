@@ -9,11 +9,13 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://121.196.232.248:3306/mysql-engine?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
     username: root
-    password: XXXX
+    password: xxxx
   output:
     ansi:
       enabled: ALWAYS
 
+mybatis-plus:
+  typeAliasesPackage: com.lesson.source.mybatis.plus.quickstart.entity
 
 logging:
   level:
