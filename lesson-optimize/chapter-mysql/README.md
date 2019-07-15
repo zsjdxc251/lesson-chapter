@@ -731,10 +731,59 @@
 
   ![1562859927403](assets/1562859927403.png)
 
+* 当前读、快照读
+
+  * 当前读：
+
+    `SQL` 读取的数据是快照本，也就是历史版本，普通的`SELECT`就是快照读
+
+    `innodb`快照读，数据的读取将由`cache`(原本数据)+`undo`(事务修改过的数据)两部分组成
+
+  * 当前读：
+
+    `SQL`读取的数据是最新版本。通过锁机制来保证读取的数据无法通过其他事务进行修改
+
+    `update,delete,insert,select .. lockinshare mode,select ..fro update` 都是当前读
 
 ### Redo log
 
+**`redo`，顾名思义就是重做。以恢复操作为目的，重现操作**
+
+* `redo log`指事务中操作的任何数据，将最新的数据备份到一个`redo log`
+
+* `redo log`的持久：
+
+  * 不是随着事务的提交才写入的，而是在事务的执行过程中，便开始写入`redo`中。具体的落盘策略可以进行配置
+
+* `redo log`是为了实现事务的持久性而出现的产物
+
+* `redo log`实现事务持久性：
+
+  * 防止在发生故障的时间点，尚有脏也未写入磁盘，在重启`mysql`服务的时候，根据`redo log`进行重做，从而达到事务的未入磁盘数据进行持久化这一特性。
+
+* 图示
+
+  ![1563205294611](assets/1563205294611.png)
+
+* 制定`redo log`记录在`{datadir}/ib_logfile1&ib_logfile2` 可通过`innodb_log_group_home_dir`配置制定目录存储
+* 一旦事务成功提交且数据持久化落盘之后，此时`redo log`中的对应事务数据记录就失去了意义，所以`redo log`的写入日志文件循环写入的
+  * 指定`redo log`日志文件组中的数据`innodb_log_file_in_group `默认是`2`
+  * 指定`redo log`每一个日志文件最大存储量`innodb_log_file_size`默认是`48M`
+  * 指定`redo log`在`cache/buffer`中的`buffer`池大小`innodb_log_buffer_size` 默认`16M`
+* `redo buffer `持久化`redo log`的策略，`innodb_flush_log_at_trx_commit`:
+  * 取值`0`每秒提交`redo buffer --> redo log OS cache --> flush cache to disk` 可能丢失一秒内事务数据
+  * 取值`1`默认值，每次事务提交执行`redo buffer --> redo log OS cache --> flush cache to disk`最安全，性能最差的方式
+  * 取值`2`每次事务提交执行`redo buffer --> redo log os cache`再每一秒执行 `-> flush cache to disk`操作
+
 ### Bin log
+
+
+
+## 配置优化
+
+### Mysql 服务器参数类型
+
+
 
 ### 事物和锁Mysql存储的关系
 
