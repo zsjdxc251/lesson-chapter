@@ -1,9 +1,12 @@
 package com.lesson.source.pattern.proxy.asm;
 
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
+
+
+import org.objectweb.asm.*;
+import org.objectweb.asm.util.TraceClassVisitor;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author zhengshijun
@@ -24,7 +27,7 @@ public class AsmStart {
         constructor.visitMethodInsn(Opcodes.INVOKESPECIAL, Type.getInternalName(Object.class), "<init>", "()V", false);
         //从当前方法返回void
         constructor.visitInsn(Opcodes.RETURN);
- 
+
         constructor.visitMaxs(1, 1);
         constructor.visitEnd();
         return cw;
@@ -75,6 +78,18 @@ public class AsmStart {
         Object value = clazz.getMethods()[0].invoke(clazz.newInstance());
         System.out.println(clazz);
         System.out.println(value);
+        prin();
+    }
+
+    public static void prin() throws IOException {
+
+       ClassReader cr = new ClassReader("com.lesson.source.pattern.proxy.UserInfoService");
+        ClassWriter cw = new ClassWriter(0);
+        TraceClassVisitor tcv=new TraceClassVisitor(cw,new PrintWriter(System.out));
+      cr.accept(tcv, 0);
+
+
+
     }
 
 }
