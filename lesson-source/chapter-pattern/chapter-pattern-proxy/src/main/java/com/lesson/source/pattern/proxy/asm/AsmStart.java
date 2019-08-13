@@ -1,10 +1,10 @@
 package com.lesson.source.pattern.proxy.asm;
 
 
-
 import org.objectweb.asm.*;
 import org.objectweb.asm.util.TraceClassVisitor;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -38,8 +38,9 @@ public class AsmStart {
      * 创建一个返回Integer=10的函数
      * public Integer getIntVal()
      * {
-     * 		return 10;
+     * return 10;
      * }
+     *
      * @return
      * @throws Exception
      */
@@ -65,8 +66,7 @@ public class AsmStart {
 
     }
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         String className = "com.agent.my3.Tester";
         /**
          * 因为上面方法用的是Opcodes.BIPUSH指令【将单字节的常量值(-128~127)推送至栈顶(如果不是-128~127之间的数字，则不能用bipush指令】
@@ -78,15 +78,22 @@ public class AsmStart {
         Object value = clazz.getMethods()[0].invoke(clazz.newInstance());
         System.out.println(clazz);
         System.out.println(value);
-        prin();
+        //prin();
     }
 
     public static void prin() throws IOException {
 
-       ClassReader cr = new ClassReader("com.lesson.source.pattern.proxy.UserInfoService");
+        ClassReader cr = new ClassReader("com.lesson.source.pattern.proxy.UserInfoService");
         ClassWriter cw = new ClassWriter(0);
-        TraceClassVisitor tcv=new TraceClassVisitor(cw,new PrintWriter(System.out));
-      cr.accept(tcv, 0);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TraceClassVisitor tcv = new TraceClassVisitor(cw, new PrintWriter(outputStream));
+        cr.accept(tcv, 0);
+
+
+        System.out.println(new String(outputStream.toByteArray()).toLowerCase());
+
+
 
 
 
