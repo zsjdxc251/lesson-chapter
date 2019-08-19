@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR" name="logserviceconfiguration"
+	packages="de.ids.acos.artu" monitorInterval="30" strict="true">
+	<properties>
+		<property name="LOG_HOME_PATH">${web:rootDir}/logs</property>
+	</properties>
+
+	<Appenders>
+
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] [%thread] %c {%F:%L} - %m%n" />
+		</Console>
+
+	</Appenders>
+	<Loggers>
+
+		<Root level="INFO">
+			<AppenderRef ref="STDOUT" />
+		</Root>
+
+	</Loggers>
+</Configuration>

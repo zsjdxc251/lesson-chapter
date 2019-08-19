@@ -1,11 +1,16 @@
 package com.lesson.source.mybatis.plus.quickstart.mapper;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.ISqlSegment;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlKeyword;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.lesson.AbstractSpringBootTest;
 import com.lesson.source.mybatis.plus.quickstart.entity.UserTra;
+import com.lesson.source.mybatis.plus.quickstart.entity.UserTraAndInnodb;
+import com.lesson.source.mybatis.plus.quickstart.entity.UserTraAndInnodbTwo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -51,5 +56,28 @@ public class UserTraMapperTest extends AbstractSpringBootTest {
 		userTraMapper.selectList(lambdaQueryWrapper);
 
 	}
+
+	@Test
+	public void test2() {
+
+		TableInfoHelper.initTableInfo(null,UserTraAndInnodbTwo.class);
+		LambdaQueryWrapper<UserTraAndInnodbTwo> lambdaQueryWrapper =
+				new QueryWrapper<UserTraAndInnodbTwo>().lambda().select(UserTraAndInnodbTwo::getPassword).eq(UserTraAndInnodbTwo::getUsername, "12345");
+		userTraMapper.selectTraAndInnAll(lambdaQueryWrapper);
+
+		System.out.println(JSON.toJSONString(lambdaQueryWrapper,true));
+
+	}
+
+	@Test
+	public void test3(){
+		TableInfoHelper.initTableInfo(null,UserTraAndInnodbTwo.class);
+		TableInfo tableInfoHelper = TableInfoHelper.getTableInfo(UserTraAndInnodbTwo.class);
+
+		System.out.println(JSON.toJSONString(tableInfoHelper,true));
+	}
+
+
+
 
 }

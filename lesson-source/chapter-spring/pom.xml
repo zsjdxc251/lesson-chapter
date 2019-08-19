@@ -23,7 +23,8 @@
         <module>chapter-spring-aop</module>
         <module>chapter-spring-five</module>
 		<module>chapter-spring-async</module>
-	</modules>
+        <module>chapter-spring-scan</module>
+    </modules>
 
 
     <dependencyManagement>

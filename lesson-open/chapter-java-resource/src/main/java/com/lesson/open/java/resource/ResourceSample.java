@@ -4,6 +4,7 @@ import com.google.common.collect.Streams;
 import com.google.common.io.Files;
 import com.google.common.primitives.Bytes;
 import com.lesson.open.java.resource.protocol.ClasspathHandler;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.util.StreamUtils;
 
 
@@ -35,6 +36,7 @@ public class ResourceSample {
                return null;
            });
            URL classpath = new URL("classpath://application.properties");
+           System.out.println(classpath.getPath());
            String content = StreamUtils.copyToString(classpath.openStream(), Charset.forName("UTF-8"));
            System.out.println(content);
             URL https = new URL("https://cn.bing.com");
