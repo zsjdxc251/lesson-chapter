@@ -13,8 +13,7 @@
     <packaging>pom</packaging>
 
     <name>chapter-cloud-zookeeper</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+
     <modules>
         <module>chapter-cloud-zookeeper-consumer</module>
         <module>chapter-cloud-zookeeper-provider</module>
