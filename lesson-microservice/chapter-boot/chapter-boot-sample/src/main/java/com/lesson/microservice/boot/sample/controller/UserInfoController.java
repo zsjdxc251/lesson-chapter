@@ -29,7 +29,7 @@ public class UserInfoController {
     private CustomProperties customProperties;
 
     @GetMapping("/getName")
-    public ResponseEntity<String> getName(@Valid UserInfo userInfo,BindingResult bindingResult){
+    public ResponseEntity<String> getName(@Valid UserInfo userInfo){
         //userInfoRepository.find();
         CustomProperties customProperties = new CustomProperties();
         BeanUtils.copyProperties(this.customProperties,customProperties);
