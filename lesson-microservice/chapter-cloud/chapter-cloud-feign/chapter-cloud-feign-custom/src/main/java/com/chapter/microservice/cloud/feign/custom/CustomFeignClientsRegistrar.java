@@ -2,7 +2,6 @@ package com.chapter.microservice.cloud.feign.custom;
 
 import com.chapter.microservice.cloud.feign.custom.annotation.CustomEnableFeignClients;
 import com.chapter.microservice.cloud.feign.custom.annotation.CustomFeignClient;
-import org.hamcrest.Factory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
