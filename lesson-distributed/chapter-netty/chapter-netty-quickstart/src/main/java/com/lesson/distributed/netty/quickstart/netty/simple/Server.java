@@ -25,6 +25,9 @@ public class Server extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.println(msg);
 
+        // 事件往下传播
+        ctx.fireChannelRead(msg);
+
 
     }
 

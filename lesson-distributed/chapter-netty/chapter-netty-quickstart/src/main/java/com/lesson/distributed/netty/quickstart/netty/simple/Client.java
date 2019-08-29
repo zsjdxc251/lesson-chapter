@@ -11,6 +11,8 @@ import io.netty.handler.codec.string.StringEncoder;
 import java.net.InetSocketAddress;
 
 /**
+ *
+ * {@link AbstractChannelHandlerContext#connect(java.net.SocketAddress, java.net.SocketAddress)}
  * @author zhengshijun
  * @version created on 2019/8/28.
  */
@@ -60,6 +62,8 @@ public class Client extends ChannelInboundHandlerAdapter {
                     }
                 });
         try {
+
+
             ChannelFuture future =  bootstrap.connect(new InetSocketAddress("127.0.0.1",8081)).sync();
             DefaultChannelPromise promise = new DefaultChannelPromise(future.channel());
             future.channel().writeAndFlush("你好", promise);
