@@ -1,5 +1,7 @@
 package com.lesson.distributed.netty.quickstart.netty.simple;
 
+import com.lesson.distributed.netty.quickstart.netty.simple.handler.InboundHandler;
+import com.lesson.distributed.netty.quickstart.netty.simple.handler.OutboundHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -7,23 +9,26 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
-import org.apache.logging.log4j.util.SystemPropertiesPropertySource;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author zhengshijun
  * @version created on 2019/8/28.
  */
+@Slf4j
 public class Server extends ChannelInboundHandlerAdapter {
 
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println(ctx);
+        log.info("channelActive");
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println(msg);
+        log.info("channelRead:{}",msg);
+
+        ctx.writeAndFlush("处理:"+msg);
 
 
     }
@@ -44,15 +49,23 @@ public class Server extends ChannelInboundHandlerAdapter {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
 
-                        ch.pipeline().addLast(new StringEncoder());
-                        ch.pipeline().addLast(new StringDecoder());
+//                        ch.pipeline().addLast(new StringEncoder());
+//                        ch.pipeline().addLast(new StringDecoder());
 
+                        ch.pipeline().addLast(new InboundHandler("1"));
+                        ch.pipeline().addLast(new InboundHandler("2"));
+                        ch.pipeline().addLast(new InboundHandler("3"));
+
+                        ch.pipeline().addLast(new OutboundHandler("1"));
+                        ch.pipeline().addLast(new OutboundHandler("2"));
+                        ch.pipeline().addLast(new OutboundHandler("3"));
                         ch.pipeline().addLast(new Server());
+
 
                     }
                 });
 
-        bootstrap.option(ChannelOption.SO_BACKLOG,2);
+        bootstrap.option(ChannelOption.SO_BACKLOG,128);
         bootstrap.childOption(ChannelOption.SO_KEEPALIVE,true);
         try {
             ChannelFuture future = bootstrap.bind(8081).sync();
