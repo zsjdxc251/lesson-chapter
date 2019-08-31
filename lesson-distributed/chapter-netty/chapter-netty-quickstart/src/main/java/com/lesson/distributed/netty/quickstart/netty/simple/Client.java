@@ -14,6 +14,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
+ *    write,bind,connect 获取 tail Handler ---> 第一个 Outbound
+ *
+ *    read 获取 head Handler ---> 最后一个 Inbound
+ *
+ *
  * {@link AbstractChannelHandlerContext#connect(java.net.SocketAddress, java.net.SocketAddress)}
  * @author zhengshijun
  * @version created on 2019/8/28.
