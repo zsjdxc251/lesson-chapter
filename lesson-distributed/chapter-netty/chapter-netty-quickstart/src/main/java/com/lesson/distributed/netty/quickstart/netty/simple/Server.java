@@ -30,6 +30,9 @@ public class Server extends ChannelInboundHandlerAdapter {
 
         ctx.writeAndFlush("处理:"+msg);
 
+        // 事件往下传播
+        ctx.fireChannelRead(msg);
+
 
     }
 
