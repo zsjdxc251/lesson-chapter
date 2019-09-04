@@ -30,12 +30,14 @@ public class Server {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
 
-                        ch.pipeline().addLast("OutboundHandlerA",new OutboundHandler("A"));
-                        ch.pipeline().addLast("OutboundHandlerC",new OutboundHandler("C"));
-                        ch.pipeline().addLast("OutboundHandlerB",new OutboundHandler("D"));
+
                         ch.pipeline().addLast(new InboundHandler("A"));
                         ch.pipeline().addLast(new InboundHandler("B"));
                         ch.pipeline().addLast(new InboundHandler("C"));
+                        ch.pipeline().addLast("OutboundHandlerA",new OutboundHandler("A"));
+                        ch.pipeline().addLast("OutboundHandlerC",new OutboundHandler("C"));
+                        ch.pipeline().addLast("OutboundHandlerB",new OutboundHandler("D"));
+//                        ch.pipeline().addLast(new SimpleInboundHandler());
 
 
                     }

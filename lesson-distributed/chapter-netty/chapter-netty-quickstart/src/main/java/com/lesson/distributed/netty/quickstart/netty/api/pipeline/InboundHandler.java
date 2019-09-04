@@ -24,7 +24,13 @@ public class InboundHandler extends ChannelInboundHandlerAdapter {
         log.info(" channelRead:{}",name);
 
         if (Objects.equals(name,"C")){
+
+            // 该操作是当前位置的 ChannelHandlerContext 开始  往上找
             ctx.writeAndFlush("你好");
+            // 研究这两者的区别
+
+            // 该操作是，获取该  pipeline tail 的ChannelHandlerContext  开始 往上找
+            ctx.channel().writeAndFlush("你好");
         } else {
             ctx.fireChannelRead(msg);
         }
