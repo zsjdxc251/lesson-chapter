@@ -71,7 +71,7 @@ public class EncodedControl extends ResourceBundle.Control {
 		if (stream != null) {
 			Reader reader = null;
 			try {
-				reader = new InputStreamReader(stream);
+				reader = new InputStreamReader(stream,charset);
 				bundle = new PropertyResourceBundle(reader);
 			} finally {
 				if (reader != null){
