@@ -6,6 +6,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Configuration;
 
 /**
+ *
+ * {@link org.springframework.context.event.EventListenerMethodProcessor}
  * @author zhengshijun
  * @version created on 2018/7/20.
  */
