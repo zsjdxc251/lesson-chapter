@@ -21,6 +21,7 @@
         <module>chapter-boot-jpa</module>
         <module>chapter-boot-version</module>
         <module>chapter-boot-actuator</module>
+        <module>chapter-boot-bus</module>
     </modules>
 
 

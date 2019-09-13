@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ValidationException;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,12 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 		log.error(request.getRequestURL().toString(), ex);
 
 		return ResponseEntity.status(response.getStatus()).body(ex.getMessage());
+	}
+
+	@ExceptionHandler(ValidationException.class)
+	public ResponseEntity<String> handleValidationException(ValidationException e) {
+		logger.error(e.getMessage(), e);
+		return ResponseEntity.ok(e.getMessage());
 	}
 
 
