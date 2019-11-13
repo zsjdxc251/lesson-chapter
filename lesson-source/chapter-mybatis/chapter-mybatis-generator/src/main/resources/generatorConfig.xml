@@ -46,9 +46,9 @@
         <!--</commentGenerator> -->
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://10.0.20.4:3306/asetku-japan?autoReconnect=true&amp;rewriteBatchedStatements=true&amp;userUnicode=true&amp;characterEncoding=utf8&amp;useAffectedRows=true&amp;useSSL=true"
+                        connectionURL="jdbc:mysql://xxxxx:3306/zsjdxc251?autoReconnect=true&amp;rewriteBatchedStatements=true&amp;userUnicode=true&amp;characterEncoding=utf8&amp;useAffectedRows=true&amp;useSSL=true"
                         userId="root"
-                        password="123456">
+                        password="xxxxxx">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>

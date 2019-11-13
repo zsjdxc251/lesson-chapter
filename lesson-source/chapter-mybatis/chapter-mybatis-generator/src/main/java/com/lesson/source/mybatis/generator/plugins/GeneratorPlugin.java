@@ -159,7 +159,7 @@ public class GeneratorPlugin extends PluginAdapter {
 					+ introspectedTable.getExampleType() + ","
 					+ introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType().getFullyQualifiedName() + ">");
 			FullyQualifiedJavaType imp = new FullyQualifiedJavaType(
-					"com.asetku.japan.commons.mapper.BaseMapper");
+					"com.lesson.commons.mapper.BaseMapper");
 			/**
 			 * 添加 extends MybatisBaseMapper
 			 */
