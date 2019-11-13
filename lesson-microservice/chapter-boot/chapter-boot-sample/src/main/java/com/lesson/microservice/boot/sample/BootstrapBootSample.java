@@ -55,7 +55,7 @@ public class BootstrapBootSample
         ConfigurableApplicationContext applicationContext = application.run(new String[]{"---3333"});
 
 
-        System.out.println(StringUtils.join(applicationContext.getBeanDefinitionNames(),"\n"));
+        //System.out.println(StringUtils.join(applicationContext.getBeanDefinitionNames(),"\n"));
 
 
 
