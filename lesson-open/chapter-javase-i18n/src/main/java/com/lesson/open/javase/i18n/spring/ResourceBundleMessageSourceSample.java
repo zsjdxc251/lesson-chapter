@@ -21,7 +21,7 @@ public class ResourceBundleMessageSourceSample {
 		// ReloadableResourceBundleMessageSource
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 		messageSource.setBasename(baseName);
-		messageSource.setDefaultEncoding(StandardCharsets.UTF_8.displayName());
+		//messageSource.setDefaultEncoding(StandardCharsets.UTF_8.displayName());
 		System.out.println(messageSource
 				.getMessage("address", new Object[]{"南山"}, Locale.getDefault()));
 

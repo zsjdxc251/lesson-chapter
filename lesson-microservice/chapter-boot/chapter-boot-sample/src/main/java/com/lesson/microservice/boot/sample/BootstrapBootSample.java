@@ -2,10 +2,16 @@ package com.lesson.microservice.boot.sample;
 
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.context.XmlServletWebServerApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.AbstractMessageSource;
+import org.springframework.context.support.AbstractResourceBasedMessageSource;
+import org.springframework.context.support.MessageSourceSupport;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 /**
  *    org.springframework.boot.SpringApplicationRunListeners#starting
@@ -59,6 +65,15 @@ public class BootstrapBootSample
 
 
 
+    }
+
+
+    @Bean
+    public ApplicationRunner applicationRunner(AbstractMessageSource messageSource){
+        return args -> {
+
+          System.out.println(messageSource);
+        };
     }
 
 
