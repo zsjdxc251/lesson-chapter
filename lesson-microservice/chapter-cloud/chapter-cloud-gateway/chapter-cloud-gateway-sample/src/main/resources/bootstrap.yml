@@ -4,3 +4,16 @@
 #      discovery:
 #        enabled: true
 #        serviceId: spring-cloud-config-sample-server
+
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      routes:
+        - uri: https://example.org
+          predicates:
+            - Path=/foo/**
+          filters:
+            - RewritePath=/foo/(?<segment>.*), /$\{segment}

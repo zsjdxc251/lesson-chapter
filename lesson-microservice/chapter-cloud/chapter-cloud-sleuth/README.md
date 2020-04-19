@@ -81,7 +81,7 @@ server:
       sender:
         type: kafka
       kafka:
-        topic: asetku-japan-zipkin
+        topic: zsjdxc251-japan-zipkin
     sleuth:
       traceId128: true
       sampler:
