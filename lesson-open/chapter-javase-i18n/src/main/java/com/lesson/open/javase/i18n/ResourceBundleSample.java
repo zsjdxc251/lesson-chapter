@@ -22,27 +22,34 @@ public class ResourceBundleSample {
 
 		ResourceBundle resourceBundle = ResourceBundle.getBundle(name);
 
+
+
 		String str = resourceBundle.getString("password");
 		System.out.println(str);
+
+
+
+
 
 		// META-INF/services/java.util.spi.ResourceBundleControlProvider
 
 
-		ClassLoader cl = ClassLoader.getSystemClassLoader();
-		ClassLoader prev = null;
-		while (cl != null) {
-			prev = cl;
-			cl = cl.getParent();
-		}
-
-		String path = "META-INF/services/java.util.spi.ResourceBundleControlProvider";
-		Enumeration<URL> urls  =  prev.getResources(path);
-
-		while (urls.hasMoreElements()) {
-
-			System.out.println(urls.nextElement().getPath());
-		}
-
+//		ClassLoader cl = ClassLoader.getSystemClassLoader();
+//		ClassLoader prev = null;
+//		while (cl != null) {
+//			prev = cl;
+//			cl = cl.getParent();
+//
+//		}
+//
+//		String path = "META-INF/services/java.util.spi.ResourceBundleControlProvider";
+//		Enumeration<URL> urls  =  prev.getResources(path);
+//
+//		while (urls.hasMoreElements()) {
+//
+//			System.out.println(urls.nextElement().getPath());
+//		}
+//
 //		ServiceLoader<ResourceBundleControlProvider> serviceLoaders
 //				= ServiceLoader.load(ResourceBundleControlProvider.class);
 //

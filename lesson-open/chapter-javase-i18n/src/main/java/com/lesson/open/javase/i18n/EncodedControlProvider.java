@@ -11,6 +11,7 @@ public class EncodedControlProvider implements ResourceBundleControlProvider  {
 	@Override
 	public ResourceBundle.Control getControl(String baseName) {
 
+		System.out.println(baseName);
 		return new EncodedControl();
 	}
 }

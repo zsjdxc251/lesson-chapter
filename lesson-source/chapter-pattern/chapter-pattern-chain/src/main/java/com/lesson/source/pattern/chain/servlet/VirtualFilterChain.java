@@ -14,7 +14,7 @@ public class VirtualFilterChain implements FilterChain{
 
 	private List<ServletFilter> filters = Lists.newArrayList();
 	 {
-		filters.add(new TimerServletFilter());
+		 filters.add(new TimerServletFilter());
 
 		 filters.add(new TimerServletFilter());
 
@@ -28,6 +28,15 @@ public class VirtualFilterChain implements FilterChain{
 
 		if (index>=filters.size()){
 
+			new Servlet(){
+
+				@Override
+				public void service(Request request, Response response) {
+
+					log.info("开始执行servlet");
+
+				}
+			}.service(request,response);
 			return;
 		}
 
