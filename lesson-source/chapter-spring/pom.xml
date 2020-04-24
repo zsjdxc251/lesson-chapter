@@ -24,6 +24,7 @@
         <module>chapter-spring-five</module>
 		<module>chapter-spring-async</module>
         <module>chapter-spring-scan</module>
+        <module>chapter-spring-env</module>
     </modules>
 
 

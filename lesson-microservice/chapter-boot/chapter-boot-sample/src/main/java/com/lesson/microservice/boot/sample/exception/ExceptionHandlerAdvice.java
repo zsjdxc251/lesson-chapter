@@ -10,6 +10,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -28,21 +29,27 @@ import java.util.Map;
  */
 @Slf4j
 @RestControllerAdvice
-public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
+public class ExceptionHandlerAdvice  extends ResponseEntityExceptionHandler{ //
 
 
-	@ExceptionHandler(Throwable.class)
-	public ResponseEntity<String> handler(HttpServletRequest request, HttpServletResponse response, Throwable ex) {
-		log.error(request.getRequestURL().toString(), ex);
+//	@ExceptionHandler(Throwable.class)
+//	public ResponseEntity<String> handler(HttpServletRequest request, HttpServletResponse response, Throwable ex) {
+//		log.error(request.getRequestURL().toString(), ex);
+//
+//		return ResponseEntity.status(response.getStatus()).body(ex.getMessage());
+//	}
 
-		return ResponseEntity.status(response.getStatus()).body(ex.getMessage());
-	}
+//	@ExceptionHandler(ValidationException.class)
+//	public ResponseEntity<String> handleValidationException(ValidationException e) {
+//		log.error(e.getMessage(), e);
+//		return ResponseEntity.ok(e.getMessage());
+//	}
 
-	@ExceptionHandler(ValidationException.class)
-	public ResponseEntity<String> handleValidationException(ValidationException e) {
-		logger.error(e.getMessage(), e);
-		return ResponseEntity.ok(e.getMessage());
-	}
+//	@ExceptionHandler(MethodArgumentNotValidException.class)
+//	public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+//		log.error(e.getMessage(), e);
+//		return ResponseEntity.ok(e.getMessage());
+//	}
 
 
 	@Override

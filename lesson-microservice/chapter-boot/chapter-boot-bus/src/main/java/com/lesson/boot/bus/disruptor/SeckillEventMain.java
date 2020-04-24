@@ -29,7 +29,9 @@ public class SeckillEventMain {
 
         //启动
         disruptor.start();
+
         RingBuffer<WorkEvent> ringBuffer = disruptor.getRingBuffer();
+
         SeckillEventProducer producer = new SeckillEventProducer(ringBuffer);
         for(long i = 0; i<10; i++){
             producer.seckill(i, i);
