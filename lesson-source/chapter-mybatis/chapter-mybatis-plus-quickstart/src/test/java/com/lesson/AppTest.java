@@ -1,12 +1,17 @@
 package com.lesson;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
 import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.SerializationUtils;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
 import com.lesson.source.mybatis.plus.quickstart.entity.User;
+import com.lesson.source.mybatis.plus.quickstart.entity.UserTra;
+import com.lesson.source.mybatis.plus.quickstart.entity.UserTraAndInnodbTwo;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -50,6 +55,19 @@ public class AppTest {
 		} catch (Exception e) {
 			throw ExceptionUtils.mpe("This is impossible to happen", e);
 		}
+	}
+
+
+	@Test
+	public void test1(){
+
+		TableInfoHelper.initTableInfo(null, UserTra.class);
+		LambdaQueryWrapper<UserTra> lambdaQueryWrapper =
+				new QueryWrapper<UserTra>().lambda()
+						.select(UserTra::getUsername, UserTra::getPassword, UserTra::getModifyTime, UserTra::getAge)
+						.eq(UserTra::getAge,2).eq(UserTra::getModifyTime,"232132");
+		System.out.println(JSON.toJSONString(lambdaQueryWrapper.getExpression()));
+		System.out.println(JSON.toJSONString(lambdaQueryWrapper,true));
 	}
 
 }

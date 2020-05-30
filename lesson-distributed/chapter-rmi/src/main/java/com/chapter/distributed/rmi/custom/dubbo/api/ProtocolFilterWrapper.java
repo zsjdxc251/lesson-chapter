@@ -50,18 +50,21 @@ public class ProtocolFilterWrapper implements Protocol {
                 final int index = i;
                 last = new Invoker<T>() {
 
+                    @Override
                     public Class<T> getInterface() {
                         return invoker.getInterface();
                     }
 
+                    @Override
                     public URL getUrl() {
                         return new URL("filter -"+index);
                     }
 
                     public boolean isAvailable() {
-                        return false;
+                        return true;
                     }
 
+                    @Override
                     public Result invoke(Invocation invocation) throws Exception {
                         log.info("invoke number");
                         return filter.invoke(next, invocation);
