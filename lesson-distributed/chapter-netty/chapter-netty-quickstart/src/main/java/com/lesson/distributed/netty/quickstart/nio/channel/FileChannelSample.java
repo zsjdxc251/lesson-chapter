@@ -17,26 +17,34 @@ public class FileChannelSample {
 
     public static void main(String[] args) throws Exception{
 
-        FileOutputStream inputStream = new FileOutputStream("F:\\tmp\\新建文本文档.txt");
+        FileOutputStream inputStream = new FileOutputStream("D:\\temp\\文件.txt");
 
         FileChannel fc = inputStream.getChannel();
 
 
         ByteBuffer bb = ByteBuffer.allocate(1024);
 
+       // bb.put("hello".getBytes());
 
-        bb.put("hello".getBytes());
+        bb.putInt(22);
 
         bb.flip();
 
         fc.write(bb);
 
         bb.clear();
-
-        bb.put("world".getBytes());
-
+        bb.putInt(66);
+        bb.putInt(55);
+        System.out.println(bb.limit());
+        System.out.println(bb.position());
         bb.flip();
+        System.out.println(bb.limit());
+        System.out.println(bb.position());
 
+        System.out.println(bb.getInt());
+        System.out.println(bb.getInt());
+        System.out.println(bb.limit());
+        System.out.println(bb.position());
         fc.write(bb);
 
 
@@ -49,18 +57,18 @@ public class FileChannelSample {
 
         /********************************************************************************/
 
-        Path path = Paths.get("F:\\资料\\File\\微位\\周报.txt");
-
-        FileChannel fileChannel = FileChannel.open(path);
-
-        ByteBuffer byteBuffer = ByteBuffer.allocate((int)fileChannel.size()+1);
-        fileChannel.read(byteBuffer);
-        byteBuffer.flip();
-        Charset charset = Charset.forName("UTF-8");
-        CharBuffer charBuffer = charset.decode(byteBuffer);
-        System.out.println(charBuffer.toString());
-        byteBuffer.clear();
-        fileChannel.close();
+//        Path path = Paths.get("F:\\资料\\File\\微位\\周报.txt");
+//
+//        FileChannel fileChannel = FileChannel.open(path);
+//
+//        ByteBuffer byteBuffer = ByteBuffer.allocate((int)fileChannel.size()+1);
+//        fileChannel.read(byteBuffer);
+//        byteBuffer.flip();
+//        Charset charset = Charset.forName("UTF-8");
+//        CharBuffer charBuffer = charset.decode(byteBuffer);
+//        System.out.println(charBuffer.toString());
+//        byteBuffer.clear();
+//        fileChannel.close();
 
 
 
