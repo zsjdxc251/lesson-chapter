@@ -34,8 +34,8 @@ public class FileChannelSample {
        // buffer.limit(60);
        // buffer.position(21);
         ByteBuffer byteBuffer = buffer.slice();
-        byteBuffer.position(3729);
-        byteBuffer.limit(3729+312);
+        byteBuffer.position(7090);
+
 //
         int msgLen = byteBuffer.getInt();
 
@@ -44,10 +44,12 @@ public class FileChannelSample {
         int bodyCrc = byteBuffer.getInt();
 
         int queueId = byteBuffer.getInt();
+        System.out.println(queueId);
 
         int flag = byteBuffer.getInt();
 
         long queueOffset =  byteBuffer.getLong();
+        System.out.println(queueOffset);
 
         long PHYSICALOFFSET = byteBuffer.getLong();
 
