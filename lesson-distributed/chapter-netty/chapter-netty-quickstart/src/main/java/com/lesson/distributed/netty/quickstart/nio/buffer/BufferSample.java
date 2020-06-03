@@ -294,10 +294,10 @@ public class BufferSample {
         while (buffer.remaining()>0) {
             System.out.print(buffer.get()+"\t");
         }
-
         // 创建新分隔
         buffer.position(2);
         buffer.limit(4);
+
         ByteBuffer sliceBuffer = buffer.slice();
 
         System.out.println("\n分隔数据");
@@ -331,7 +331,7 @@ public class BufferSample {
 
     public static void main(String[] args) throws IOException {
 
-        mappedBufferSimple();
+        sliceSimple();
 
 
 
