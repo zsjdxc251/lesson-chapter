@@ -2,6 +2,7 @@ package com.lesson.distributed.netty.quickstart.nio.channel;
 
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.RandomAccessFile;
 import java.nio.Buffer;
@@ -12,6 +13,7 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 
 /**
  * @author zhengshijun
@@ -19,8 +21,30 @@ import java.nio.file.Paths;
  */
 public class FileChannelSample {
 
+    public static void consumequeue() throws Exception {
 
-    public static void main(String[] args) throws Exception{
+        FileChannel fileChannel = new RandomAccessFile("F:\\workspace\\home\\store\\consumequeue\\TopicTest\\2\\00000000000000000000", "r").getChannel();
+        MappedByteBuffer buffer =  fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, 6000000);
+        ByteBuffer byteBuffer = buffer.slice();
+        byteBuffer.position(493);
+        byteBuffer.flip();
+
+
+        long offset = byteBuffer.getLong();
+        int size = byteBuffer.getInt();
+
+        System.out.println(offset);
+        System.out.println(size);
+        System.out.println(byteBuffer.getLong());
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        commitlog();
+    }
+
+
+    public static void commitlog() throws Exception{
 
 //        FileInputStream inputStream = new FileInputStream("F:\\workspace\\home\\store\\commitlog\\00000000000000000000");
 //
@@ -31,10 +55,11 @@ public class FileChannelSample {
         MappedByteBuffer buffer =  fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, 1024*1024*1024);
 
 
+
        // buffer.limit(60);
        // buffer.position(21);
         ByteBuffer byteBuffer = buffer.slice();
-        byteBuffer.position(7090);
+        byteBuffer.position(65938);
 
 //
         int msgLen = byteBuffer.getInt();
@@ -52,8 +77,10 @@ public class FileChannelSample {
         System.out.println(queueOffset);
 
         long PHYSICALOFFSET = byteBuffer.getLong();
+        System.out.println(PHYSICALOFFSET);
 
         int sysFlag = byteBuffer.getInt();
+        System.out.println("sysFlag:"+sysFlag);
 
         long BORNTIMESTAMP = byteBuffer.getLong();
 
@@ -61,8 +88,9 @@ public class FileChannelSample {
 
         long STORETIMESTAMP = byteBuffer.getLong();
 
-
-        ByteBuffer STOREHOSTADDRESS =  byteBuffer.get(new byte[8]);
+        byte[] bytesStore = new byte[8];
+        ByteBuffer STOREHOSTADDRESS =  byteBuffer.get(bytesStore);
+        System.out.println(Base64.getEncoder().encodeToString(bytesStore));
 
         int RECONSUMETIMES = byteBuffer.getInt();
 
