@@ -29,6 +29,13 @@ public class UserInfoController {
     @Autowired
     private CustomProperties customProperties;
 
+    /**
+     * {@link org.hibernate.validator.constraints.Range}
+     *
+     * {@link Valid}
+     * @param userInfo
+     * @return
+     */
     @GetMapping("/getName")
     public ResponseEntity<String> getName(@Validated UserInfo userInfo){
         //userInfoRepository.find();
