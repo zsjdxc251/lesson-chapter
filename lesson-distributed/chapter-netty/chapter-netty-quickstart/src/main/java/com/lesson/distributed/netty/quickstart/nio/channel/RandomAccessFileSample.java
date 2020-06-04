@@ -12,7 +12,38 @@ import java.nio.channels.FileChannel;
  * @version created on 2020/6/3.
  */
 public class RandomAccessFileSample {
-    public static void main(String[] args) throws IOException {
+
+
+    public static void main(String[] args)throws Exception {
+
+        loadIndexHeader();
+    }
+
+    public static void loadIndexHeader() throws IOException {
+        RandomAccessFile file = new RandomAccessFile("F:\\workspace\\home\\store\\index\\20200603105057054","r");
+        MappedByteBuffer mbb = file.getChannel().map(FileChannel.MapMode.READ_ONLY,0,1024);
+
+        int beginTimestampIndex = 0;
+        int endTimestampIndex = 8;
+        int beginPhyoffsetIndex = 16;
+        int endPhyoffsetIndex = 24;
+        int hashSlotcountIndex = 32;
+        int indexCountIndex = 36;
+        ByteBuffer byteBuffer = mbb.slice();
+        System.out.println(byteBuffer.getLong(beginTimestampIndex));
+        System.out.println(byteBuffer.getLong(endTimestampIndex));
+        System.out.println(byteBuffer.getLong(beginPhyoffsetIndex));
+        System.out.println(byteBuffer.getLong(endPhyoffsetIndex));
+        System.out.println(byteBuffer.getInt(hashSlotcountIndex));
+        System.out.println(byteBuffer.getInt(indexCountIndex));
+
+
+        file.close();
+
+    }
+
+
+    public static void testForce() throws IOException {
 
         //FileOutputStream inputStream = new FileOutputStream("D:\\temp\\文件.txt");
         // FileChannel fileChannel = FileChannel.open(Paths.get("D:\\temp\\文件.txt"), StandardOpenOption.WRITE);
