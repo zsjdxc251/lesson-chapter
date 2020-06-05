@@ -40,7 +40,7 @@ public class FileChannelSample {
 
 
     public static void main(String[] args) throws Exception {
-        commitlog();
+        consumequeue();
     }
 
 
