@@ -21,26 +21,55 @@ import java.util.Base64;
  */
 public class FileChannelSample {
 
-    public static void consumequeue() throws Exception {
 
-        FileChannel fileChannel = new RandomAccessFile("F:\\workspace\\home\\store\\consumequeue\\TopicTest\\2\\00000000000000000000", "r").getChannel();
+    public static void consumequeueForSchedule() throws Exception {
+        FileChannel fileChannel = new RandomAccessFile("D:\\workspace\\home\\store\\consumequeue\\SCHEDULE_TOPIC_XXXX\\7\\00000000000000000000", "r").getChannel();
         MappedByteBuffer buffer =  fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, 6000000);
         ByteBuffer byteBuffer = buffer.slice();
-        byteBuffer.position(493);
-        byteBuffer.flip();
+        byteBuffer.position(20);
+        //byteBuffer.flip();
 
+        System.out.println(byteBuffer.position());
+        System.out.println(byteBuffer.limit());
+        while (true) {
+            long offset = byteBuffer.getLong();
+            int size = byteBuffer.getInt();
+            if (offset == 0 && size ==0 ){
+                break;
+            }
+            System.out.println(offset);
+            System.out.println(size);
+            System.out.println(byteBuffer.getLong());
+            System.out.println(byteBuffer.position());
+        }
+    }
 
-        long offset = byteBuffer.getLong();
-        int size = byteBuffer.getInt();
+    public static void consumequeue() throws Exception {
 
-        System.out.println(offset);
-        System.out.println(size);
-        System.out.println(byteBuffer.getLong());
+        FileChannel fileChannel = new RandomAccessFile("D:\\workspace\\home\\store\\consumequeue\\TopicTest\\1\\00000000000000000000", "r").getChannel();
+        MappedByteBuffer buffer =  fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, 6000000);
+        ByteBuffer byteBuffer = buffer.slice();
+      // byteBuffer.position(253);
+     //byteBuffer.flip();
+
+        System.out.println(byteBuffer.position());
+       System.out.println(byteBuffer.limit());
+        while (true) {
+            long offset = byteBuffer.getLong();
+            int size = byteBuffer.getInt();
+            if (offset == 0 && size ==0 ){
+                break;
+            }
+            System.out.println(offset);
+            System.out.println(size);
+            System.out.println(byteBuffer.getLong());
+            System.out.println(byteBuffer.position());
+        }
     }
 
 
     public static void main(String[] args) throws Exception {
-        consumequeue();
+        consumequeueForSchedule();
     }
 
 
@@ -50,7 +79,7 @@ public class FileChannelSample {
 //
 //        FileChannel fc = inputStream.getChannel();
 
-        FileChannel fileChannel = new RandomAccessFile("F:\\workspace\\home\\store\\commitlog\\00000000000000000000", "r").getChannel();
+        FileChannel fileChannel = new RandomAccessFile("D:\\workspace\\home\\store\\commitlog\\00000000000000000000", "r").getChannel();
         //FileChannel fileChannel = new RandomAccessFile("F:\\workspace\\home\\store\\consumequeue\\SCHEDULE_TOPIC_XXXX\\1\\00000000000000000000", "r").getChannel();
         MappedByteBuffer buffer =  fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, 1024*1024*1024);
 
@@ -59,7 +88,7 @@ public class FileChannelSample {
        // buffer.limit(60);
        // buffer.position(21);
         ByteBuffer byteBuffer = buffer.slice();
-        byteBuffer.position(65938);
+        byteBuffer.position(415324);
 
 //
         int msgLen = byteBuffer.getInt();
