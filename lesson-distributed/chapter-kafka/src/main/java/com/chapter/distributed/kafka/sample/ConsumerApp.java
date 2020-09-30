@@ -23,7 +23,7 @@ public class ConsumerApp extends Thread{
     private ConsumerApp(String topic) {
 
         Properties properties = new Properties();
-        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"121.196.232.248:9092,121.196.232.248:9093,121.196.232.248:9094");
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"47.114.189.36:3389");
         properties.put(ConsumerConfig.GROUP_ID_CONFIG,"kafka_sample_consumer");
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.IntegerDeserializer");
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringDeserializer");

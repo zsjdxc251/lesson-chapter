@@ -26,7 +26,7 @@ public class ProducerApp extends Thread{
 
     private ProducerApp(String topic,boolean isAysnc) {
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"121.196.232.248:9092,121.196.232.248:9093,121.196.232.248:9094");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"47.114.189.36:3389");
         properties.put(ProducerConfig.CLIENT_ID_CONFIG,"kafka_sample_producer");
         properties.put(ProducerConfig.ACKS_CONFIG,"-1");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.IntegerSerializer");
