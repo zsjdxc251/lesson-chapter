@@ -24,7 +24,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
 
 		new UpdateWrapper<User>().lambda().set(User::getPhoneNumber,2).eq(User::getUid,2);
-
+		
 		return baseMapper.selectOne(lambdaQueryWrapper);
 	}
 

@@ -44,3 +44,14 @@
 2. Netty是如何解决jdk空轮询的Bug
 3. Netty 如何保证异步串行化
 4. Netty 是如何启动的
+
+
+
+
+
+![img](README.assets/1115848-13f9d29c65eda2cd.webp)
+
+
+
+
+

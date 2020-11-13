@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.ServiceLoader;
 import java.util.spi.ResourceBundleControlProvider;
@@ -18,33 +20,45 @@ public class ResourceBundleSample {
 	public static void main(String[] args) throws IOException {
 
 		String name = "locale.messages";
+		ServiceLoader<ResourceBundleControlProvider> serviceLoaders
+				= ServiceLoader.load(ResourceBundleControlProvider.class);
+
+		Iterator<ResourceBundleControlProvider> iterator = serviceLoaders.iterator();
+		ResourceBundleControlProvider provider = null;
+		if (iterator.hasNext()){
+			provider = iterator.next();
+		}
+		ResourceBundle resourceBundle = ResourceBundle.getBundle(name, Objects.requireNonNull(provider).getControl(name));
 
 
-		ResourceBundle resourceBundle = ResourceBundle.getBundle(name);
 
 		String str = resourceBundle.getString("password");
 		System.out.println(str);
 
+
+
+
+
 		// META-INF/services/java.util.spi.ResourceBundleControlProvider
 
-
-		ClassLoader cl = ClassLoader.getSystemClassLoader();
-		ClassLoader prev = null;
-		while (cl != null) {
-			prev = cl;
-			cl = cl.getParent();
-		}
-
-		String path = "META-INF/services/java.util.spi.ResourceBundleControlProvider";
-		Enumeration<URL> urls  =  prev.getResources(path);
-
-		while (urls.hasMoreElements()) {
-
-			System.out.println(urls.nextElement().getPath());
-		}
-
-//		ServiceLoader<ResourceBundleControlProvider> serviceLoaders
-//				= ServiceLoader.load(ResourceBundleControlProvider.class);
+//
+//		ClassLoader cl = ClassLoader.getSystemClassLoader();
+//		ClassLoader prev = null;
+//		while (cl != null) {
+//			prev = cl;
+//			cl = cl.getParent();
+//
+//		}
+////
+//		String path = "META-INF/services/java.util.spi.ResourceBundleControlProvider";
+//		Enumeration<URL> urls  =  prev.getResources(path);
+//
+//		while (urls.hasMoreElements()) {
+//
+//			System.out.println(urls.nextElement().getPath());
+//		}
+//
+//		ServiceLoader<ResourceBundleControlProvider> serviceLoaders = ServiceLoader.load(ResourceBundleControlProvider.class);
 //
 //		for (ResourceBundleControlProvider provider : serviceLoaders) {
 //

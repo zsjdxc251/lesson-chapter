@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +29,15 @@ public class UserInfoController {
     @Autowired
     private CustomProperties customProperties;
 
+    /**
+     * {@link org.hibernate.validator.constraints.Range}
+     *
+     * {@link Valid}
+     * @param userInfo
+     * @return
+     */
     @GetMapping("/getName")
-    public ResponseEntity<String> getName(@Valid UserInfo userInfo){
+    public ResponseEntity<String> getName(@Validated UserInfo userInfo){
         //userInfoRepository.find();
         CustomProperties customProperties = new CustomProperties();
         BeanUtils.copyProperties(this.customProperties,customProperties);

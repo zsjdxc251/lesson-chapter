@@ -1,5 +1,7 @@
 
 spring:
+  messages:
+    encoding: GBK
   application:
     name: spring-boot-sample
   datasource:
