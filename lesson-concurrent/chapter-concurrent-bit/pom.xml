@@ -13,11 +13,11 @@
 
 	<name>chapter-concurrent-bit</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>common-lang</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-	</dependencies>
+<!--	<dependencies>-->
+<!--		<dependency>-->
+<!--			<groupId>com.example</groupId>-->
+<!--			<artifactId>common-lang</artifactId>-->
+<!--			<version>1.0.0</version>-->
+<!--		</dependency>-->
+<!--	</dependencies>-->
 </project>

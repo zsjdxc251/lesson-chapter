@@ -3,6 +3,8 @@ package com.lesson.project.elasticsearch.spring.configure;
 import org.elasticsearch.client.transport.TransportClient;
 
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.LocalTransportAddress;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ public class ElasticsearchConfigure {
             transportClient =
                     new PreBuiltTransportClient(setting);
 
-            TransportAddress transportAddress = new TransportAddress(InetAddress.getByName(elasticsearchProperties.getHost()),elasticsearchProperties.getPort());
+            TransportAddress transportAddress = new InetSocketTransportAddress(InetAddress.getByName(elasticsearchProperties.getHost()),elasticsearchProperties.getPort());
             transportClient.addTransportAddress(transportAddress);
         } catch (UnknownHostException e) {
             throw new IllegalArgumentException();
