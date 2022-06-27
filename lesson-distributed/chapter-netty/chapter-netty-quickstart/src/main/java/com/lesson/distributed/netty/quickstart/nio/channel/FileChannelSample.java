@@ -23,24 +23,25 @@ public class FileChannelSample {
 
 
     public static void consumequeueForSchedule() throws Exception {
-        FileChannel fileChannel = new RandomAccessFile("D:\\workspace\\home\\store\\consumequeue\\SCHEDULE_TOPIC_XXXX\\7\\00000000000000000000", "r").getChannel();
+        FileChannel fileChannel = new RandomAccessFile("D:\\workspace\\home\\sample-bb\\store\\consumequeue\\sample"
+            + "-topic-2\\0\\00000000000000000000", "r").getChannel();
         MappedByteBuffer buffer =  fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, 6000000);
         ByteBuffer byteBuffer = buffer.slice();
         byteBuffer.position(20);
         //byteBuffer.flip();
 
-        System.out.println(byteBuffer.position());
-        System.out.println(byteBuffer.limit());
+        System.out.println("po:"+byteBuffer.position());
+        System.out.println("limit:"+byteBuffer.limit());
         while (true) {
             long offset = byteBuffer.getLong();
             int size = byteBuffer.getInt();
             if (offset == 0 && size ==0 ){
                 break;
             }
-            System.out.println(offset);
-            System.out.println(size);
-            System.out.println(byteBuffer.getLong());
-            System.out.println(byteBuffer.position());
+            System.out.println("offset="+offset);
+            System.out.println("size="+size);
+            System.out.println("long="+byteBuffer.getLong());
+            System.out.println("position="+byteBuffer.position());
         }
     }
 
