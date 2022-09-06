@@ -1,2 +1,0 @@
-0:0:0:0:0:0:0:1 - - [25/Aug/2018:17:02:38 +0800] GET /auto/getName HTTP/1.1 200 9 http-bio-8080-exec-1 70
-0:0:0:0:0:0:0:1 - - [25/Aug/2018:17:08:50 +0800] GET /auto/getName HTTP/1.1 200 9 http-bio-8080-exec-1 4721
