@@ -12,7 +12,7 @@
     <artifactId>chapter-cloud-feign-client</artifactId>
 
     <properties>
-        <zookeeper.version>3.4.12</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
 
     </properties>
 
